@@ -1017,25 +1017,27 @@
     // 3. Escudo de Emergencia Médica (Con enlace cliqueable verificado)
     function dispararEmergencia() {
         const chatBox = document.getElementById('chat-box');
-        chatBox.innerHTML += `<div class="message user-message" style="background:#d32f2f; font-weight:bold;">🧑‍⚕️ Consulta de Urgencia</div>`;
+        chatBox.innerHTML += `<div class="message user-message" style="background:#d32f2f; color:white; font-weight:bold;">🧑‍⚕️ Consulta de Urgencia</div>`;
         
-        // Código HTML perfecto con enlace a Google Maps genérico para buscar veterinarias
-        const warningHTML = `¡ATENCIÓN! 🧑‍⚕️ No soy un médico veterinario, soy una IA experta en comportamiento.<br><br>Si tu mascota está sangrando, convulsionando, no respira, fue envenenada o sufrió un accidente grave, <strong>ESTO REQUIERE ATENCIÓN PROFESIONAL INMEDIATA</strong>.<br><br>Por favor, no pierdas tiempo en el chat. Llévala a una clínica veterinaria ahora mismo.<br><br>📍 <a href="https://www.google.com/maps/search/veterinaria+24+horas" target="_blank" style="color:#d32f2f; font-weight:900; text-decoration:underline; cursor:pointer;">Haz clic aquí para buscar veterinarias 24 horas en Google Maps</a>.`;
+        // 👇 TEXTO SUAVIZADO Y PROFESIONAL (Sin descripciones gráficas) 👇
+        const warningHTML = `¡ATENCIÓN! 🧑‍⚕️ No soy un médico veterinario, soy una IA experta en comportamiento.<br><br>Si tu mascota sufrió un accidente grave o presenta una condición crítica, <strong>ESTO REQUIERE ATENCIÓN PROFESIONAL INMEDIATA</strong>.<br><br>Por favor, no pierdas tiempo en el chat. Llévala a una clínica veterinaria ahora mismo.<br><br>📍 <a href="https://www.google.com/maps/search/veterinaria+24+horas" target="_blank" style="color:#d32f2f; font-weight:900; text-decoration:underline; cursor:pointer;">Haz clic aquí para buscar veterinarias 24 horas en Google Maps</a>.`;
         
         const newMsg = document.createElement("div");
         newMsg.className = "message bot-message";
         
-        // Bordes rojos pero fondo translúcido (se ve bien en blanco y en dark mode)
+        // Bordes rojos pero fondo translúcido (elegante en light y dark mode)
         newMsg.style.border = "2px solid #d32f2f";
         newMsg.style.background = "rgba(211, 47, 47, 0.1)"; 
         newMsg.style.color = "var(--text-main)";
         
-        // Lo inyectamos de golpe (sin efecto de escritura) para que el Link funcione y sea instantáneo
+        // Lo inyectamos instantáneamente
         newMsg.innerHTML = warningHTML;
         chatBox.appendChild(newMsg);
         
-        // Que Regina también lo diga en voz alta
-        hablar("Atención. Esto es una emergencia médica. Lleva a tu mascota a una clínica veterinaria inmediatamente.");
+        // Regina habla de forma calmada pero firme
+        if (typeof hablar === "function") {
+            hablar("Atención. Esto es una urgencia médica. Por favor, lleva a tu mascota a una clínica veterinaria inmediatamente.");
+        }
         
         const chatBoxFinal = document.getElementById('chat-box');
         chatBoxFinal.scrollTop = chatBoxFinal.scrollHeight;
