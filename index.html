@@ -7,142 +7,249 @@
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#6a1b9a">
     <meta name="description" content="Regina Valentina: La experta en comportamiento animal que pone orden en el rancho. ¡Tus primeros 3 consejos son GRATIS! 🤠🐾">
-    
+    <meta name="keywords" content="comportamiento animal, adiestramiento, Regina Valentina, Robles Bienestar">
+    <meta name="author" content="Robles Bienestar">
+
     <meta property="og:title" content="Regina Valentina 🤠🐾 | Experta en Mascotas">
     <meta property="og:description" content="¿Tu mascota manda en casa? Platica con Regina y soluciona sus problemas hoy mismo.">
     <meta property="og:image" content="https://reginavalentina.com/ReginaValentinaRostro.png?v=2">
     <meta property="og:url" content="https://reginavalentina.com">
     <meta property="og:type" content="website">
 
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Regina Valentina 🤠">
+    <meta name="twitter:description" content="Consejos expertos de comportamiento animal con Inteligencia Artificial.">
+    <meta name="twitter:image" content="https://reginavalentina.com/ReginaValentinaRostro.png?v=2">
+    <link rel="icon" href="ReginaValentinaRostro.png?v=2" type="image/png">
     <style>
+        /* Importación de Fuentes de Accesibilidad */
         @import url('https://fonts.cdnfonts.com/css/open-dyslexic');
         @import url('https://fonts.cdnfonts.com/css/gallaudet');
 
-        body.dyslexia-mode * { font-family: 'OpenDyslexic', sans-serif !important; letter-spacing: 0.05em !important; }
-        body.large-text-mode .message { font-size: 1.45rem !important; line-height: 1.6 !important; }
-        body.large-text-mode input { font-size: 1.35rem !important; }
-        body.large-text-mode .chip { font-size: 1.25rem !important; }
+        /* Accesibilidad: Modo Dislexia */
+        body.dyslexia-mode * {
+            font-family: 'OpenDyslexic', sans-serif !important;
+            letter-spacing: 0.05em !important;
+        }
 
-        body.high-contrast-mode { --bg-body: #000000 !important; --bg-chat: #000000 !important; --text-main: #ffffff !important; --header-bg: #000000 !important; --bot-bubble: #1a1a1a !important; --bot-text: #ffffff !important; --input-border: #ffff00 !important; }
+        /* Accesibilidad: Lupa (Letra Grande) */
+        body.large-text-mode .message { font-size: 1.25rem !important; line-height: 1.6 !important; }
+        body.large-text-mode input { font-size: 1.15rem !important; }
+        body.large-text-mode .chip { font-size: 1.05rem !important; }
+
+        /* Accesibilidad: Alto Contraste (Ceguera al color) */
+        body.high-contrast-mode {
+            --bg-body: #000000 !important;
+            --bg-chat: #000000 !important;
+            --text-main: #ffffff !important;
+            --header-bg: #000000 !important;
+            --bot-bubble: #1a1a1a !important;
+            --bot-text: #ffffff !important;
+            --input-border: #ffff00 !important;
+        }
         body.high-contrast-mode .header { border-bottom: 3px solid #ffff00; }
-        body.high-contrast-mode button, body.high-contrast-mode .chip { border: 2px solid #ffff00 !important; color: #ffff00 !important; background: #000 !important; }
+        body.high-contrast-mode button, body.high-contrast-mode .chip { 
+            border: 2px solid #ffff00 !important; color: #ffff00 !important; background: #000 !important; 
+        }
         body.high-contrast-mode .user-message { background-color: #ffff00 !important; color: #000000 !important; font-weight: bold; }
         body.high-contrast-mode a { color: #ffff00 !important; text-decoration: underline; }
 
-        body.lsm-mode .message { font-family: 'Gallaudet', sans-serif !important; font-size: 2.2rem !important; line-height: 1.6 !important; }
+        /* Accesibilidad: Modo Señas */
+        body.lsm-mode .message {
+            font-family: 'Gallaudet', sans-serif !important;
+            font-size: 2.2rem !important; 
+            line-height: 1.6 !important;
+        }
 
-        :root { --bg-body: #f4f4f9; --bg-chat: #ffffff; --text-main: #333333; --header-bg: #6a1b9a; --bot-bubble: #f1f0f0; --bot-text: #333333; --input-border: #ddd; }
-        [data-theme="dark"] { --bg-body: #121212; --bg-chat: #1e1e1e; --text-main: #e0e0e0; --header-bg: #4a148c; --bot-bubble: #2d2d2d; --bot-text: #e0e0e0; --input-border: #444; }
-        [data-theme="sepia"] { --bg-body: #f4ecd8; --bg-chat: #fdf6e3; --text-main: #5b4636; --header-bg: #8b6b61; --bot-bubble: #ede0c8; --bot-text: #4a3b32; --input-border: #d3c4a9; }
+        :root {
+            --bg-body: #f4f4f9;
+            --bg-chat: #ffffff;
+            --text-main: #333333;
+            --header-bg: #6a1b9a;
+            --bot-bubble: #f1f0f0;
+            --bot-text: #333333;
+            --input-border: #ddd;
+        }
 
-        /* 👇 LAS DOS BURBUJAS FLOTANTES DE LA DERECHA 👇 */
-        .support-btn { position: fixed; bottom: 20px; right: 20px; background-color: #6a1b9a; border-radius: 50%; width: 55px; height: 55px; display: flex; justify-content: center; align-items: center; box-shadow: 0 4px 15px rgba(0,0,0,0.3); z-index: 9999; transition: 0.3s; cursor:pointer; }
-        .support-btn:hover { transform: scale(1.1); background-color: #ffca28; }
-
-        .share-bubble { position: fixed; bottom: 85px; right: 20px; background: linear-gradient(145deg, #ff9800, #f57c00); border-radius: 50%; width: 55px; height: 55px; display: flex; justify-content: center; align-items: center; box-shadow: 0 4px 15px rgba(0,0,0,0.3); z-index: 9999; transition: 0.3s; cursor:pointer; font-size:1.6rem; border:none; color:white; }
-        .share-bubble:hover { transform: scale(1.1); background: #e65100; }
-
-        body { font-family: 'Segoe UI', sans-serif; background-color: var(--bg-body); color: var(--text-main); display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; flex-direction: column; transition: background-color 0.3s ease; font-size: 1.15rem; }
+        /* Botón de Soporte Flotante (Correo) */
+        .support-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #6a1b9a;
+            border-radius: 50%;
+            width: 55px;
+            height: 55px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            z-index: 9999;
+            transition: transform 0.3s, background-color 0.3s;
+        }
+        .support-btn:hover { 
+            transform: scale(1.1); 
+            background-color: #ffca28; 
+        }
         
-        .chat-container { width: 95%; max-width: 750px; background: var(--bg-chat); border-radius: 12px; box-shadow: 0 5px 25px rgba(0,0,0,0.15); overflow: hidden; display: flex; flex-direction: column; height: 85vh; margin-bottom: 20px; margin-top: 15px; transition: background-color 0.3s ease; }
-        
-        .header { background-color: var(--header-bg); color: white; padding: 20px; text-align: center; display: flex; align-items: center; justify-content: center; gap: 15px; position: relative; }
+       /* Variables para el Dark Mode */
+        [data-theme="dark"] {
+            --bg-body: #121212;
+            --bg-chat: #1e1e1e;
+            --text-main: #e0e0e0;
+            --header-bg: #4a148c;
+            --bot-bubble: #2d2d2d;
+            --bot-text: #e0e0e0;
+            --input-border: #444;
+        }
 
-        .regina-avatar { width: 105px !important; height: 105px !important; min-width: 105px !important; min-height: 105px !important; border-radius: 50%; border: 3px solid white; object-fit: cover;}
+        /* Variables para el Modo Sepia */
+        [data-theme="sepia"] {
+            --bg-body: #f4ecd8;
+            --bg-chat: #fdf6e3;
+            --text-main: #5b4636;
+            --header-bg: #8b6b61;
+            --bot-bubble: #ede0c8;
+            --bot-text: #4a3b32;
+            --input-border: #d3c4a9;
+        }
+
+        body { 
+            font-family: 'Segoe UI', sans-serif; 
+            background-color: var(--bg-body); 
+            color: var(--text-main);
+            display: flex; justify-content: center; align-items: center; 
+            min-height: 100vh; margin: 0; flex-direction: column; 
+            transition: background-color 0.3s ease;
+        }
         
+        /* 👇 EL CHAT AHORA ES MÁS ANCHO Y ELEGANTE 👇 */
+        .chat-container { 
+            width: 95%; max-width: 700px; /* <--- EXPANDIDO PARA MEJOR LECTURA */
+            background: var(--bg-chat); border-radius: 12px; 
+            box-shadow: 0 5px 25px rgba(0,0,0,0.15); overflow: hidden; 
+            display: flex; flex-direction: column; height: 85vh; margin-bottom: 20px; margin-top: 15px;
+            transition: background-color 0.3s ease;
+        }
+        
+        .header {
+            background-color: var(--header-bg); color: white; padding: 20px;
+            text-align: center; display: flex; align-items: center; justify-content: center; gap: 15px; 
+            position: relative;
+        }
+
+        .regina-avatar { width: 65px; height: 65px; border-radius: 50%; border: 3px solid white; object-fit: cover;}
         .header div { text-align: left; }
-        .header h1 { margin: 0; font-size: 1.6em; }
-        .header p { margin: 5px 0 0 0; font-size: 1.05em; opacity: 0.9; }
+        .header h1 { margin: 0; font-size: 1.5em; }
+        .header p { margin: 5px 0 0 0; font-size: 0.9em; opacity: 0.9; }
 
-        #chat-box { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; scroll-behavior: smooth; }
+        .theme-toggle {
+            position: absolute; right: 15px; top: 15px; background: none; border: none;
+            color: white; font-size: 1.2rem; cursor: pointer; opacity: 0.8; transition: opacity 0.3s;
+        }
+        .theme-toggle:hover { opacity: 1; }
+
+        #chat-box { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; }
         
-        .message { max-width: 85%; padding: 14px 20px; border-radius: 20px; font-size: 1.20rem; line-height: 1.5; position: relative; word-wrap: break-word; white-space: pre-wrap; }
+        /* 👇 LOS MENSAJES AHORA APROVECHAN EL ESPACIO EXTRA 👇 */
+        .message { 
+            max-width: 85%; /* Se ven más anchos */
+            padding: 12px 18px; 
+            border-radius: 20px; 
+            font-size: 0.95rem; 
+            line-height: 1.5; 
+            position: relative; 
+            word-wrap: break-word; 
+            white-space: pre-wrap; 
+        }
         .user-message { align-self: flex-end; background-color: #6a1b9a; color: white; border-bottom-right-radius: 2px; }
         .bot-message { align-self: flex-start; background-color: var(--bot-bubble); color: var(--bot-text); border-bottom-left-radius: 2px; }
         
-        .input-area { padding: 15px 20px; border-top: 1px solid var(--input-border); display: flex; flex-direction: column; gap: 12px; background: var(--bg-chat); }
-        .input-area input { font-size: 1.15rem; width: 100%; box-sizing: border-box; padding: 12px; background: var(--bg-body); color: var(--text-main); border: 1px solid var(--input-border); border-radius: 20px; outline: none; }
-        .input-controls { display: flex; justify-content: space-between; align-items: center; width: 100%; }
-        .input-icons { display: flex; gap: 15px; }
-        .input-controls button.btn-enviar { font-size: 1.15rem; padding: 10px 25px; background-color: #6a1b9a; color: white; border: none; border-radius: 20px; cursor: pointer; font-weight: bold; }
+        .input-area { padding: 20px; border-top: 1px solid var(--input-border); display: flex; gap: 10px; background: var(--bg-chat); }
+        input { flex: 1; padding: 10px; background: var(--bg-body); color: var(--text-main); border: 1px solid var(--input-border); border-radius: 20px; outline: none; }
+        button { padding: 10px 20px; background-color: #6a1b9a; color: white; border: none; border-radius: 20px; cursor: pointer; font-weight: bold; }
         
-        .pdf-btn { display: block; margin-top: 10px; background: #e91e63; color: white; text-align: center; padding: 8px 12px; border-radius: 5px; font-size: 1rem; text-decoration: none; cursor: pointer; width: fit-content; }
-        .loading { font-style: italic; color: #888; font-size: 1rem; margin-left: 20px; margin-bottom: 10px; display: none; }
-        .footer { text-align: center; font-size: 0.9rem; color: #777; padding: 20px; width: 100%; max-width: 700px; }
-        .chips-container { display: flex; gap: 10px; padding: 12px 15px; overflow-x: auto; white-space: nowrap; scrollbar-width: none; background: var(--bg-chat); }
-        .chip { background-color: var(--bg-body); border: 2px solid #6a1b9a; color: var(--text-main); padding: 10px 18px; border-radius: 20px; font-size: 1.05rem; font-weight: bold; cursor: pointer; }
-        
-        /* 👇 ANIMACIÓN DE CELEBRACIÓN DE ESTRELLA 👇 */
-        @keyframes latidoEstrella {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.6); filter: drop-shadow(0 0 15px #ffca28); }
-            100% { transform: scale(1); }
+        .pdf-btn {
+            display: block; margin-top: 10px; background: #e91e63; color: white; 
+            text-align: center; padding: 5px 10px; border-radius: 5px; 
+            font-size: 0.8rem; text-decoration: none; cursor: pointer; width: fit-content;
         }
-        .animar-estrella { animation: latidoEstrella 0.6s ease-in-out 3; }
 
-        #membrete-pdf { display: none; }
+        .loading { font-style: italic; color: #888; font-size: 0.8rem; margin-left: 20px; margin-bottom: 10px; display: none; }
+        .footer { text-align: center; font-size: 0.8rem; color: #777; padding: 20px; width: 100%; max-width: 400px; }
+        .chips-container { display: flex; gap: 8px; padding: 10px 15px; overflow-x: auto; white-space: nowrap; scrollbar-width: none; background: var(--bg-chat); }
+        .chip { background-color: var(--bg-body); border: 2px solid #6a1b9a; color: var(--text-main); padding: 8px 15px; border-radius: 20px; font-size: 0.85rem; font-weight: bold; cursor: pointer; }
+        
+        #membrete-pdf {
+            display: none;
+        }
         @media print {
             * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
-            .header, .input-area, .chips-container, button, .pdf-btn, footer, .footer, #caja-aviso-legal, .support-btn, .share-bubble, #trofeo-badge { display: none !important; }
+            .header, .input-area, .chips-container, button, .theme-toggle, .pdf-btn, footer, .footer, #footer, #caja-aviso-legal, .support-btn, #trofeo-badge { 
+                display: none !important; 
+            }
             body > p, body > div > p { display: none !important; }
             #membrete-pdf { display: block !important; text-align: center; margin-bottom: 30px; page-break-after: avoid; }
             body, html, .chat-container, #chat-box { width: 100% !important; height: auto !important; overflow: visible !important; box-shadow: none !important; border: none !important; margin: 0 !important; padding: 0 !important; }
-            .message { display: block !important; background: transparent !important; box-shadow: none !important; margin-bottom: 20px !important; font-family: 'Georgia', 'Times New Roman', serif !important; font-size: 13pt !important; line-height: 1.8 !important; text-align: justify !important; }
+            .message { display: block !important; background: transparent !important; box-shadow: none !important; margin-bottom: 20px !important; page-break-inside: auto !important; font-family: 'Georgia', 'Times New Roman', serif !important; font-size: 13pt !important; line-height: 1.8 !important; text-align: justify !important; }
+            img { max-width: 90% !important; margin: 20px auto !important; page-break-inside: avoid !important; display: block !important; border-radius: 12px !important; border: 3px solid #ffca28 !important; box-shadow: 0px 10px 15px rgba(0,0,0,0.3) !important; }
+            body.dyslexic-mode, body.dyslexic-mode .message { font-family: 'OpenDyslexic', sans-serif !important; letter-spacing: 1px !important; }
+            body.dark-mode, body.dark-mode .chat-container, body.dark-mode #chat-box, body.dark-mode .message { background-color: #121212 !important; color: #e0e0e0 !important; }
+            body.dark-mode #membrete-pdf h1, body.dark-mode #membrete-pdf p { color: #ffffff !important; }
+            body.sepia-mode, body.sepia-mode .chat-container, body.sepia-mode #chat-box, body.sepia-mode .message { background-color: #f4ecd8 !important; color: #4a3b2c !important; }
+            body.sepia-mode #membrete-pdf h1, body.sepia-mode #membrete-pdf p { color: #4a3b2c !important; }
+            body.sepia-mode img { border-color: #8b6b4a !important; } 
         }
+        
     </style>
 </head>
 <body>
 
 <div id="auth-modal" style="position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:2000; justify-content:center; align-items:center; display:none;">
     <div style="background:white; padding:40px; border-radius:15px; width:85%; max-width:320px; text-align:center; box-shadow: 0 10px 30px rgba(0,0,0,0.5); position:relative;">
-        <button onclick="document.getElementById('auth-modal').style.display='none'; vibrar(30);" style="position:absolute; top:10px; right:15px; background:none; border:none; font-size:2em; color:#999; cursor:pointer;">×</button>
-        <img src="ReginaValentinaRostro.png?v=2" alt="Regina" style="width:90px; height:90px; border-radius:50%; margin-bottom:15px; border:3px solid #6a1b9a; object-fit: cover;">
-        <h2 id="auth-title" style="color:#6a1b9a; margin-top:0;">Acceso VIP 🤠</h2>
+        <button onclick="document.getElementById('auth-modal').style.display='none'" style="position:absolute; top:10px; right:15px; background:none; border:none; font-size:1.8em; color:#999; cursor:pointer;">×</button>
+        <img src="ReginaValentinaRostro.png?v=2" alt="Regina" style="width:80px; height:80px; border-radius:50%; margin-bottom:15px; border:3px solid #6a1b9a;">
+        <h2 id="auth-title" style="color:#6a1b9a; margin-top:0;">Acceso al Rancho 🤠</h2>
         
         <div id="auth-inputs">
-            <input type="email" id="auth-email" placeholder="Correo electrónico" style="width:100%; padding:12px; margin-bottom:15px; border:1px solid #ddd; border-radius:8px; box-sizing:border-box; font-size:1.1rem;">
-            <input type="password" id="auth-password" placeholder="Contraseña" style="width:100%; padding:12px; margin-bottom:15px; border:1px solid #ddd; border-radius:8px; box-sizing:border-box; font-size:1.1rem;">
+            <input type="email" id="auth-email" placeholder="Tu correo electrónico" style="width:90%; padding:12px; margin-bottom:15px; border:1px solid #ddd; border-radius:8px; box-sizing:border-box;">
+            <input type="password" id="auth-password" placeholder="Tu contraseña" style="width:90%; padding:12px; margin-bottom:15px; border:1px solid #ddd; border-radius:8px; box-sizing:border-box;">
             
-            <button onclick="vibrar(40); ejecutarLogin();" style="width:100%; padding:14px; background-color:#6a1b9a; color:white; border:none; border-radius:8px; font-weight:bold; cursor:pointer; margin-bottom:10px; font-size:1.1rem;">Iniciar Sesión</button>
-            <button onclick="vibrar(40); ejecutarRegistro();" style="width:100%; padding:14px; background-color:#fff; color:#6a1b9a; border:2px solid #6a1b9a; border-radius:8px; font-weight:bold; cursor:pointer; font-size:1.1rem;">Crear Cuenta Nueva</button>
+            <div style="text-align: left; margin-left: 5%; margin-bottom: 20px; width: 90%;">
+                <label style="font-size: 0.85em; color: #555; display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                    <input type="checkbox" id="auth-terminos" style="width: 18px; height: 18px; cursor: pointer;">
+                    <span>Acepto los <a href="terminos.html" target="_blank" style="color: #6a1b9a; text-decoration: underline;">Términos y Condiciones</a></span>
+                </label>
+            </div>
+            
+            <button onclick="ejecutarLogin()" style="width:90%; padding:12px; background-color:#6a1b9a; color:white; border:none; border-radius:8px; font-weight:bold; cursor:pointer; margin-bottom:10px;">Iniciar Sesión</button>
+            <button onclick="ejecutarRegistro()" style="width:90%; padding:12px; background-color:#fff; color:#6a1b9a; border:2px solid #6a1b9a; border-radius:8px; font-weight:bold; cursor:pointer;">Crear Cuenta Nueva</button>
         </div>
 
         <div id="logged-in-view" style="display:none; text-align:center;">
-            <p style="color:#555; font-size:1.1em; margin-bottom:20px;">Usted ya es parte del rancho. ¡Su acceso está asegurado!</p>
-            <button id="btn-centro-mando" onclick="vibrar(40); window.open('https://RenatoRobles.pythonanywhere.com/panel-robles?admin_id=' + getUserId(), '_blank')" style="display:none; width:100%; padding:14px; background-color:#1e1e1e; color:#ffca28; border:2px solid #ffca28; border-radius:8px; font-weight:bold; cursor:pointer; margin: 0 auto 15px auto; font-size:1.1rem;">🦅 Centro de Mando</button>
-            <button onclick="vibrar(40); cerrarSesion();" style="width:100%; padding:14px; background-color:#f44336; color:white; border:none; border-radius:8px; font-weight:bold; cursor:pointer; margin: 0 auto; font-size:1.1rem;">Cerrar Sesión 🚪</button>
-            <button onclick="eliminarCuentaPropia()" style="display:block; margin: 20px auto 0 auto; background:none; border:none; color:#9e9e9e; text-decoration:underline; font-size:0.95em; cursor:pointer;">Eliminar mi cuenta y datos</button>
-            
-            <div style="background: rgba(106, 27, 154, 0.1); padding: 15px; border-radius: 8px; margin-bottom: 20px; border: 1px dashed #6a1b9a; margin-top:20px;">
-                <p style="margin-top:0; font-size:1em; color:#333; font-weight:bold;">🎟️ ¿Tienes un código promocional?</p>
-                <div style="display:flex; flex-direction:column; gap:10px;">
-                    <input type="text" id="input-cupon" placeholder="Ej. ROBLESVIP" style="width:100%; padding:12px; border:1px solid #ccc; border-radius:5px; text-transform:uppercase; font-size:1rem; box-sizing:border-box;">
-                    <button onclick="vibrar(40); canjearCupon();" style="width:100%; background:#6a1b9a; color:white; border:none; padding:12px; border-radius:5px; font-weight:bold; cursor:pointer; font-size:1rem;">Canjear Cupón</button>
+            <p style="color:#555; font-size:0.95em; margin-bottom:20px;">Usted ya es parte del rancho. ¡Su acceso está asegurado!</p>
+            <button id="btn-centro-mando" onclick="window.open('https://RenatoRobles.pythonanywhere.com/panel-robles?admin_id=' + getUserId(), '_blank')" style="display:none; width:90%; padding:12px; background-color:#1e1e1e; color:#ffca28; border:2px solid #ffca28; border-radius:8px; font-weight:bold; cursor:pointer; margin: 0 auto 15px auto; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">🦅 Centro de Mando</button>
+            <button onclick="cerrarSesion()" style="width:90%; padding:12px; background-color:#f44336; color:white; border:none; border-radius:8px; font-weight:bold; cursor:pointer; margin: 0 auto;">Cerrar Sesión 🚪</button>
+            <button onclick="eliminarCuentaPropia()" style="display:block; margin: 20px auto 0 auto; background:none; border:none; color:#9e9e9e; text-decoration:underline; font-size:0.85em; cursor:pointer;">Eliminar mi cuenta y datos (Derechos ARCO)</button>
+            <div style="background: rgba(106, 27, 154, 0.1); padding: 15px; border-radius: 8px; margin-bottom: 20px; border: 1px dashed #6a1b9a;">
+                <p style="margin-top:0; font-size:0.9em; color:#333; font-weight:bold;">🎟️ ¿Tienes un código promocional?</p>
+                <div style="display:flex; gap:10px;">
+                    <input type="text" id="input-cupon" placeholder="Ej. ROBLESVIP" style="flex:1; padding:10px; border:1px solid #ccc; border-radius:5px; text-transform:uppercase;">
+                    <button onclick="canjearCupon()" style="background:#6a1b9a; color:white; border:none; padding:10px 15px; border-radius:5px; font-weight:bold; cursor:pointer;">Canjear</button>
                 </div>
             </div>
         </div>
-        <p id="auth-error" style="color:red; font-size:1rem; margin-top:15px; min-height:20px;"></p>
-    </div>
-</div>
-
-<div id="vitrina-modal" style="position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:2000; justify-content:center; align-items:center; display:none;">
-    <div style="background:white; padding:30px; border-radius:15px; width:85%; max-width:350px; text-align:center; box-shadow: 0 10px 30px rgba(0,0,0,0.5); position:relative; border-top: 6px solid #ffca28;">
-        <button onclick="document.getElementById('vitrina-modal').style.display='none'; vibrar(30);" style="position:absolute; top:10px; right:15px; background:none; border:none; font-size:2em; color:#999; cursor:pointer;">×</button>
-        <h2 style="color:#6a1b9a; margin-top:0;">🏆 Tu Vitrina de Logros</h2>
-        <p style="color:#555; font-size:0.95em; margin-bottom:20px;">Cumple las tareas de Regina para desbloquear habilidades.</p>
-        
-        <div id="lista-trofeos" style="max-height: 400px; overflow-y: auto; padding-right:5px;">
-            </div>
+        <p id="auth-error" style="color:red; font-size:0.85rem; margin-top:15px; min-height:20px;"></p>
     </div>
 </div>
 
 <div id="feedback-modal" style="position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:2000; justify-content:center; align-items:center; display:none;">
     <div style="background:white; padding:30px; border-radius:15px; width:85%; max-width:320px; text-align:center; box-shadow: 0 10px 30px rgba(0,0,0,0.5); position:relative; border-top: 6px solid #ffca28;">
-        <button onclick="document.getElementById('feedback-modal').style.display='none'; vibrar(60);" style="position:absolute; top:10px; right:15px; background:none; border:none; font-size:2em; color:#999; cursor:pointer;">×</button>
+        <button onclick="document.getElementById('feedback-modal').style.display='none'" style="position:absolute; top:10px; right:15px; background:none; border:none; font-size:1.8em; color:#999; cursor:pointer;">×</button>
         <h2 style="color:#6a1b9a; margin-top:0;">💡 Buzón del Rancho</h2>
-        <p style="color:#555; font-size:1.05em; margin-bottom:15px;">¿Qué podemos mejorar? ¡Échele compa!</p>
-        <textarea id="feedback-texto" rows="4" placeholder="Escriba aquí su mensaje..." style="width:100%; padding:12px; border:1px solid #ddd; border-radius:8px; box-sizing:border-box; resize:none; margin-bottom:15px; font-family:inherit; font-size:1.05rem;"></textarea>
-        <button id="btn-enviar-sug" onclick="vibrar(40); enviarSugerencia();" style="width:100%; padding:14px; background-color:#ffca28; color:#333; border:none; border-radius:8px; font-weight:bold; cursor:pointer; font-size:1.1rem;">Enviar Mensaje 🚀</button>
+        <p style="color:#555; font-size:0.9em; margin-bottom:15px;">¿Qué podemos mejorar? ¿Todo al cien? ¡Échele compa, lo leo directo en mi oficina!</p>
+        <textarea id="feedback-texto" rows="4" placeholder="Escriba aquí su mensaje, sugerencia o queja..." style="width:100%; padding:10px; border:1px solid #ddd; border-radius:8px; box-sizing:border-box; resize:none; margin-bottom:15px; font-family:inherit;"></textarea>
+        <button id="btn-enviar-sug" onclick="enviarSugerencia()" style="width:100%; padding:12px; background-color:#ffca28; color:#333; border:none; border-radius:8px; font-weight:bold; cursor:pointer;">Enviar Mensaje 🚀</button>
     </div>
 </div>
         
@@ -153,28 +260,23 @@
     <hr style="border: 1px solid #ffca28; margin-bottom: 20px;">
 </div>
 
-<div id="trofeo-badge" onclick="vibrar(40); abrirVitrina()" title="Ver mis medallas" style="position:fixed; top:20px; right:20px; z-index:1900; background:linear-gradient(145deg, #fff8e1, #ffecb3); border:2px solid #ffca28; padding:8px 15px; border-radius:25px; box-shadow:0 4px 10px rgba(0,0,0,0.2); font-size:1.5em; display:none; align-items:center; gap:5px; font-weight:bold; color:#333; cursor:pointer; transition:0.3s;">
+<div id="trofeo-badge" style="position:fixed; top:20px; right:20px; z-index:9999; background:linear-gradient(145deg, #fff8e1, #ffecb3); border:2px solid #ffca28; padding:8px 15px; border-radius:25px; box-shadow:0 4px 10px rgba(0,0,0,0.2); font-size:1.3em; display:none; align-items:center; gap:5px; font-weight:bold; color:#333; pointer-events:none;">
     🌟 <span id="trofeo-count">0</span>
 </div>
 
 <div class="chat-container">
-   <div class="header">
-        <img src="ReginaValentinaRostro.png?v=2" alt="Regina Valentina" class="regina-avatar">
+   <div class="header" style="display: flex; align-items: center; justify-content: flex-start; gap: 20px; padding: 25px 20px;">
+        <img src="ReginaValentinaRostro.png?v=2" alt="Regina Valentina" class="regina-avatar" style="width: 88px; height: 88px; border-radius: 50%; border: 3px solid white; object-fit: cover; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
         
-        <div>
-            <h1>Regina Valentina 🤠🐾</h1>
-            <p>Experta en Comportamiento</p>
+        <div style="text-align: left; display: flex; flex-direction: column; justify-content: center;">
+            <h1 style="margin: 0; font-size: 1.35em;">Regina Valentina 🤠🐾</h1>
+            <p style="margin: 3px 0 12px 0; font-size: 0.9em; opacity: 0.9;">Experta en Comportamiento</p>
             
-            <div style="display: flex; gap: 12px; margin-top:10px;">
-                <button id="btn-header-voice" style="background:rgba(255,255,255,0.2); border-radius:50%; width:46px; height:46px; display:flex; justify-content:center; align-items:center; color:#ffeb3b; padding:0; transition: 0.3s; border:none; cursor:pointer;" onclick="vibrar(30); togglePremiumVoice()" title="Voz Premium HD">
-                    <div style="display:flex; flex-direction:column; align-items:center; line-height:1.1;">
-                        <span style="font-size:1.2rem;">🗣️</span>
-                        <span style="font-size:0.65rem;">💎</span>
-                    </div>
-                </button>
-                <button style="background:rgba(255,255,255,0.2); border-radius:50%; width:46px; height:46px; display:flex; justify-content:center; align-items:center; padding:0; transition: 0.3s; border:none; cursor:pointer; color:white; font-size:1.4rem;" onclick="vibrar(30); toggleTheme()" title="Cambiar Tema">🌙</button>
-                <button style="background:rgba(255,255,255,0.2); border-radius:50%; width:46px; height:46px; display:flex; justify-content:center; align-items:center; padding:0; transition: 0.3s; border:none; cursor:pointer; color:white; font-size:1.4rem;" onclick="vibrar(30); abrirMiCuenta()" title="Mi Cuenta">👤</button>
-                <button style="background:rgba(255,255,255,0.2); border-radius:50%; width:46px; height:46px; display:flex; justify-content:center; align-items:center; padding:0; transition: 0.3s; border:none; cursor:pointer; color:white; font-size:1.4rem;" onclick="vibrar(30); document.getElementById('settings-modal').style.display='flex'" title="Herramientas y Ajustes">⚙️</button>
+            <div style="display: flex; gap: 12px;">
+                <button id="btn-header-voice" class="theme-toggle" style="position:static; background:rgba(255,255,255,0.2); border-radius:50%; width:38px; height:38px; display:flex; justify-content:center; align-items:center; color:#ffeb3b; padding:0; transition: 0.3s;" onclick="togglePremiumVoice()" title="Voz Premium HD">💎🗣️</button>
+                <button id="btn-theme-toggle" class="theme-toggle" style="position:static; background:rgba(255,255,255,0.2); border-radius:50%; width:38px; height:38px; display:flex; justify-content:center; align-items:center; padding:0; transition: 0.3s;" onclick="toggleTheme()" title="Cambiar Tema">🌙</button>
+                <button class="theme-toggle" style="position:static; background:rgba(255,255,255,0.2); border-radius:50%; width:38px; height:38px; display:flex; justify-content:center; align-items:center; padding:0; transition: 0.3s;" onclick="abrirMiCuenta()" title="Mi Cuenta">👤</button>
+                <button class="theme-toggle" style="position:static; background:rgba(255,255,255,0.2); border-radius:50%; width:38px; height:38px; display:flex; justify-content:center; align-items:center; padding:0; transition: 0.3s;" onclick="document.getElementById('settings-modal').style.display='flex'" title="Herramientas y Ajustes">⚙️</button>
             </div>
         </div>
     </div>
@@ -187,28 +289,33 @@
     <div class="loading" id="loading">Regina está escribiendo...</div>
 
     <div class="chips-container">
-        <button class="chip" onclick="vibrar(40); sendChip('🤠 ¿Cómo educar a un perro latoso?')">🤠 Educar perro latoso</button>
-        <button class="chip" onclick="vibrar(40); sendChip('🧐 ¡Analízame Regina!')">🧐 Analízame</button>
-        <button class="chip" onclick="vibrar(40); sendChip('🏠 ¿Cómo evitar que se orine adentro?')">🏠 Pipí en casa</button>
-        <button class="chip" onclick="vibrar(60); dispararEmergencia()" style="border-color:#d32f2f; color:#d32f2f; font-weight:bold; opacity:0.8;">🧑‍⚕️ Urgencia</button>
+        <button class="chip" onclick="sendChip('🤠 ¿Cómo educar a un perro latoso?')">🤠 Educar perro latoso</button>
+        <button class="chip" onclick="sendChip('🧐 ¡Analízame Regina! Hazme unas 2 o 3 preguntas rápidas, una por una, para diagnosticar qué estoy haciendo mal con la educación de mi mascota.')">🧐 Analízame</button>
+        <button class="chip" onclick="sendChip('🏠 ¿Cómo evitar que se orine adentro?')">🏠 Pipí en casa</button>
+        <button class="chip" onclick="dispararEmergencia()" style="border-color:#d32f2f; color:#d32f2f; font-weight:bold; opacity:0.8;">🧑‍⚕️ Urgencia</button>
     </div>
 
-    <div class="input-area">
-        <input type="text" id="user-input" placeholder="Escribe tu consulta aquí...">
-        <div class="input-controls">
-            <div class="input-icons">
-                <button id="mic-toggle" onclick="vibrar(30); toggleMic()" style="background:none; border:none; font-size:1.8em; cursor:pointer; padding: 0; transition: 0.3s;" title="Dictar por voz">🎤</button>
-                <input type="file" id="input-foto-chat" accept="image/*" style="display:none;" onchange="previsualizarFotoChat()">
-                <button id="btn-camara" onclick="vibrar(30); document.getElementById('input-foto-chat').click()" style="background:none; border:none; font-size:1.8em; cursor:pointer; padding: 0; transition: 0.3s;" title="Subir Foto">📷</button>
-            </div>
-            <button class="btn-enviar" onclick="vibrar(50); sendMessage()">Enviar</button>
-        </div>
+    <div class="input-area" style="align-items: center; padding: 12px 10px; display: flex; gap: 6px;">
+        <input type="text" id="user-input" placeholder="Escribe tu consulta aquí..." style="flex: 1; min-width: 60px; background: transparent; border: none; color: white; outline: none; font-size: 1em; padding: 5px;">
+        
+        <button id="mic-toggle" onclick="toggleMic()" style="background:none; border:none; font-size:1.5em; cursor:pointer; padding: 0 2px; transition: 0.3s;" title="Dictar por voz">🎤</button>
+        
+        <input type="file" id="input-foto-chat" accept="image/*" style="display:none;" onchange="previsualizarFotoChat()">
+        <button id="btn-camara" onclick="document.getElementById('input-foto-chat').click()" style="background:none; border:none; font-size:1.5em; cursor:pointer; padding: 0 2px; transition: 0.3s;" title="Subir Foto">📷</button>
+
+        <label id="lbl-premium-voice" style="cursor: pointer; display: none; align-items: center; font-size: 1.4em; padding: 0 2px;" title="Respuesta con Voz (VIP)">
+            <input type="checkbox" id="premium-voice-toggle" onchange="toggleVoiceIcon()" style="display: none;">
+            <span id="voice-icon" style="filter: grayscale(100%); transition: 0.3s;">🗣️</span>
+        </label>
+        
+        <button onclick="sendMessage()" style="margin-left: 2px; background: linear-gradient(145deg, #6a1b9a, #8e24aa); color:white; border:none; padding:10px 14px; border-radius:25px; font-weight:bold; cursor:pointer; font-size:0.95em;">Enviar</button>
     </div>
 </div> 
 
 <script>
     const API_URL = 'https://RenatoRobles.pythonanywhere.com';
 
+    // --- VARIABLES GLOBALES ---
     let voiceEnabled = false;
     let premiumVoiceEnabled = true; 
     let reginaVoice = null;
@@ -216,32 +323,7 @@
     let dyslexiaEnabled = false;
     let lsmEnabled = false;
 
-    // 👇 MAGIA HÁPTICA REFORZADA (Solo Android lo permite en Web) 👇
-    function vibrar(patron) {
-        if ("vibrate" in navigator) {
-            try { navigator.vibrate(patron); } catch(e) {}
-        }
-    }
-
-    function compartirApp() {
-        if (navigator.share) {
-            navigator.share({
-                title: 'Regina Valentina 🤠🐾',
-                text: '¡Conoce a Regina Valentina, la experta en mascotas con IA! Te da consejos buenísimos.',
-                url: 'https://reginavalentina.com'
-            }).catch(console.error);
-        } else {
-            navigator.clipboard.writeText("https://reginavalentina.com");
-            mostrarNotificacion("🔗 ¡Enlace copiado al portapapeles!", "#4caf50");
-        }
-    }
-
-    function silenciarAviso(texto) {
-        let txt = texto;
-        if(txt.includes("Aviso:")) { txt = txt.split("Aviso:")[0]; }
-        return txt.replace(/[*_#]/g, '');
-    }
-
+    // --- FUNCIONES DE ACCESIBILIDAD ---
     function toggleDyslexia() {
         dyslexiaEnabled = !dyslexiaEnabled;
         const body = document.body;
@@ -259,21 +341,23 @@
         }
     }
 
-    function quitarAcentos(texto) { return texto.normalize("NFD").replace(/[\u0300-\u036f]/g, ""); }
+    function quitarAcentos(texto) {
+        return texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    }
     
     function copiarConsejo(elementoId) {
-        vibrar(60);
         let clon = document.getElementById(elementoId).cloneNode(true);
         let botones = clon.querySelectorAll('button, div');
         botones.forEach(b => b.remove()); 
-        navigator.clipboard.writeText(clon.innerText.trim());
-        mostrarNotificacion("📋 ¡Consejo copiado al portapapeles!", "#d81b60");
+        
+        navigator.clipboard.writeText(clon.innerText.trim()).then(() => {
+            alert("¡Consejo guardado en el portapapeles, pariente! 📋"); 
+        }).catch(err => console.error('Error al copiar: ', err));
     }
     
     let ultimoMensajeLeido = null;
 
     function reproducirMensaje(msgId) {
-        vibrar(60);
         if (typeof audioPremiumActual !== 'undefined' && audioPremiumActual) {
             audioPremiumActual.pause();
         }
@@ -289,15 +373,20 @@
         ultimoMensajeLeido = msgId;
 
         const elemento = document.getElementById(msgId);
-        let textoPuro = elemento.getAttribute('data-puretext') || elemento.innerText;
-        let textoLimpio = silenciarAviso(textoPuro);
+        const textoPuro = elemento.getAttribute('data-puretext') || elemento.innerText;
+        
+        let textoLimpio = textoPuro.replace(/[\u{1F600}-\u{1F6FF}]/gu, ''); 
+        textoLimpio = textoLimpio.replace(/[*_]/g, ''); 
         
         const utterance = new SpeechSynthesisUtterance(textoLimpio);
         if (reginaVoice) utterance.voice = reginaVoice;
         utterance.lang = 'es-MX';
         utterance.rate = 1.05; 
+        utterance.pitch = 1.1; 
         
-        utterance.onend = function() { if (ultimoMensajeLeido === msgId) ultimoMensajeLeido = null; };
+        utterance.onend = function() {
+            if (ultimoMensajeLeido === msgId) ultimoMensajeLeido = null;
+        };
         
         window.speechSynthesis.speak(utterance);
         mostrarNotificacion("🔊 Leyendo... (Click en el mismo botón para detener)", "#2196f3", 3500);
@@ -305,7 +394,9 @@
     
     window.addEventListener('beforeunload', function() {
         window.speechSynthesis.cancel();
-        if (typeof audioPremiumActual !== 'undefined' && audioPremiumActual) audioPremiumActual.pause();
+        if (typeof audioPremiumActual !== 'undefined' && audioPremiumActual) {
+            audioPremiumActual.pause();
+        }
     });
 
     function toggleLSM() {
@@ -338,7 +429,7 @@
     
     function mostrarNotificacion(texto, colorFondo = "#6a1b9a", tiempo = 4500) {
         const noti = document.createElement('div');
-        noti.style.cssText = `position:fixed; top:20px; left:50%; transform:translateX(-50%); background:${colorFondo}; color:white; padding:12px 24px; border-radius:30px; z-index:9999; box-shadow:0 4px 15px rgba(0,0,0,0.4); font-weight:bold; font-size:1.05em; transition: opacity 0.5s; text-align:center;`;
+        noti.style.cssText = `position:fixed; top:20px; left:50%; transform:translateX(-50%); background:${colorFondo}; color:white; padding:12px 24px; border-radius:30px; z-index:9999; box-shadow:0 4px 15px rgba(0,0,0,0.4); font-weight:bold; font-size:0.95em; transition: opacity 0.5s; text-align:center;`;
         noti.innerHTML = texto;
         document.body.appendChild(noti);
         
@@ -359,22 +450,20 @@
         recognition.lang = 'es-MX'; 
 
         recognition.onstart = function() {
-            vibrar(60);
             micEnabled = true;
             document.getElementById('mic-toggle').innerText = '🔴'; 
             mostrarNotificacion("🎤 Te escucho, pariente...", "#f44336"); 
         };
 
         recognition.onresult = function(event) {
-            vibrar(80);
             const transcript = event.results[0][0].transcript;
             const inputField = document.getElementById('user-input');
             inputField.value = inputField.value ? inputField.value + ' ' + transcript : transcript;
-            mostrarNotificacion("✅ Voz capturada", "#4caf50");
+            mostrarNotificacion("✅ Voz capturada, presiona Enviar pa' que lo oiga", "#4caf50");
         };
 
         recognition.onerror = function(event) {
-            vibrar([50, 50, 50]);
+            console.error("Error en micrófono: ", event.error);
             mostrarNotificacion("⚠️ Error al escuchar. Checa tus permisos.", "#f44336");
         };
 
@@ -382,78 +471,37 @@
             micEnabled = false;
             document.getElementById('mic-toggle').innerText = '🎤'; 
         };
+    } else {
+        console.log("El dictado por voz no es compatible con este navegador.");
     }
 
     function toggleMic() {
-        if (!recognition) { alert("Tu navegador no soporta el dictado por voz. Usa Chrome o Safari."); return; }
-        if (micEnabled) recognition.stop();
-        else recognition.start();
+        if (!recognition) {
+            alert("Tu navegador no soporta el dictado por voz. Usa Chrome o Safari actualizados.");
+            return;
+        }
+        if (micEnabled) {
+            recognition.stop();
+        } else {
+            recognition.start();
+        }
     }
 
-    // 👇 LA LÓGICA DE LA VITRINA DE TROFEOS 👇
-    const trofeosConfig = [
-        { id: 1, color: "🟢", nombre: "Líder Alfa", desc: "Has establecido reglas y liderazgo en la manada." },
-        { id: 2, color: "🔵", nombre: "Maestro Zen", desc: "Lograste serenidad y calma en casa." },
-        { id: 3, color: "🔴", nombre: "Autocontrol", desc: "Dominaste los impulsos de tu mascota." },
-        { id: 4, color: "🟠", nombre: "Atleta Perruno", desc: "Nivel de actividad física ideal alcanzado." },
-        { id: 5, color: "🌟", nombre: "Socio Supremo", desc: "Conexión perfecta con tu mascota." }
-    ];
-
-    function abrirVitrina() {
-        const modal = document.getElementById('vitrina-modal');
-        const lista = document.getElementById('lista-trofeos');
-        let medallasActuales = parseInt(localStorage.getItem('regina_estrellas') || 0);
-        
-        let html = "";
-        trofeosConfig.forEach(t => {
-            let bloqueado = medallasActuales < t.id ? "filter: grayscale(100%); opacity: 0.4;" : "filter: drop-shadow(0 0 8px #ffca28); background: #fff8e1; border: 2px solid #ffca28;";
-            let candado = medallasActuales < t.id ? "🔒" : "✅";
-            
-            html += `<div style="display:flex; align-items:center; gap:15px; margin-bottom:15px; padding:15px; background:#f9f9f9; border-radius:12px; border: 1px solid #eee; transition: 0.3s; ${bloqueado}">
-                <span style="font-size:2.5em;">${t.color}</span>
-                <div style="text-align:left; flex:1;">
-                    <h4 style="margin:0; color:#6a1b9a; font-size:1.1em;">${t.nombre}</h4>
-                    <p style="margin:5px 0 0 0; font-size:0.85em; color:#555;">${t.desc}</p>
-                </div>
-                <div style="font-size:1.2em;">${candado}</div>
-            </div>`;
-        });
-        
-        lista.innerHTML = html;
-        modal.style.display = 'flex';
-    }
-
-    function celebrarInsigniaNueva(cantidad) {
-        // Vibración de victoria súper intensa (Funciona en Android)
-        vibrar([100, 50, 100, 50, 300, 100, 500]);
-        mostrarNotificacion("🎉 ¡NUEVA HABILIDAD DESBLOQUEADA! 🎉<br>Revisa tu Vitrina de Logros.", "#ff9800", 6000);
-        
-        const badge = document.getElementById('trofeo-badge');
-        badge.classList.remove('animar-estrella');
-        void badge.offsetWidth; // Reinicia la animación
-        badge.classList.add('animar-estrella');
-    }
-
+    // 👇 LA FUNCIÓN ACTUALIZADORA DE ESTRELLAS CON MEMORIA (LOCALSTORAGE) 👇
     function actualizarInsigniasVisuales(cantidad) {
         const badge = document.getElementById('trofeo-badge');
         const count = document.getElementById('trofeo-count');
-        
-        let guardadas = parseInt(localStorage.getItem('regina_estrellas') || 0);
-
         if (cantidad !== undefined && cantidad > 0) {
             badge.style.display = 'flex';
             count.innerText = cantidad;
-            localStorage.setItem('regina_estrellas', cantidad); 
-            
-            if (cantidad > guardadas) {
-                celebrarInsigniaNueva(cantidad);
-            }
+            localStorage.setItem('regina_estrellas', cantidad); // EL NAVEGADOR LAS RECUERDA
         } else {
             badge.style.display = 'none';
         }
     }
 
     window.addEventListener('DOMContentLoaded', async () => {
+        // Cargar Tema
         const savedTheme = localStorage.getItem('regina_theme');
         const btnTheme = document.getElementById('btn-theme-toggle'); 
         if (savedTheme === 'dark') {
@@ -464,10 +512,10 @@
             btnTheme.innerText = '☕';
         }
 
+        // Cargar Estrellas de Memoria
         const medallasGuardadas = localStorage.getItem('regina_estrellas');
         if (medallasGuardadas && medallasGuardadas > 0) {
-            document.getElementById('trofeo-badge').style.display = 'flex';
-            document.getElementById('trofeo-count').innerText = medallasGuardadas;
+            actualizarInsigniasVisuales(medallasGuardadas);
         }
 
         const storedUserId = localStorage.getItem('regina_user_id');
@@ -547,37 +595,47 @@
     function cerrarSesion() {
         localStorage.removeItem('regina_registrado');
         localStorage.removeItem('regina_user_id');
-        localStorage.removeItem('regina_estrellas'); 
+        localStorage.removeItem('regina_estrellas'); // Borramos memoria de estrellas al salir
         mostrarNotificacion("🚪 Sesión cerrada. ¡Nos vemos pronto!", "#f44336");
         setTimeout(() => { window.location.reload(); }, 1200);
     }
     
     async function canjearCupon() {
         const codigo = document.getElementById('input-cupon').value;
-        if(!codigo) { vibrar([50, 50, 50]); mostrarNotificacion("⚠️ Por favor escriba un código primero.", "#f44336"); return; }
+        if(!codigo) {
+            mostrarNotificacion("⚠️ Por favor escriba un código primero.", "#f44336");
+            return;
+        }
         
         try {
             const response = await fetch(`${API_URL}/canjear_codigo`, {
-                method: 'POST', headers: { 'Content-Type': 'application/json' },
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ user_id: getUserId(), codigo: codigo })
             });
             const data = await response.json();
             
             if (response.ok) {
-                vibrar([50, 100, 50, 100]);
                 mostrarNotificacion(data.message, "#4caf50", 5000);
                 document.getElementById('input-cupon').value = "";
-            } else { vibrar([50, 50, 50]); mostrarNotificacion(data.error, "#f44336", 4000); }
-        } catch (e) { vibrar([50, 50, 50]); mostrarNotificacion("⚠️ Error de conexión con la bóveda de cupones.", "#f44336"); }
+            } else {
+                mostrarNotificacion(data.error, "#f44336", 4000);
+            }
+        } catch (e) {
+            mostrarNotificacion("⚠️ Error de conexión con la bóveda de cupones.", "#f44336");
+        }
     }
     
     async function eliminarCuentaPropia() {
-        vibrar(100);
         if(!confirm("⚠️ ¿Estás seguro de querer borrar tu cuenta? Perderás tu historial y tus accesos VIP. Esta acción no se puede deshacer.")) return;
+        
         try {
             const response = await fetch(`${API_URL}/eliminar_cuenta`, {
-                method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ user_id: getUserId() })
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ user_id: getUserId() })
             });
+            
             if (response.ok) {
                 localStorage.removeItem('regina_registrado');
                 localStorage.removeItem('regina_user_id');
@@ -586,11 +644,14 @@
                 mostrarNotificacion("🗑️ Cuenta y datos eliminados de la Base de Datos.", "#f44336");
                 setTimeout(() => window.location.reload(), 1500);
             }
-        } catch (e) { mostrarNotificacion("⚠️ Error al conectar con el servidor.", "#f44336"); }
+        } catch (e) {
+            mostrarNotificacion("⚠️ Error al conectar con el servidor.", "#f44336");
+        }
     }
 
     function obtenerDatosAuth() {
         return {
+            nombre: document.getElementById('auth-nombre') ? document.getElementById('auth-nombre').value : '',
             email: document.getElementById('auth-email').value,
             password: document.getElementById('auth-password').value,
             user_id: localStorage.getItem('regina_user_id') 
@@ -600,25 +661,33 @@
     async function ejecutarRegistro() {
         const terminos = document.getElementById('auth-terminos').checked;
         const errorMsg = document.getElementById('auth-error');
-        if (!terminos) { vibrar([50,50,50]); errorMsg.innerText = "⚠️ Debe aceptar los Términos y Condiciones para continuar."; return; }
+        
+        if (!terminos) {
+            errorMsg.innerText = "⚠️ Debe aceptar los Términos y Condiciones para continuar.";
+            return;
+        }
 
         const authDatos = obtenerDatosAuth();
         errorMsg.innerText = "Registrando, aguanta...";
         try {
             const response = await fetch(`${API_URL}/registro`, {
-                method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(authDatos)
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(authDatos)
             });
             const data = await response.json();
             if (response.ok) {
-                vibrar([50, 100, 50, 100]);
                 localStorage.setItem('regina_registrado', 'true');
                 localStorage.setItem('regina_user_id', data.user_id);
                 localStorage.setItem('regina_is_admin', 'false'); 
+                
                 errorMsg.innerText = ""; 
                 document.getElementById('auth-modal').style.display = 'none';
                 mostrarNotificacion("✅ ¡Cuenta lista, pariente! Ya eres VIP del rancho.", "#4caf50");
-            } else { vibrar([50,50,50]); errorMsg.innerText = data.error; }
-        } catch (e) { vibrar([50,50,50]); errorMsg.innerText = "Error de conexión al servidor."; }
+            } else {
+                errorMsg.innerText = data.error;
+            }
+        } catch (e) { errorMsg.innerText = "Error de conexión al servidor."; }
     }
 
     async function ejecutarLogin() {
@@ -627,32 +696,47 @@
         errorMsg.innerText = "Entrando...";
         try {
             const response = await fetch(`${API_URL}/login`, {
-                method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(authDatos)
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(authDatos)
             });
             const data = await response.json();
             if (response.ok) {
-                vibrar([50, 100, 50]);
                 localStorage.setItem('regina_registrado', 'true');
                 localStorage.setItem('regina_user_id', data.user_id);
-                localStorage.setItem('regina_is_admin', data.is_admin ? 'true' : 'false');
+                
+                if (data.is_admin) {
+                    localStorage.setItem('regina_is_admin', 'true');
+                } else {
+                    localStorage.setItem('regina_is_admin', 'false');
+                }
+                
                 errorMsg.innerText = ""; 
                 document.getElementById('auth-modal').style.display = 'none';
                 mostrarNotificacion("✅ ¡Sesión iniciada! Qué bueno verlo de vuelta.", "#4caf50");
-                if (data.insignias !== undefined) actualizarInsigniasVisuales(data.insignias);
-            } else { vibrar([50,50,50]); errorMsg.innerText = data.error; }
-        } catch (e) { vibrar([50,50,50]); errorMsg.innerText = "Error de conexión al servidor."; }
+
+                // Dibujar y recordar medallas al iniciar sesión
+                if (data.insignias !== undefined) {
+                    actualizarInsigniasVisuales(data.insignias);
+                }
+
+            } else {
+                errorMsg.innerText = data.error;
+            }
+        } catch (e) { errorMsg.innerText = "Error de conexión al servidor."; }
     }
 
     function getUserId() { return localStorage.getItem('regina_user_id'); }
 
     function toggleVoice() {
-        vibrar(60);
         const btnModal = document.getElementById('btn-config-voice');
         if (!voiceEnabled) {
             voiceEnabled = true;
             document.getElementById('voice-toggle').innerText = '🗣️';
             if(btnModal) { btnModal.style.background = '#e8f5e9'; btnModal.style.borderColor = '#4caf50'; } 
+            
             if (premiumVoiceEnabled) { togglePremiumVoice(); } 
+            
             cargarVoces();
             mostrarNotificacion("🤖 Voz robótica activada", "#2196f3");
             hablar("Voz robótica activada.");
@@ -667,16 +751,19 @@
 
     function togglePremiumVoice() {
         const btnPremium = document.getElementById('btn-header-voice'); 
+        
         if (!premiumVoiceEnabled) {
             premiumVoiceEnabled = true;
-            if(btnPremium) btnPremium.innerHTML = '<div style="display:flex; flex-direction:column; align-items:center; line-height:1.1;"><span style="font-size:1.2rem;">🗣️</span><span style="font-size:0.65rem;">💎</span></div>'; 
+            if(btnPremium) btnPremium.innerText = '💎🗣️'; 
+            
             if (voiceEnabled) { toggleVoice(); } 
+            
             mostrarNotificacion("✨ Voz Premium HD Activada", "#ffca28");
             const chatBox = document.getElementById('chat-box');
             if (chatBox) chatBox.scrollTop = chatBox.scrollHeight;
         } else {
             premiumVoiceEnabled = false;
-            if(btnPremium) btnPremium.innerHTML = '<div style="display:flex; flex-direction:column; align-items:center; line-height:1.1;"><span style="font-size:1.2rem;">🤫</span><span style="font-size:0.65rem; filter:grayscale(100%);">💎</span></div>'; 
+            if(btnPremium) btnPremium.innerText = '💎🤫'; 
             if (audioPremiumActual) audioPremiumActual.pause();
             mostrarNotificacion("🤫 Voz Premium Desactivada", "#9e9e9e");
         }
@@ -684,17 +771,23 @@
 
     function cargarVoces() {
         let voces = window.speechSynthesis.getVoices();
-        reginaVoice = voces.find(voz => voz.lang.includes('es-MX') && voz.name.includes('Mujer')) || voces.find(voz => voz.lang.includes('es-MX')) || voces.find(voz => voz.lang.includes('es'));
+        reginaVoice = voces.find(voz => voz.lang.includes('es-MX') && voz.name.includes('Mujer')) || 
+                      voces.find(voz => voz.lang.includes('es-MX')) || 
+                      voces.find(voz => voz.lang.includes('es'));
     }
     window.speechSynthesis.onvoiceschanged = cargarVoces;
 
     function hablar(texto) {
         if (!voiceEnabled) return;
         window.speechSynthesis.cancel(); 
-        let textoLimpio = silenciarAviso(texto); 
+        let textoLimpio = texto.replace(/[\u{1F600}-\u{1F6FF}]/gu, ''); 
+        textoLimpio = textoLimpio.replace(/[*_]/g, ''); 
+        
         const utterance = new SpeechSynthesisUtterance(textoLimpio);
         if (reginaVoice) utterance.voice = reginaVoice;
-        utterance.lang = 'es-MX'; utterance.rate = 1.05; 
+        utterance.lang = 'es-MX';
+        utterance.rate = 1.05; 
+        utterance.pitch = 1.1; 
         window.speechSynthesis.speak(utterance);
     }
 
@@ -724,23 +817,20 @@
                 const chatBox = document.getElementById('chat-box');
                 chatBox.scrollTop = chatBox.scrollHeight;
             } else {
-                // 👇 HÁPTICA AL TERMINAR 👇
-                vibrar([50, 100, 50]);
-
-                let copyBtn = `<button onclick="copiarConsejo('${msgId}')" style="background:none; border:1px solid #d81b60; color:#d81b60; border-radius:15px; padding:6px 14px; cursor:pointer; font-size:1rem; font-weight:bold;">📋 Copiar</button>`;
-                let readBtn = `<button onclick="reproducirMensaje('${msgId}')" style="background:none; border:1px solid #2196f3; color:#2196f3; border-radius:15px; padding:6px 14px; margin-left:8px; cursor:pointer; font-size:1rem; font-weight:bold;">🔊 Escuchar</button>`;
+                let copyBtn = `<button onclick="copiarConsejo('${msgId}')" style="background:none; border:1px solid #d81b60; color:#d81b60; border-radius:15px; padding:5px 12px; cursor:pointer; font-size:0.85em; font-weight:bold;">📋 Copiar</button>`;
+                let readBtn = `<button onclick="reproducirMensaje('${msgId}')" style="background:none; border:1px solid #2196f3; color:#2196f3; border-radius:15px; padding:5px 12px; margin-left:8px; cursor:pointer; font-size:0.85em; font-weight:bold;">🔊 Escuchar</button>`;
                 
                 let califBtns = `
-                    <button id="btn-up-${msgId}" onclick="calificarMensaje('${msgId}', 'up')" style="background:none; border:none; cursor:pointer; font-size:1.5em; margin-left:15px; transition:0.2s; filter:grayscale(0%);" title="¡Buen consejo!">👍</button>
-                    <button id="btn-down-${msgId}" onclick="calificarMensaje('${msgId}', 'down')" style="background:none; border:none; cursor:pointer; font-size:1.5em; margin-left:5px; transition:0.2s; filter:grayscale(0%);" title="No me sirvió">👎</button>`;
+                    <button id="btn-up-${msgId}" onclick="calificarMensaje('${msgId}', 'up')" style="background:none; border:none; cursor:pointer; font-size:1.3em; margin-left:15px; transition:0.2s; filter:grayscale(0%);" title="¡Buen consejo!">👍</button>
+                    <button id="btn-down-${msgId}" onclick="calificarMensaje('${msgId}', 'down')" style="background:none; border:none; cursor:pointer; font-size:1.3em; margin-left:5px; transition:0.2s; filter:grayscale(0%);" title="No me sirvió">👎</button>`;
                 
                 let botonesAccion = `<br><div style="margin-top:10px; display:flex; align-items:center; flex-wrap:wrap;">${copyBtn}${readBtn}<div style="margin-left:auto;">${califBtns}</div></div>`;
 
                 if (textoAEscribir.length > 600 && (textoAEscribir.includes('Guia') || textoAEscribir.includes('paso a paso') || textoAEscribir.includes('1.'))) {
                     let btnHTML = `<br>
                     <div style="display:flex; gap:10px; margin-top:10px; flex-wrap:wrap;">
-                        <button class="pdf-btn" onclick="vibrar(60); imprimirGuia('${msgId}')">📄 Guardar PDF Simple</button>
-                        <button class="pdf-btn" style="background:#ffca28; color:black; border:2px solid #ffb300;" id="btn-ilustrar-${msgId}" onclick="vibrar(60); ilustrarManual('${msgId}')">✨ Ilustrar Manual (VIP)</button>
+                        <button class="pdf-btn" onclick="imprimirGuia('${msgId}')">📄 Guardar PDF Simple</button>
+                        <button class="pdf-btn" style="background:#ffca28; color:black; border:2px solid #ffb300;" id="btn-ilustrar-${msgId}" onclick="ilustrarManual('${msgId}')">✨ Ilustrar Manual (VIP)</button>
                     </div>`;
                     element.innerHTML += btnHTML + botonesAccion;
                     element.setAttribute('data-original', text + btnHTML + botonesAccion);
@@ -756,31 +846,32 @@
     async function ilustrarManual(msgId) {
         const mensajeElement = document.getElementById(msgId);
         const btn = document.getElementById(`btn-ilustrar-${msgId}`);
-        btn.innerText = "✨ Creando ilustración... (Espere unos 10 seg)";
+        btn.innerText = "✨ Creando ilustración premium con Google AI... (Espere unos 10 seg)";
         btn.disabled = true;
 
         try {
             const textoGuia = mensajeElement.innerText;
             const response = await fetch(`${API_URL}/ilustrar`, {
-                method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ texto: textoGuia })
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ texto: textoGuia })
             });
             const data = await response.json();
 
             if (data.imagen_b64) {
-                vibrar([50, 50, 50]); 
                 const imgHTML = `<br><img src="data:image/jpeg;base64,${data.imagen_b64}" alt="Ilustración Premium" style="width:100%; max-width:90%; border-radius:12px; border:3px solid #ffca28; margin:15px auto; box-shadow:0 4px 8px rgba(0,0,0,0.2); display:block;">`;
                 btn.parentElement.insertAdjacentHTML('beforebegin', imgHTML);
                 const currentOriginal = mensajeElement.getAttribute('data-original');
                 if(currentOriginal) { mensajeElement.setAttribute('data-original', currentOriginal + imgHTML); }
                 btn.style.display = 'none'; 
-                hablar("¡Listo pariente! Su manual ha sido ilustrado.");
+                hablar("¡Listo pariente! Su manual ha sido ilustrado con una imagen premium.");
             } else {
-                alert(data.error || "Ocurrió un error.");
+                alert(data.error || "Ocurrió un error al crear la imagen.");
                 btn.innerText = "✨ Reintentar Ilustración";
                 btn.disabled = false;
             }
         } catch (e) {
-            alert("Error de conexión.");
+            alert("Error de conexión con el estudio premium.");
             btn.innerText = "✨ Reintentar Ilustración";
             btn.disabled = false;
         }
@@ -790,22 +881,23 @@
         const texto = document.getElementById('feedback-texto').value;
         const btn = document.getElementById('btn-enviar-sug');
         
-        if (!texto.trim()) { vibrar([50,50,50]); mostrarNotificacion("⚠️ Escriba algo antes de enviar.", "#f44336"); return; }
+        if (!texto.trim()) { mostrarNotificacion("⚠️ Escriba algo antes de enviar.", "#f44336"); return; }
         
         btn.innerText = "Enviando... ⏳";
         btn.disabled = true;
         
         try {
             const response = await fetch(`${API_URL}/feedback`, {
-                method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ user_id: getUserId(), mensaje: texto })
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ user_id: getUserId(), mensaje: texto })
             });
             if (response.ok) {
-                vibrar([50, 100, 50]);
                 mostrarNotificacion("✅ ¡Mensaje recibido! Gracias por ayudarnos a mejorar.", "#4caf50", 5000);
                 document.getElementById('feedback-modal').style.display = 'none';
                 document.getElementById('feedback-texto').value = '';
             }
-        } catch (e) { vibrar([50,50,50]); mostrarNotificacion("⚠️ Error al enviar.", "#f44336"); }
+        } catch (e) { mostrarNotificacion("⚠️ Error al enviar. Revise su conexión.", "#f44336"); }
         
         btn.innerText = "Enviar Mensaje 🚀";
         btn.disabled = false;
@@ -846,7 +938,6 @@
             loading.style.display = 'none';
 
             if (data.status === 'quota_exceeded') {
-                vibrar([50, 100, 50, 100, 50]); 
                 if (!localStorage.getItem('regina_registrado')) {
                     document.getElementById('auth-modal').style.display = 'flex';
                     document.getElementById('auth-modal').querySelector('h2').innerText = "¡Epa! Crea tu cuenta para ver tus pases 🤠";
@@ -856,10 +947,10 @@
                         <div style="background:white; padding:30px; border-radius:20px; max-width:90%; width:400px; text-align:center; box-shadow:0 10px 25px rgba(0,0,0,0.5); border-top: 6px solid #d81b60;">
                             <h2 style="color:#d81b60; margin-top:0;">¡Tiempo Fuera, Pariente! 🛑</h2>
                             <p style="color:#333; font-size:1.1em; font-weight:bold;">Se nos acabaron los mensajes de prueba.</p>
-                            <p style="color:#555; font-size:1.05em; margin-bottom:20px;">Pero la clínica sigue abierta. Active su pase para seguir platicando con Regina.</p>
+                            <p style="color:#555; font-size:0.95em; margin-bottom:20px;">Pero la clínica sigue abierta. Active su pase para seguir platicando con Regina.</p>
                             <a href="${data.payment_link_day}" style="display:block; background:#ffca28; color:#333; text-decoration:none; padding:15px; border-radius:12px; font-weight:bold; margin-bottom:12px; font-size:1.1em; box-shadow:0 4px 6px rgba(0,0,0,0.1);">🤠 Pase 24 Horas - $39 MXN</a>
                             <a href="${data.payment_link_month}" style="display:block; background:#d81b60; color:white; text-decoration:none; padding:15px; border-radius:12px; font-weight:bold; margin-bottom:20px; font-size:1.1em; box-shadow:0 4px 6px rgba(0,0,0,0.1);">💎 Mes VIP Ilimitado - $99 MXN</a>
-                            <button onclick="document.getElementById('modal-premium').remove()" style="background:none; border:none; color:#999; text-decoration:underline; cursor:pointer; font-size:1em;">Cerrar por ahora</button>
+                            <button onclick="document.getElementById('modal-premium').remove()" style="background:none; border:none; color:#999; text-decoration:underline; cursor:pointer; font-size:0.9em;">Cerrar por ahora</button>
                         </div>
                     </div>`;
                     document.body.insertAdjacentHTML('beforeend', modalHtml);
@@ -878,8 +969,10 @@
                     audioPremiumActual.play();
                 }
 
-                // SI REGRESA MÁS INSIGNIAS, ACTUALIZA LA VITRINA
-                if (data.insignias !== undefined) { actualizarInsigniasVisuales(data.insignias); }
+                // Dibujar y recordar medallas si el usuario completó la tarea en este mensaje
+                if (data.insignias !== undefined) {
+                    actualizarInsigniasVisuales(data.insignias);
+                }
 
             } else {
                 chatBox.innerHTML += `<div class="message bot-message" style="color:red">Error en el servidor.</div>`;
@@ -893,7 +986,7 @@
     }
 
     document.getElementById("user-input").addEventListener("keypress", function(event) {
-        if (event.key === "Enter") { vibrar(80); sendMessage(); }
+        if (event.key === "Enter") { sendMessage(); }
     });
 
     function sendChip(texto) {
@@ -909,7 +1002,6 @@
             const reader = new FileReader();
             reader.onloadend = function() {
                 imagenChatBase64 = reader.result;
-                vibrar([50, 100, 50]);
                 mostrarNotificacion("📸 ¡Foto adjuntada exitosamente!<br>Agrega una descripción y dale a Enviar.", "#4caf50", 4500);
                 document.getElementById('btn-camara').style.background = '#e1bee7';
                 document.getElementById('btn-camara').style.borderRadius = '50%';
@@ -922,13 +1014,12 @@
     let contrasteEnabled = false;
 
     function toggleLupa() {
-        vibrar(60);
         lupaEnabled = !lupaEnabled;
         const btnModal = document.getElementById('btn-config-lupa');
         if (lupaEnabled) {
             document.body.classList.add('large-text-mode');
             if(btnModal) { btnModal.style.background = '#e8f5e9'; btnModal.style.borderColor = '#4caf50'; }
-            mostrarNotificacion("🔍 Texto súper grande activado", "#4caf50");
+            mostrarNotificacion("🔍 Texto grande activado", "#4caf50");
         } else {
             document.body.classList.remove('large-text-mode');
             if(btnModal) { btnModal.style.background = '#f4f4f9'; btnModal.style.borderColor = '#ddd'; }
@@ -939,7 +1030,6 @@
     }
 
     function toggleContraste() {
-        vibrar(60);
         contrasteEnabled = !contrasteEnabled;
         const btnModal = document.getElementById('btn-config-contraste');
         if (contrasteEnabled) {
@@ -953,30 +1043,7 @@
         }
     }
 
-    function dispararEmergencia() {
-        const chatBox = document.getElementById('chat-box');
-        chatBox.innerHTML += `<div class="message user-message" style="background:#d32f2f; color:white; font-weight:bold;">🧑‍⚕️ Consulta de Urgencia</div>`;
-        
-        const warningHTML = `¡ATENCIÓN! 🧑‍⚕️ No soy un médico veterinario, soy una IA experta en comportamiento.<br><br>Si tu mascota sufrió un accidente grave o presenta una condición crítica, <strong>ESTO REQUIERE ATENCIÓN PROFESIONAL INMEDIATA</strong>.<br><br>Por favor, no pierdas tiempo en el chat. Llévala a una clínica veterinaria ahora mismo.<br><br>📍 <a href="https://www.google.com/maps/search/veterinaria+24+horas" target="_blank" style="color:#d32f2f; font-weight:900; text-decoration:underline; cursor:pointer;">Haz clic aquí para buscar veterinarias 24 horas en Google Maps</a>.`;
-        
-        const newMsg = document.createElement("div");
-        newMsg.className = "message bot-message";
-        newMsg.style.border = "2px solid #d32f2f";
-        newMsg.style.background = "rgba(211, 47, 47, 0.1)"; 
-        newMsg.style.color = "var(--text-main)";
-        newMsg.innerHTML = warningHTML;
-        chatBox.appendChild(newMsg);
-        
-        if (typeof hablar === "function") {
-            hablar("Atención. Esto es una urgencia médica. Por favor, lleva a tu mascota a una clínica veterinaria inmediatamente.");
-        }
-        
-        const chatBoxFinal = document.getElementById('chat-box');
-        chatBoxFinal.scrollTop = chatBoxFinal.scrollHeight;
-    }
-
     function descargarHistorial() {
-        vibrar(60);
         const mensajes = document.querySelectorAll('.message');
         if(mensajes.length <= 1) {
             mostrarNotificacion("⚠️ No hay historial de plática para guardar aún.", "#f44336");
@@ -1007,6 +1074,7 @@
         document.getElementById('settings-modal').style.display='none';
     }
 
+    // --- SISTEMA DE INSTALACIÓN PWA (APP) ---
     let deferredPrompt;
     window.addEventListener('beforeinstallprompt', (e) => {
         e.preventDefault();
@@ -1015,11 +1083,11 @@
     });
 
     function instalarApp() {
-        vibrar(60);
         if (deferredPrompt) {
             deferredPrompt.prompt();
             deferredPrompt.userChoice.then((choiceResult) => {
                 if (choiceResult.outcome === 'accepted') {
+                    console.log('App instalada con éxito por el pariente.');
                     document.getElementById('btn-install-app').style.display = 'none';
                 }
                 deferredPrompt = null;
@@ -1029,13 +1097,13 @@
 </script>
 
 <div style="text-align:center; margin-top:25px; margin-bottom: 15px;">
-    <a href="https://RenatoRobles.pythonanywhere.com/blog" target="_blank" onclick="vibrar(60)" style="background: linear-gradient(145deg, #00bcd4, #0097a7); color: white; padding: 14px 28px; border-radius: 25px; text-decoration: none; font-weight: bold; font-size: 1.2em; box-shadow: 0 4px 10px rgba(0,0,0,0.2); display: inline-block; transition: 0.3s;">
+    <a href="https://RenatoRobles.pythonanywhere.com/blog" target="_blank" style="background: linear-gradient(145deg, #00bcd4, #0097a7); color: white; padding: 12px 25px; border-radius: 25px; text-decoration: none; font-weight: bold; font-size: 1.1em; box-shadow: 0 4px 10px rgba(0,0,0,0.2); display: inline-block; transition: 0.3s;">
         📝 Leer el Blog de la Experta
     </a>
 </div>
     
 <div class="footer">
-    <button onclick="vibrar(60); document.getElementById('feedback-modal').style.display='flex'" style="background:none; border:none; color:#6a1b9a; cursor:pointer; font-size:1.1em; text-decoration:underline; font-weight:bold; margin-bottom:15px;">💡 Dejar una Sugerencia Rápida</button>
+    <button onclick="document.getElementById('feedback-modal').style.display='flex'" style="background:none; border:none; color:#6a1b9a; cursor:pointer; font-size:1em; text-decoration:underline; font-weight:bold; margin-bottom:15px;">💡 Dejar una Sugerencia Rápida</button>
     <p>© 2026 <b>Robles Bienestar</b>. Todos los derechos reservados.</p>
     <p><a href="terminos.html" target="_blank">Ver Términos y Condiciones Completos</a></p>
     <div id="caja-aviso-legal">
@@ -1043,46 +1111,44 @@
     </div>
 </div> 
 
-<button onclick="vibrar(60); compartirApp()" class="share-bubble" title="Compartir App">📤</button>
-
-<a href="mailto:soporte@reginavalentina.com?subject=Ayuda%20con%20Regina%20Valentina" onclick="vibrar(60)" class="support-btn" title="Contactar Soporte">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="32" height="32" fill="white">
+<a href="mailto:soporte@reginavalentina.com?subject=Ayuda%20con%20Regina%20Valentina" class="support-btn" title="Contactar Soporte">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="28" height="28" fill="white">
         <path d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48H48zM0 176V384c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V176L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z"/>
     </svg>
 </a>
 
 <div id="settings-modal" style="position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:2000; justify-content:center; align-items:center; display:none;">
     <div style="background:white; padding:30px; border-radius:15px; width:85%; max-width:320px; text-align:center; box-shadow: 0 10px 30px rgba(0,0,0,0.5); position:relative; border-top: 6px solid #6a1b9a;">
-        <button onclick="document.getElementById('settings-modal').style.display='none'; vibrar(60);" style="position:absolute; top:10px; right:15px; background:none; border:none; font-size:2em; color:#999; cursor:pointer;">×</button>
+        <button onclick="document.getElementById('settings-modal').style.display='none'" style="position:absolute; top:10px; right:15px; background:none; border:none; font-size:1.8em; color:#999; cursor:pointer;">×</button>
         
-        <h3 style="color:#6a1b9a; margin-top:20px; margin-bottom:5px; padding-right:15px; font-size:1.3em;">⚙️ Herramientas</h3>
-        <p style="color:#555; font-size:1em; margin-bottom:20px;">Ajusta tu experiencia.</p>
+        <h3 style="color:#6a1b9a; margin-top:20px; margin-bottom:5px; padding-right:15px;">⚙️ Herramientas del Rancho</h3>
+        <p style="color:#555; font-size:0.9em; margin-bottom:20px;">Ajusta tu experiencia o guarda tus datos.</p>
         
-        <button id="btn-install-app" onclick="instalarApp()" class="btn" style="width:100%; margin-bottom:12px; background: linear-gradient(145deg, #ff9800, #f57c00); color:white; font-weight:bold; display:none; font-size:1.15rem; padding:12px; border-radius:8px; border:none;">📱 Instalar App</button>
+        <button id="btn-install-app" onclick="instalarApp()" class="btn" style="width:100%; margin-bottom:12px; background: linear-gradient(145deg, #ff9800, #f57c00); color:white; font-weight:bold; display:none; font-size:1.1em; padding:12px; border-radius:8px; border:none;">📱 Instalar App en el Celular</button>
 
-        <button onclick="descargarHistorial()" class="btn" style="width:100%; margin-bottom:15px; background:#4caf50; color:white; font-weight:bold; font-size:1.15rem; padding:12px; border-radius:8px; border:none; box-shadow: 0 4px 6px rgba(0,0,0,0.2); cursor:pointer;">💾 Guardar Chat (TXT)</button>
+        <button onclick="descargarHistorial()" class="btn" style="width:100%; margin-bottom:15px; background:#4caf50; color:white; font-weight:bold; font-size:1.1em; padding:12px; border-radius:8px; border:none; box-shadow: 0 4px 6px rgba(0,0,0,0.2); cursor:pointer;">💾 Guardar Conversación (TXT)</button>
         
         <hr style="border: 1px solid #eee; margin: 15px 0;">
 
         <div style="display:flex; flex-direction:column; gap: 12px; margin-bottom: 25px;">
-            <button id="btn-config-dyslexia" onclick="vibrar(60); toggleDyslexia()" style="background:#f4f4f9; color:#333; border:2px solid #ddd; padding:14px; border-radius:10px; cursor:pointer; font-family:inherit; display:flex; align-items:center; gap:15px; font-weight:bold; transition:0.3s; font-size:1.1rem;">
-                <span id="dyslexia-toggle" style="font-size:1.8em;">👓</span> Letra para Dislexia
+            <button id="btn-config-dyslexia" onclick="toggleDyslexia()" style="background:#f4f4f9; color:#333; border:2px solid #ddd; padding:12px; border-radius:10px; cursor:pointer; font-family:inherit; display:flex; align-items:center; gap:15px; font-weight:bold; transition:0.3s;">
+                <span id="dyslexia-toggle" style="font-size:1.6em;">👓</span> Letra para Dislexia
             </button>
-            <button id="btn-config-lsm" onclick="vibrar(60); toggleLSM()" style="background:#f4f4f9; color:#333; border:2px solid #ddd; padding:14px; border-radius:10px; cursor:pointer; font-family:inherit; display:flex; align-items:center; gap:15px; font-weight:bold; transition:0.3s; font-size:1.1rem;">
-                <span id="lsm-toggle" style="font-size:1.8em;">🤟</span> Dactilología
+            <button id="btn-config-lsm" onclick="toggleLSM()" style="background:#f4f4f9; color:#333; border:2px solid #ddd; padding:12px; border-radius:10px; cursor:pointer; font-family:inherit; display:flex; align-items:center; gap:15px; font-weight:bold; transition:0.3s;">
+                <span id="lsm-toggle" style="font-size:1.6em;">🤟</span> Modo Dactilología
             </button>
-            <button id="btn-config-voice" onclick="vibrar(60); toggleVoice()" style="background:#f4f4f9; color:#333; border:2px solid #ddd; padding:14px; border-radius:10px; cursor:pointer; font-family:inherit; display:flex; align-items:center; gap:15px; font-weight:bold; transition:0.3s; font-size:1.1rem;">
-                <span id="voice-toggle" style="font-size:1.8em;">🤫</span> Voz Robótica (Básica)
+            <button id="btn-config-voice" onclick="toggleVoice()" style="background:#f4f4f9; color:#333; border:2px solid #ddd; padding:12px; border-radius:10px; cursor:pointer; font-family:inherit; display:flex; align-items:center; gap:15px; font-weight:bold; transition:0.3s;">
+                <span id="voice-toggle" style="font-size:1.6em;">🤫</span> Voz Robótica (Básica)
             </button>
-            <button id="btn-config-lupa" onclick="vibrar(60); toggleLupa()" style="background:#f4f4f9; color:#333; border:2px solid #ddd; padding:14px; border-radius:10px; cursor:pointer; font-family:inherit; display:flex; align-items:center; gap:15px; font-weight:bold; transition:0.3s; font-size:1.1rem;">
-                <span style="font-size:1.8em;">🔍</span> Agrandar Letra
+            <button id="btn-config-lupa" onclick="toggleLupa()" style="background:#f4f4f9; color:#333; border:2px solid #ddd; padding:12px; border-radius:10px; cursor:pointer; font-family:inherit; display:flex; align-items:center; gap:15px; font-weight:bold; transition:0.3s;">
+                <span style="font-size:1.6em;">🔍</span> Agrandar Letra
             </button>
-            <button id="btn-config-contraste" onclick="vibrar(60); toggleContraste()" style="background:#f4f4f9; color:#333; border:2px solid #ddd; padding:14px; border-radius:10px; cursor:pointer; font-family:inherit; display:flex; align-items:center; gap:15px; font-weight:bold; transition:0.3s; font-size:1.1rem;">
-                <span style="font-size:1.8em;">🌗</span> Alto Contraste
+            <button id="btn-config-contraste" onclick="toggleContraste()" style="background:#f4f4f9; color:#333; border:2px solid #ddd; padding:12px; border-radius:10px; cursor:pointer; font-family:inherit; display:flex; align-items:center; gap:15px; font-weight:bold; transition:0.3s;">
+                <span style="font-size:1.6em;">🌗</span> Alto Contraste
             </button>
         </div>
         
-        <button onclick="document.getElementById('settings-modal').style.display='none'; vibrar(60);" style="width:100%; padding:14px; background-color:#d32f2f; color:white; border:none; border-radius:8px; font-weight:bold; cursor:pointer; font-size:1.15rem;">Cerrar Menú</button>
+        <button onclick="document.getElementById('settings-modal').style.display='none'" style="width:100%; padding:12px; background-color:#d32f2f; color:white; border:none; border-radius:8px; font-weight:bold; cursor:pointer; font-size:1.1em;">Cerrar Menú</button>
     </div>
 </div>
 
