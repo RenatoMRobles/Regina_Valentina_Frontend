@@ -16,176 +16,69 @@
     <meta property="og:url" content="https://reginavalentina.com">
     <meta property="og:type" content="website">
 
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Regina Valentina 🤠">
-    <meta name="twitter:description" content="Consejos expertos de comportamiento animal con Inteligencia Artificial.">
-    <meta name="twitter:image" content="https://reginavalentina.com/ReginaValentinaRostro.png?v=2">
-    <link rel="icon" href="ReginaValentinaRostro.png?v=2" type="image/png">
     <style>
-        /* Importación de Fuentes de Accesibilidad */
         @import url('https://fonts.cdnfonts.com/css/open-dyslexic');
         @import url('https://fonts.cdnfonts.com/css/gallaudet');
 
-        /* Accesibilidad: Modo Dislexia */
-        body.dyslexia-mode * {
-            font-family: 'OpenDyslexic', sans-serif !important;
-            letter-spacing: 0.05em !important;
-        }
-
-        /* 👇 NUEVA LUPA TITÁNICA (Ya que la normal creció) 👇 */
-        body.large-text-mode .message { font-size: 1.50rem !important; line-height: 1.6 !important; }
-        body.large-text-mode input { font-size: 1.40rem !important; }
+        body.dyslexia-mode * { font-family: 'OpenDyslexic', sans-serif !important; letter-spacing: 0.05em !important; }
+        body.large-text-mode .message { font-size: 1.45rem !important; line-height: 1.6 !important; }
+        body.large-text-mode input { font-size: 1.35rem !important; }
         body.large-text-mode .chip { font-size: 1.25rem !important; }
 
-        /* Accesibilidad: Alto Contraste */
-        body.high-contrast-mode {
-            --bg-body: #000000 !important;
-            --bg-chat: #000000 !important;
-            --text-main: #ffffff !important;
-            --header-bg: #000000 !important;
-            --bot-bubble: #1a1a1a !important;
-            --bot-text: #ffffff !important;
-            --input-border: #ffff00 !important;
-        }
+        body.high-contrast-mode { --bg-body: #000000 !important; --bg-chat: #000000 !important; --text-main: #ffffff !important; --header-bg: #000000 !important; --bot-bubble: #1a1a1a !important; --bot-text: #ffffff !important; --input-border: #ffff00 !important; }
         body.high-contrast-mode .header { border-bottom: 3px solid #ffff00; }
-        body.high-contrast-mode button, body.high-contrast-mode .chip { 
-            border: 2px solid #ffff00 !important; color: #ffff00 !important; background: #000 !important; 
-        }
+        body.high-contrast-mode button, body.high-contrast-mode .chip { border: 2px solid #ffff00 !important; color: #ffff00 !important; background: #000 !important; }
         body.high-contrast-mode .user-message { background-color: #ffff00 !important; color: #000000 !important; font-weight: bold; }
         body.high-contrast-mode a { color: #ffff00 !important; text-decoration: underline; }
 
-        /* Accesibilidad: Modo Señas */
-        body.lsm-mode .message {
-            font-family: 'Gallaudet', sans-serif !important;
-            font-size: 2.5rem !important;
-            line-height: 1.6 !important;
-        }
+        body.lsm-mode .message { font-family: 'Gallaudet', sans-serif !important; font-size: 2.2rem !important; line-height: 1.6 !important; }
 
-        :root {
-            --bg-body: #f4f4f9;
-            --bg-chat: #ffffff;
-            --text-main: #333333;
-            --header-bg: #6a1b9a;
-            --bot-bubble: #f1f0f0;
-            --bot-text: #333333;
-            --input-border: #ddd;
-        }
+        :root { --bg-body: #f4f4f9; --bg-chat: #ffffff; --text-main: #333333; --header-bg: #6a1b9a; --bot-bubble: #f1f0f0; --bot-text: #333333; --input-border: #ddd; }
+        [data-theme="dark"] { --bg-body: #121212; --bg-chat: #1e1e1e; --text-main: #e0e0e0; --header-bg: #4a148c; --bot-bubble: #2d2d2d; --bot-text: #e0e0e0; --input-border: #444; }
+        [data-theme="sepia"] { --bg-body: #f4ecd8; --bg-chat: #fdf6e3; --text-main: #5b4636; --header-bg: #8b6b61; --bot-bubble: #ede0c8; --bot-text: #4a3b32; --input-border: #d3c4a9; }
 
-        /* Botón de Soporte Flotante */
-        .support-btn {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: #6a1b9a;
-            border-radius: 50%;
-            width: 60px;
-            height: 60px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            z-index: 9999;
-            transition: transform 0.3s, background-color 0.3s;
-        }
+        .support-btn { position: fixed; bottom: 20px; right: 20px; background-color: #6a1b9a; border-radius: 50%; width: 55px; height: 55px; display: flex; justify-content: center; align-items: center; box-shadow: 0 4px 15px rgba(0,0,0,0.3); z-index: 9999; transition: 0.3s; }
         .support-btn:hover { transform: scale(1.1); background-color: #ffca28; }
-        
-       /* Variables para el Dark Mode */
-        [data-theme="dark"] {
-            --bg-body: #121212;
-            --bg-chat: #1e1e1e;
-            --text-main: #e0e0e0;
-            --header-bg: #4a148c;
-            --bot-bubble: #2d2d2d;
-            --bot-text: #e0e0e0;
-            --input-border: #444;
-        }
 
-        /* Variables para el Modo Sepia */
-        [data-theme="sepia"] {
-            --bg-body: #f4ecd8;
-            --bg-chat: #fdf6e3;
-            --text-main: #5b4636;
-            --header-bg: #8b6b61;
-            --bot-bubble: #ede0c8;
-            --bot-text: #4a3b32;
-            --input-border: #d3c4a9;
-        }
-
-        body { 
-            font-family: 'Segoe UI', sans-serif; 
-            background-color: var(--bg-body); 
-            color: var(--text-main);
-            display: flex; justify-content: center; align-items: center; 
-            min-height: 100vh; margin: 0; flex-direction: column; 
-            transition: background-color 0.3s ease;
-            font-size: 1.15rem; 
-        }
+        body { font-family: 'Segoe UI', sans-serif; background-color: var(--bg-body); color: var(--text-main); display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; flex-direction: column; transition: background-color 0.3s ease; font-size: 1.15rem; }
         
-        .chat-container { 
-            width: 95%; max-width: 750px; 
-            background: var(--bg-chat); border-radius: 12px; 
-            box-shadow: 0 5px 25px rgba(0,0,0,0.15); overflow: hidden; 
-            display: flex; flex-direction: column; height: 85vh; margin-bottom: 20px; margin-top: 15px;
-            transition: background-color 0.3s ease;
-        }
+        .chat-container { width: 95%; max-width: 750px; background: var(--bg-chat); border-radius: 12px; box-shadow: 0 5px 25px rgba(0,0,0,0.15); overflow: hidden; display: flex; flex-direction: column; height: 85vh; margin-bottom: 20px; margin-top: 15px; transition: background-color 0.3s ease; }
         
-        .header {
-            background-color: var(--header-bg); color: white; padding: 20px;
-            text-align: center; display: flex; align-items: center; justify-content: center; gap: 15px; 
-            position: relative;
-        }
+        .header { background-color: var(--header-bg); color: white; padding: 20px; text-align: center; display: flex; align-items: center; justify-content: center; gap: 15px; position: relative; }
 
-        /* 👇 FOTO DE REGINA MÁS GRANDE (Pasó de 65px a 85px) 👇 */
-        .regina-avatar { width: 85px; height: 85px; border-radius: 50%; border: 3px solid white; object-fit: cover;}
+        /* FOTO DE REGINA FORZADA A GRANDE */
+        .regina-avatar { width: 105px !important; height: 105px !important; min-width: 105px !important; min-height: 105px !important; border-radius: 50%; border: 3px solid white; object-fit: cover;}
+        
         .header div { text-align: left; }
-        .header h1 { margin: 0; font-size: 1.7em; }
-        .header p { margin: 5px 0 0 0; font-size: 1.1em; opacity: 0.9; }
+        .header h1 { margin: 0; font-size: 1.6em; }
+        .header p { margin: 5px 0 0 0; font-size: 1.05em; opacity: 0.9; }
 
-        .theme-toggle {
-            position: absolute; right: 15px; top: 15px; background: none; border: none;
-            color: white; cursor: pointer; opacity: 0.8; transition: opacity 0.3s;
-        }
+        .theme-toggle { position: absolute; right: 15px; top: 15px; background: none; border: none; color: white; font-size: 1.2rem; cursor: pointer; opacity: 0.8; transition: opacity 0.3s; }
         .theme-toggle:hover { opacity: 1; }
 
-        #chat-box { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; }
+        #chat-box { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; scroll-behavior: smooth; }
         
-        /* 👇 NUEVO ESTÁNDAR: LETRA GRANDE POR DEFECTO 👇 */
-        .message { 
-            max-width: 85%; 
-            padding: 14px 20px; 
-            border-radius: 20px; 
-            font-size: 1.25rem; /* <--- El antiguo tamaño Lupa ahora es el normal */
-            line-height: 1.5; 
-            position: relative; 
-            word-wrap: break-word; 
-            white-space: pre-wrap; 
-        }
+        .message { max-width: 85%; padding: 14px 20px; border-radius: 20px; font-size: 1.20rem; line-height: 1.5; position: relative; word-wrap: break-word; white-space: pre-wrap; }
         .user-message { align-self: flex-end; background-color: #6a1b9a; color: white; border-bottom-right-radius: 2px; }
         .bot-message { align-self: flex-start; background-color: var(--bot-bubble); color: var(--bot-text); border-bottom-left-radius: 2px; }
         
-        .input-area { padding: 20px; border-top: 1px solid var(--input-border); display: flex; gap: 10px; background: var(--bg-chat); align-items: center; }
-        .input-area input { font-size: 1.20rem; flex: 1; padding: 12px; background: var(--bg-body); color: var(--text-main); border: 1px solid var(--input-border); border-radius: 20px; outline: none; }
-        .input-area button { font-size: 1.15rem; padding: 12px 22px; background-color: #6a1b9a; color: white; border: none; border-radius: 20px; cursor: pointer; font-weight: bold; }
+        /* 👇 NUEVA ÁREA DE TEXTO CON BOTÓN ABAJO 👇 */
+        .input-area { padding: 15px 20px; border-top: 1px solid var(--input-border); display: flex; flex-direction: column; gap: 12px; background: var(--bg-chat); }
+        .input-area input { font-size: 1.15rem; width: 100%; box-sizing: border-box; padding: 12px; background: var(--bg-body); color: var(--text-main); border: 1px solid var(--input-border); border-radius: 20px; outline: none; }
+        .input-controls { display: flex; justify-content: space-between; align-items: center; width: 100%; }
+        .input-icons { display: flex; gap: 15px; }
+        .input-controls button.btn-enviar { font-size: 1.15rem; padding: 10px 25px; background-color: #6a1b9a; color: white; border: none; border-radius: 20px; cursor: pointer; font-weight: bold; }
         
-        .pdf-btn {
-            display: block; margin-top: 10px; background: #e91e63; color: white; 
-            text-align: center; padding: 8px 12px; border-radius: 5px; 
-            font-size: 1rem; text-decoration: none; cursor: pointer; width: fit-content;
-        }
-
+        .pdf-btn { display: block; margin-top: 10px; background: #e91e63; color: white; text-align: center; padding: 8px 12px; border-radius: 5px; font-size: 1rem; text-decoration: none; cursor: pointer; width: fit-content; }
         .loading { font-style: italic; color: #888; font-size: 1rem; margin-left: 20px; margin-bottom: 10px; display: none; }
         .footer { text-align: center; font-size: 0.9rem; color: #777; padding: 20px; width: 100%; max-width: 700px; }
-        
         .chips-container { display: flex; gap: 10px; padding: 12px 15px; overflow-x: auto; white-space: nowrap; scrollbar-width: none; background: var(--bg-chat); }
-        .chip { background-color: var(--bg-body); border: 2px solid #6a1b9a; color: var(--text-main); padding: 10px 18px; border-radius: 20px; font-size: 1.10rem; font-weight: bold; cursor: pointer; }
+        .chip { background-color: var(--bg-body); border: 2px solid #6a1b9a; color: var(--text-main); padding: 10px 18px; border-radius: 20px; font-size: 1.05rem; font-weight: bold; cursor: pointer; }
         
         #membrete-pdf { display: none; }
-        
         @media print {
             * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
-            .header, .input-area, .chips-container, button, .theme-toggle, .pdf-btn, footer, .footer, #footer, #caja-aviso-legal, .support-btn, #trofeo-badge { 
-                display: none !important; 
-            }
+            .header, .input-area, .chips-container, button, .theme-toggle, .pdf-btn, footer, .footer, #footer, #caja-aviso-legal, .support-btn, #trofeo-badge { display: none !important; }
             body > p, body > div > p { display: none !important; }
             #membrete-pdf { display: block !important; text-align: center; margin-bottom: 30px; page-break-after: avoid; }
             body, html, .chat-container, #chat-box { width: 100% !important; height: auto !important; overflow: visible !important; box-shadow: none !important; border: none !important; margin: 0 !important; padding: 0 !important; }
@@ -198,36 +91,36 @@
 
 <div id="auth-modal" style="position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:2000; justify-content:center; align-items:center; display:none;">
     <div style="background:white; padding:40px; border-radius:15px; width:85%; max-width:320px; text-align:center; box-shadow: 0 10px 30px rgba(0,0,0,0.5); position:relative;">
-        <button onclick="document.getElementById('auth-modal').style.display='none'" style="position:absolute; top:10px; right:15px; background:none; border:none; font-size:2em; color:#999; cursor:pointer;">×</button>
+        <button onclick="document.getElementById('auth-modal').style.display='none'; vibrar(30);" style="position:absolute; top:10px; right:15px; background:none; border:none; font-size:2em; color:#999; cursor:pointer;">×</button>
         <img src="ReginaValentinaRostro.png?v=2" alt="Regina" style="width:90px; height:90px; border-radius:50%; margin-bottom:15px; border:3px solid #6a1b9a; object-fit: cover;">
-        <h2 id="auth-title" style="color:#6a1b9a; margin-top:0;">Acceso al Rancho 🤠</h2>
+        <h2 id="auth-title" style="color:#6a1b9a; margin-top:0;">Acceso VIP 🤠</h2>
         
         <div id="auth-inputs">
-            <input type="email" id="auth-email" placeholder="Tu correo electrónico" style="width:90%; padding:12px; margin-bottom:15px; border:1px solid #ddd; border-radius:8px; box-sizing:border-box; font-size:1.1rem;">
-            <input type="password" id="auth-password" placeholder="Tu contraseña" style="width:90%; padding:12px; margin-bottom:15px; border:1px solid #ddd; border-radius:8px; box-sizing:border-box; font-size:1.1rem;">
+            <input type="email" id="auth-email" placeholder="Correo electrónico" style="width:100%; padding:12px; margin-bottom:15px; border:1px solid #ddd; border-radius:8px; box-sizing:border-box; font-size:1.1rem;">
+            <input type="password" id="auth-password" placeholder="Contraseña" style="width:100%; padding:12px; margin-bottom:15px; border:1px solid #ddd; border-radius:8px; box-sizing:border-box; font-size:1.1rem;">
             
-            <div style="text-align: left; margin-left: 5%; margin-bottom: 20px; width: 90%;">
+            <div style="text-align: left; margin-bottom: 20px; width: 100%;">
                 <label style="font-size: 0.95em; color: #555; display: flex; align-items: center; gap: 8px; cursor: pointer;">
                     <input type="checkbox" id="auth-terminos" style="width: 20px; height: 20px; cursor: pointer;">
                     <span>Acepto los <a href="terminos.html" target="_blank" style="color: #6a1b9a; text-decoration: underline;">Términos y Condiciones</a></span>
                 </label>
             </div>
             
-            <button onclick="ejecutarLogin()" style="width:90%; padding:14px; background-color:#6a1b9a; color:white; border:none; border-radius:8px; font-weight:bold; cursor:pointer; margin-bottom:10px; font-size:1.1rem;">Iniciar Sesión</button>
-            <button onclick="ejecutarRegistro()" style="width:90%; padding:14px; background-color:#fff; color:#6a1b9a; border:2px solid #6a1b9a; border-radius:8px; font-weight:bold; cursor:pointer; font-size:1.1rem;">Crear Cuenta Nueva</button>
+            <button onclick="vibrar(40); ejecutarLogin();" style="width:100%; padding:14px; background-color:#6a1b9a; color:white; border:none; border-radius:8px; font-weight:bold; cursor:pointer; margin-bottom:10px; font-size:1.1rem;">Iniciar Sesión</button>
+            <button onclick="vibrar(40); ejecutarRegistro();" style="width:100%; padding:14px; background-color:#fff; color:#6a1b9a; border:2px solid #6a1b9a; border-radius:8px; font-weight:bold; cursor:pointer; font-size:1.1rem;">Crear Cuenta Nueva</button>
         </div>
 
         <div id="logged-in-view" style="display:none; text-align:center;">
             <p style="color:#555; font-size:1.1em; margin-bottom:20px;">Usted ya es parte del rancho. ¡Su acceso está asegurado!</p>
-            <button id="btn-centro-mando" onclick="window.open('https://RenatoRobles.pythonanywhere.com/panel-robles?admin_id=' + getUserId(), '_blank')" style="display:none; width:90%; padding:14px; background-color:#1e1e1e; color:#ffca28; border:2px solid #ffca28; border-radius:8px; font-weight:bold; cursor:pointer; margin: 0 auto 15px auto; box-shadow: 0 4px 6px rgba(0,0,0,0.3); font-size:1.1rem;">🦅 Centro de Mando</button>
-            <button onclick="cerrarSesion()" style="width:90%; padding:14px; background-color:#f44336; color:white; border:none; border-radius:8px; font-weight:bold; cursor:pointer; margin: 0 auto; font-size:1.1rem;">Cerrar Sesión 🚪</button>
-            <button onclick="eliminarCuentaPropia()" style="display:block; margin: 20px auto 0 auto; background:none; border:none; color:#9e9e9e; text-decoration:underline; font-size:0.95em; cursor:pointer;">Eliminar mi cuenta y datos (Derechos ARCO)</button>
+            <button id="btn-centro-mando" onclick="vibrar(40); window.open('https://RenatoRobles.pythonanywhere.com/panel-robles?admin_id=' + getUserId(), '_blank')" style="display:none; width:100%; padding:14px; background-color:#1e1e1e; color:#ffca28; border:2px solid #ffca28; border-radius:8px; font-weight:bold; cursor:pointer; margin: 0 auto 15px auto; box-shadow: 0 4px 6px rgba(0,0,0,0.3); font-size:1.1rem;">🦅 Centro de Mando</button>
+            <button onclick="vibrar(40); cerrarSesion();" style="width:100%; padding:14px; background-color:#f44336; color:white; border:none; border-radius:8px; font-weight:bold; cursor:pointer; margin: 0 auto; font-size:1.1rem;">Cerrar Sesión 🚪</button>
+            <button onclick="eliminarCuentaPropia()" style="display:block; margin: 20px auto 0 auto; background:none; border:none; color:#9e9e9e; text-decoration:underline; font-size:0.95em; cursor:pointer;">Eliminar mi cuenta y datos</button>
             
             <div style="background: rgba(106, 27, 154, 0.1); padding: 15px; border-radius: 8px; margin-bottom: 20px; border: 1px dashed #6a1b9a; margin-top:20px;">
                 <p style="margin-top:0; font-size:1em; color:#333; font-weight:bold;">🎟️ ¿Tienes un código promocional?</p>
-                <div style="display:flex; gap:10px;">
-                    <input type="text" id="input-cupon" placeholder="Ej. ROBLESVIP" style="flex:1; padding:12px; border:1px solid #ccc; border-radius:5px; text-transform:uppercase; font-size:1rem;">
-                    <button onclick="canjearCupon()" style="background:#6a1b9a; color:white; border:none; padding:12px 20px; border-radius:5px; font-weight:bold; cursor:pointer; font-size:1rem;">Canjear</button>
+                <div style="display:flex; flex-direction:column; gap:10px;">
+                    <input type="text" id="input-cupon" placeholder="Ej. ROBLESVIP" style="width:100%; padding:12px; border:1px solid #ccc; border-radius:5px; text-transform:uppercase; font-size:1rem; box-sizing:border-box;">
+                    <button onclick="vibrar(40); canjearCupon();" style="width:100%; background:#6a1b9a; color:white; border:none; padding:12px; border-radius:5px; font-weight:bold; cursor:pointer; font-size:1rem;">Canjear Cupón</button>
                 </div>
             </div>
         </div>
@@ -237,11 +130,11 @@
 
 <div id="feedback-modal" style="position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:2000; justify-content:center; align-items:center; display:none;">
     <div style="background:white; padding:30px; border-radius:15px; width:85%; max-width:320px; text-align:center; box-shadow: 0 10px 30px rgba(0,0,0,0.5); position:relative; border-top: 6px solid #ffca28;">
-        <button onclick="document.getElementById('feedback-modal').style.display='none'" style="position:absolute; top:10px; right:15px; background:none; border:none; font-size:2em; color:#999; cursor:pointer;">×</button>
+        <button onclick="document.getElementById('feedback-modal').style.display='none'; vibrar(30);" style="position:absolute; top:10px; right:15px; background:none; border:none; font-size:2em; color:#999; cursor:pointer;">×</button>
         <h2 style="color:#6a1b9a; margin-top:0;">💡 Buzón del Rancho</h2>
-        <p style="color:#555; font-size:1.05em; margin-bottom:15px;">¿Qué podemos mejorar? ¿Todo al cien? ¡Échele compa, lo leo directo en mi oficina!</p>
-        <textarea id="feedback-texto" rows="4" placeholder="Escriba aquí su mensaje, sugerencia o queja..." style="width:100%; padding:12px; border:1px solid #ddd; border-radius:8px; box-sizing:border-box; resize:none; margin-bottom:15px; font-family:inherit; font-size:1.05rem;"></textarea>
-        <button id="btn-enviar-sug" onclick="enviarSugerencia()" style="width:100%; padding:14px; background-color:#ffca28; color:#333; border:none; border-radius:8px; font-weight:bold; cursor:pointer; font-size:1.1rem;">Enviar Mensaje 🚀</button>
+        <p style="color:#555; font-size:1.05em; margin-bottom:15px;">¿Qué podemos mejorar? ¡Échele compa!</p>
+        <textarea id="feedback-texto" rows="4" placeholder="Escriba aquí su mensaje..." style="width:100%; padding:12px; border:1px solid #ddd; border-radius:8px; box-sizing:border-box; resize:none; margin-bottom:15px; font-family:inherit; font-size:1.05rem;"></textarea>
+        <button id="btn-enviar-sug" onclick="vibrar(40); enviarSugerencia();" style="width:100%; padding:14px; background-color:#ffca28; color:#333; border:none; border-radius:8px; font-weight:bold; cursor:pointer; font-size:1.1rem;">Enviar Mensaje 🚀</button>
     </div>
 </div>
         
@@ -265,10 +158,10 @@
             <p>Experta en Comportamiento</p>
             
             <div style="display: flex; gap: 12px; margin-top:10px;">
-                <button id="btn-header-voice" style="background:rgba(255,255,255,0.2); border-radius:50%; width:46px; height:46px; display:flex; justify-content:center; align-items:center; color:#ffeb3b; padding:0; transition: 0.3s; border:none; cursor:pointer; font-size:1.4rem;" onclick="togglePremiumVoice()" title="Voz Premium HD">💎🗣️</button>
-                <button id="btn-theme-toggle" style="background:rgba(255,255,255,0.2); border-radius:50%; width:46px; height:46px; display:flex; justify-content:center; align-items:center; padding:0; transition: 0.3s; border:none; cursor:pointer; color:white; font-size:1.4rem;" onclick="toggleTheme()" title="Cambiar Tema">🌙</button>
-                <button style="background:rgba(255,255,255,0.2); border-radius:50%; width:46px; height:46px; display:flex; justify-content:center; align-items:center; padding:0; transition: 0.3s; border:none; cursor:pointer; color:white; font-size:1.4rem;" onclick="abrirMiCuenta()" title="Mi Cuenta">👤</button>
-                <button style="background:rgba(255,255,255,0.2); border-radius:50%; width:46px; height:46px; display:flex; justify-content:center; align-items:center; padding:0; transition: 0.3s; border:none; cursor:pointer; color:white; font-size:1.4rem;" onclick="document.getElementById('settings-modal').style.display='flex'" title="Herramientas y Ajustes">⚙️</button>
+                <button id="btn-header-voice" style="background:rgba(255,255,255,0.2); border-radius:50%; width:46px; height:46px; display:flex; justify-content:center; align-items:center; color:#ffeb3b; padding:0; transition: 0.3s; border:none; cursor:pointer; font-size:1.4rem;" onclick="vibrar(30); togglePremiumVoice()" title="Voz Premium HD">💎🗣️</button>
+                <button id="btn-theme-toggle" style="background:rgba(255,255,255,0.2); border-radius:50%; width:46px; height:46px; display:flex; justify-content:center; align-items:center; padding:0; transition: 0.3s; border:none; cursor:pointer; color:white; font-size:1.4rem;" onclick="vibrar(30); toggleTheme()" title="Cambiar Tema">🌙</button>
+                <button style="background:rgba(255,255,255,0.2); border-radius:50%; width:46px; height:46px; display:flex; justify-content:center; align-items:center; padding:0; transition: 0.3s; border:none; cursor:pointer; color:white; font-size:1.4rem;" onclick="vibrar(30); abrirMiCuenta()" title="Mi Cuenta">👤</button>
+                <button style="background:rgba(255,255,255,0.2); border-radius:50%; width:46px; height:46px; display:flex; justify-content:center; align-items:center; padding:0; transition: 0.3s; border:none; cursor:pointer; color:white; font-size:1.4rem;" onclick="vibrar(30); document.getElementById('settings-modal').style.display='flex'" title="Herramientas y Ajustes">⚙️</button>
             </div>
         </div>
     </div>
@@ -281,18 +174,22 @@
     <div class="loading" id="loading">Regina está escribiendo...</div>
 
     <div class="chips-container">
-        <button class="chip" onclick="sendChip('🤠 ¿Cómo educar a un perro latoso?')">🤠 Educar perro latoso</button>
-        <button class="chip" onclick="sendChip('🧐 ¡Analízame Regina! Hazme unas 2 o 3 preguntas rápidas, una por una, para diagnosticar qué estoy haciendo mal con la educación de mi mascota.')">🧐 Analízame</button>
-        <button class="chip" onclick="sendChip('🏠 ¿Cómo evitar que se orine adentro?')">🏠 Pipí en casa</button>
-        <button class="chip" onclick="dispararEmergencia()" style="border-color:#d32f2f; color:#d32f2f; font-weight:bold; opacity:0.8;">🧑‍⚕️ Urgencia</button>
+        <button class="chip" onclick="vibrar(40); sendChip('🤠 ¿Cómo educar a un perro latoso?')">🤠 Educar perro latoso</button>
+        <button class="chip" onclick="vibrar(40); sendChip('🧐 ¡Analízame Regina!')">🧐 Analízame</button>
+        <button class="chip" onclick="vibrar(40); sendChip('🏠 ¿Cómo evitar que se orine adentro?')">🏠 Pipí en casa</button>
+        <button class="chip" onclick="vibrar(50); dispararEmergencia()" style="border-color:#d32f2f; color:#d32f2f; font-weight:bold; opacity:0.8;">🧑‍⚕️ Urgencia</button>
     </div>
 
     <div class="input-area">
         <input type="text" id="user-input" placeholder="Escribe tu consulta aquí...">
-        <button id="mic-toggle" onclick="toggleMic()" style="background:none; border:none; font-size:1.8em; cursor:pointer; padding: 0 5px; transition: 0.3s;" title="Dictar por voz">🎤</button>
-        <input type="file" id="input-foto-chat" accept="image/*" style="display:none;" onchange="previsualizarFotoChat()">
-        <button id="btn-camara" onclick="document.getElementById('input-foto-chat').click()" style="background:none; border:none; font-size:1.8em; cursor:pointer; padding: 0 5px; transition: 0.3s;" title="Subir Foto">📷</button>
-        <button onclick="sendMessage()" style="margin-left: 2px;">Enviar</button>
+        <div class="input-controls">
+            <div class="input-icons">
+                <button id="mic-toggle" onclick="vibrar(30); toggleMic()" style="background:none; border:none; font-size:1.8em; cursor:pointer; padding: 0; transition: 0.3s;" title="Dictar por voz">🎤</button>
+                <input type="file" id="input-foto-chat" accept="image/*" style="display:none;" onchange="previsualizarFotoChat()">
+                <button id="btn-camara" onclick="vibrar(30); document.getElementById('input-foto-chat').click()" style="background:none; border:none; font-size:1.8em; cursor:pointer; padding: 0; transition: 0.3s;" title="Subir Foto">📷</button>
+            </div>
+            <button class="btn-enviar" onclick="vibrar(50); sendMessage()">Enviar</button>
+        </div>
     </div>
 </div> 
 
@@ -306,10 +203,18 @@
     let dyslexiaEnabled = false;
     let lsmEnabled = false;
 
-    // --- CORTADOR DE AVISO LEGAL (EL SILENCIADOR) ---
+    // MAGIA HÁPTICA (VIBRACIÓN WEB - Limitado en iOS)
+    function vibrar(patron) {
+        if ("vibrate" in navigator) {
+            try { navigator.vibrate(patron); } catch(e) {}
+        }
+    }
+
+    // CORTADOR DE AVISO LEGAL Y ASTERISCOS (MANTIENE EMOJIS)
     function silenciarAviso(texto) {
-        if(texto.includes("Aviso:")) { return texto.split("Aviso:")[0]; }
-        return texto;
+        let txt = texto;
+        if(txt.includes("Aviso:")) { txt = txt.split("Aviso:")[0]; }
+        return txt.replace(/[*_#]/g, '');
     }
 
     function toggleDyslexia() {
@@ -332,6 +237,7 @@
     function quitarAcentos(texto) { return texto.normalize("NFD").replace(/[\u0300-\u036f]/g, ""); }
     
     function copiarConsejo(elementoId) {
+        vibrar(30);
         let clon = document.getElementById(elementoId).cloneNode(true);
         let botones = clon.querySelectorAll('button, div');
         botones.forEach(b => b.remove()); 
@@ -342,6 +248,7 @@
     let ultimoMensajeLeido = null;
 
     function reproducirMensaje(msgId) {
+        vibrar(30);
         if (typeof audioPremiumActual !== 'undefined' && audioPremiumActual) {
             audioPremiumActual.pause();
         }
@@ -359,8 +266,7 @@
         const elemento = document.getElementById(msgId);
         let textoPuro = elemento.getAttribute('data-puretext') || elemento.innerText;
         
-        textoPuro = silenciarAviso(textoPuro); // APLICAMOS SILENCIADOR
-        let textoLimpio = textoPuro.replace(/[\u{1F600}-\u{1F6FF}]/gu, '').replace(/[*_]/g, ''); 
+        let textoLimpio = silenciarAviso(textoPuro);
         
         const utterance = new SpeechSynthesisUtterance(textoLimpio);
         if (reginaVoice) utterance.voice = reginaVoice;
@@ -429,12 +335,14 @@
         recognition.lang = 'es-MX'; 
 
         recognition.onstart = function() {
+            vibrar(30);
             micEnabled = true;
             document.getElementById('mic-toggle').innerText = '🔴'; 
             mostrarNotificacion("🎤 Te escucho, pariente...", "#f44336"); 
         };
 
         recognition.onresult = function(event) {
+            vibrar(40);
             const transcript = event.results[0][0].transcript;
             const inputField = document.getElementById('user-input');
             inputField.value = inputField.value ? inputField.value + ' ' + transcript : transcript;
@@ -442,6 +350,7 @@
         };
 
         recognition.onerror = function(event) {
+            vibrar([50, 50, 50]);
             mostrarNotificacion("⚠️ Error al escuchar. Checa tus permisos.", "#f44336");
         };
 
@@ -567,7 +476,7 @@
     
     async function canjearCupon() {
         const codigo = document.getElementById('input-cupon').value;
-        if(!codigo) { mostrarNotificacion("⚠️ Por favor escriba un código primero.", "#f44336"); return; }
+        if(!codigo) { vibrar([50, 50, 50]); mostrarNotificacion("⚠️ Por favor escriba un código primero.", "#f44336"); return; }
         
         try {
             const response = await fetch(`${API_URL}/canjear_codigo`, {
@@ -577,13 +486,15 @@
             const data = await response.json();
             
             if (response.ok) {
+                vibrar([50, 100, 50, 100]);
                 mostrarNotificacion(data.message, "#4caf50", 5000);
                 document.getElementById('input-cupon').value = "";
-            } else { mostrarNotificacion(data.error, "#f44336", 4000); }
-        } catch (e) { mostrarNotificacion("⚠️ Error de conexión con la bóveda de cupones.", "#f44336"); }
+            } else { vibrar([50, 50, 50]); mostrarNotificacion(data.error, "#f44336", 4000); }
+        } catch (e) { vibrar([50, 50, 50]); mostrarNotificacion("⚠️ Error de conexión con la bóveda de cupones.", "#f44336"); }
     }
     
     async function eliminarCuentaPropia() {
+        vibrar(100);
         if(!confirm("⚠️ ¿Estás seguro de querer borrar tu cuenta? Perderás tu historial y tus accesos VIP. Esta acción no se puede deshacer.")) return;
         try {
             const response = await fetch(`${API_URL}/eliminar_cuenta`, {
@@ -611,7 +522,7 @@
     async function ejecutarRegistro() {
         const terminos = document.getElementById('auth-terminos').checked;
         const errorMsg = document.getElementById('auth-error');
-        if (!terminos) { errorMsg.innerText = "⚠️ Debe aceptar los Términos y Condiciones para continuar."; return; }
+        if (!terminos) { vibrar([50,50,50]); errorMsg.innerText = "⚠️ Debe aceptar los Términos y Condiciones para continuar."; return; }
 
         const authDatos = obtenerDatosAuth();
         errorMsg.innerText = "Registrando, aguanta...";
@@ -621,14 +532,15 @@
             });
             const data = await response.json();
             if (response.ok) {
+                vibrar([50, 100, 50, 100]);
                 localStorage.setItem('regina_registrado', 'true');
                 localStorage.setItem('regina_user_id', data.user_id);
                 localStorage.setItem('regina_is_admin', 'false'); 
                 errorMsg.innerText = ""; 
                 document.getElementById('auth-modal').style.display = 'none';
                 mostrarNotificacion("✅ ¡Cuenta lista, pariente! Ya eres VIP del rancho.", "#4caf50");
-            } else { errorMsg.innerText = data.error; }
-        } catch (e) { errorMsg.innerText = "Error de conexión al servidor."; }
+            } else { vibrar([50,50,50]); errorMsg.innerText = data.error; }
+        } catch (e) { vibrar([50,50,50]); errorMsg.innerText = "Error de conexión al servidor."; }
     }
 
     async function ejecutarLogin() {
@@ -641,6 +553,7 @@
             });
             const data = await response.json();
             if (response.ok) {
+                vibrar([50, 100, 50]);
                 localStorage.setItem('regina_registrado', 'true');
                 localStorage.setItem('regina_user_id', data.user_id);
                 localStorage.setItem('regina_is_admin', data.is_admin ? 'true' : 'false');
@@ -648,13 +561,14 @@
                 document.getElementById('auth-modal').style.display = 'none';
                 mostrarNotificacion("✅ ¡Sesión iniciada! Qué bueno verlo de vuelta.", "#4caf50");
                 if (data.insignias !== undefined) actualizarInsigniasVisuales(data.insignias);
-            } else { errorMsg.innerText = data.error; }
-        } catch (e) { errorMsg.innerText = "Error de conexión al servidor."; }
+            } else { vibrar([50,50,50]); errorMsg.innerText = data.error; }
+        } catch (e) { vibrar([50,50,50]); errorMsg.innerText = "Error de conexión al servidor."; }
     }
 
     function getUserId() { return localStorage.getItem('regina_user_id'); }
 
     function toggleVoice() {
+        vibrar(30);
         const btnModal = document.getElementById('btn-config-voice');
         if (!voiceEnabled) {
             voiceEnabled = true;
@@ -700,9 +614,7 @@
         if (!voiceEnabled) return;
         window.speechSynthesis.cancel(); 
         
-        let textoALeer = silenciarAviso(texto); // APLICAMOS SILENCIADOR
-        let textoLimpio = textoALeer.replace(/[\u{1F600}-\u{1F6FF}]/gu, '').replace(/[*_]/g, ''); 
-        
+        let textoLimpio = silenciarAviso(texto); 
         const utterance = new SpeechSynthesisUtterance(textoLimpio);
         if (reginaVoice) utterance.voice = reginaVoice;
         utterance.lang = 'es-MX'; utterance.rate = 1.05; 
@@ -735,6 +647,9 @@
                 const chatBox = document.getElementById('chat-box');
                 chatBox.scrollTop = chatBox.scrollHeight;
             } else {
+                // 👇 HÁPTICA: Doble vibración al terminar de escribir la IA 👇
+                vibrar([50, 100, 50]);
+
                 let copyBtn = `<button onclick="copiarConsejo('${msgId}')" style="background:none; border:1px solid #d81b60; color:#d81b60; border-radius:15px; padding:6px 14px; cursor:pointer; font-size:1rem; font-weight:bold;">📋 Copiar</button>`;
                 let readBtn = `<button onclick="reproducirMensaje('${msgId}')" style="background:none; border:1px solid #2196f3; color:#2196f3; border-radius:15px; padding:6px 14px; margin-left:8px; cursor:pointer; font-size:1rem; font-weight:bold;">🔊 Escuchar</button>`;
                 
@@ -747,8 +662,8 @@
                 if (textoAEscribir.length > 600 && (textoAEscribir.includes('Guia') || textoAEscribir.includes('paso a paso') || textoAEscribir.includes('1.'))) {
                     let btnHTML = `<br>
                     <div style="display:flex; gap:10px; margin-top:10px; flex-wrap:wrap;">
-                        <button class="pdf-btn" onclick="imprimirGuia('${msgId}')">📄 Guardar PDF Simple</button>
-                        <button class="pdf-btn" style="background:#ffca28; color:black; border:2px solid #ffb300;" id="btn-ilustrar-${msgId}" onclick="ilustrarManual('${msgId}')">✨ Ilustrar Manual (VIP)</button>
+                        <button class="pdf-btn" onclick="vibrar(30); imprimirGuia('${msgId}')">📄 Guardar PDF Simple</button>
+                        <button class="pdf-btn" style="background:#ffca28; color:black; border:2px solid #ffb300;" id="btn-ilustrar-${msgId}" onclick="vibrar(30); ilustrarManual('${msgId}')">✨ Ilustrar Manual (VIP)</button>
                     </div>`;
                     element.innerHTML += btnHTML + botonesAccion;
                     element.setAttribute('data-original', text + btnHTML + botonesAccion);
@@ -764,7 +679,7 @@
     async function ilustrarManual(msgId) {
         const mensajeElement = document.getElementById(msgId);
         const btn = document.getElementById(`btn-ilustrar-${msgId}`);
-        btn.innerText = "✨ Creando ilustración premium con Google AI... (Espere unos 10 seg)";
+        btn.innerText = "✨ Creando ilustración... (Espere unos 10 seg)";
         btn.disabled = true;
 
         try {
@@ -777,19 +692,20 @@
             const data = await response.json();
 
             if (data.imagen_b64) {
+                vibrar([50, 50, 50]); // Vibra cuando llega la foto
                 const imgHTML = `<br><img src="data:image/jpeg;base64,${data.imagen_b64}" alt="Ilustración Premium" style="width:100%; max-width:90%; border-radius:12px; border:3px solid #ffca28; margin:15px auto; box-shadow:0 4px 8px rgba(0,0,0,0.2); display:block;">`;
                 btn.parentElement.insertAdjacentHTML('beforebegin', imgHTML);
                 const currentOriginal = mensajeElement.getAttribute('data-original');
                 if(currentOriginal) { mensajeElement.setAttribute('data-original', currentOriginal + imgHTML); }
                 btn.style.display = 'none'; 
-                hablar("¡Listo pariente! Su manual ha sido ilustrado con una imagen premium.");
+                hablar("¡Listo pariente! Su manual ha sido ilustrado.");
             } else {
-                alert(data.error || "Ocurrió un error al crear la imagen.");
+                alert(data.error || "Ocurrió un error.");
                 btn.innerText = "✨ Reintentar Ilustración";
                 btn.disabled = false;
             }
         } catch (e) {
-            alert("Error de conexión con el estudio premium.");
+            alert("Error de conexión.");
             btn.innerText = "✨ Reintentar Ilustración";
             btn.disabled = false;
         }
@@ -799,7 +715,7 @@
         const texto = document.getElementById('feedback-texto').value;
         const btn = document.getElementById('btn-enviar-sug');
         
-        if (!texto.trim()) { mostrarNotificacion("⚠️ Escriba algo antes de enviar.", "#f44336"); return; }
+        if (!texto.trim()) { vibrar([50,50,50]); mostrarNotificacion("⚠️ Escriba algo antes de enviar.", "#f44336"); return; }
         
         btn.innerText = "Enviando... ⏳";
         btn.disabled = true;
@@ -811,11 +727,12 @@
                 body: JSON.stringify({ user_id: getUserId(), mensaje: texto })
             });
             if (response.ok) {
+                vibrar([50, 100, 50]);
                 mostrarNotificacion("✅ ¡Mensaje recibido! Gracias por ayudarnos a mejorar.", "#4caf50", 5000);
                 document.getElementById('feedback-modal').style.display = 'none';
                 document.getElementById('feedback-texto').value = '';
             }
-        } catch (e) { mostrarNotificacion("⚠️ Error al enviar. Revise su conexión.", "#f44336"); }
+        } catch (e) { vibrar([50,50,50]); mostrarNotificacion("⚠️ Error al enviar.", "#f44336"); }
         
         btn.innerText = "Enviar Mensaje 🚀";
         btn.disabled = false;
@@ -856,6 +773,7 @@
             loading.style.display = 'none';
 
             if (data.status === 'quota_exceeded') {
+                vibrar([50, 100, 50, 100, 50]); // Patrón de error
                 if (!localStorage.getItem('regina_registrado')) {
                     document.getElementById('auth-modal').style.display = 'flex';
                     document.getElementById('auth-modal').querySelector('h2').innerText = "¡Epa! Crea tu cuenta para ver tus pases 🤠";
@@ -901,7 +819,7 @@
     }
 
     document.getElementById("user-input").addEventListener("keypress", function(event) {
-        if (event.key === "Enter") { sendMessage(); }
+        if (event.key === "Enter") { vibrar(50); sendMessage(); }
     });
 
     function sendChip(texto) {
@@ -917,6 +835,7 @@
             const reader = new FileReader();
             reader.onloadend = function() {
                 imagenChatBase64 = reader.result;
+                vibrar([50, 100, 50]);
                 mostrarNotificacion("📸 ¡Foto adjuntada exitosamente!<br>Agrega una descripción y dale a Enviar.", "#4caf50", 4500);
                 document.getElementById('btn-camara').style.background = '#e1bee7';
                 document.getElementById('btn-camara').style.borderRadius = '50%';
@@ -929,6 +848,7 @@
     let contrasteEnabled = false;
 
     function toggleLupa() {
+        vibrar(30);
         lupaEnabled = !lupaEnabled;
         const btnModal = document.getElementById('btn-config-lupa');
         if (lupaEnabled) {
@@ -945,6 +865,7 @@
     }
 
     function toggleContraste() {
+        vibrar(30);
         contrasteEnabled = !contrasteEnabled;
         const btnModal = document.getElementById('btn-config-contraste');
         if (contrasteEnabled) {
@@ -981,6 +902,7 @@
     }
 
     function descargarHistorial() {
+        vibrar(30);
         const mensajes = document.querySelectorAll('.message');
         if(mensajes.length <= 1) {
             mostrarNotificacion("⚠️ No hay historial de plática para guardar aún.", "#f44336");
@@ -1019,11 +941,11 @@
     });
 
     function instalarApp() {
+        vibrar(40);
         if (deferredPrompt) {
             deferredPrompt.prompt();
             deferredPrompt.userChoice.then((choiceResult) => {
                 if (choiceResult.outcome === 'accepted') {
-                    console.log('App instalada con éxito.');
                     document.getElementById('btn-install-app').style.display = 'none';
                 }
                 deferredPrompt = null;
@@ -1033,13 +955,13 @@
 </script>
 
 <div style="text-align:center; margin-top:25px; margin-bottom: 15px;">
-    <a href="https://RenatoRobles.pythonanywhere.com/blog" target="_blank" style="background: linear-gradient(145deg, #00bcd4, #0097a7); color: white; padding: 14px 28px; border-radius: 25px; text-decoration: none; font-weight: bold; font-size: 1.2em; box-shadow: 0 4px 10px rgba(0,0,0,0.2); display: inline-block; transition: 0.3s;">
+    <a href="https://RenatoRobles.pythonanywhere.com/blog" target="_blank" onclick="vibrar(30)" style="background: linear-gradient(145deg, #00bcd4, #0097a7); color: white; padding: 14px 28px; border-radius: 25px; text-decoration: none; font-weight: bold; font-size: 1.2em; box-shadow: 0 4px 10px rgba(0,0,0,0.2); display: inline-block; transition: 0.3s;">
         📝 Leer el Blog de la Experta
     </a>
 </div>
     
 <div class="footer">
-    <button onclick="document.getElementById('feedback-modal').style.display='flex'" style="background:none; border:none; color:#6a1b9a; cursor:pointer; font-size:1.1em; text-decoration:underline; font-weight:bold; margin-bottom:15px;">💡 Dejar una Sugerencia Rápida</button>
+    <button onclick="vibrar(30); document.getElementById('feedback-modal').style.display='flex'" style="background:none; border:none; color:#6a1b9a; cursor:pointer; font-size:1.1em; text-decoration:underline; font-weight:bold; margin-bottom:15px;">💡 Dejar una Sugerencia Rápida</button>
     <p>© 2026 <b>Robles Bienestar</b>. Todos los derechos reservados.</p>
     <p><a href="terminos.html" target="_blank">Ver Términos y Condiciones Completos</a></p>
     <div id="caja-aviso-legal">
@@ -1047,7 +969,7 @@
     </div>
 </div> 
 
-<a href="mailto:soporte@reginavalentina.com?subject=Ayuda%20con%20Regina%20Valentina" class="support-btn" title="Contactar Soporte">
+<a href="mailto:soporte@reginavalentina.com?subject=Ayuda%20con%20Regina%20Valentina" onclick="vibrar(30)" class="support-btn" title="Contactar Soporte">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="32" height="32" fill="white">
         <path d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48H48zM0 176V384c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V176L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z"/>
     </svg>
@@ -1055,7 +977,7 @@
 
 <div id="settings-modal" style="position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:2000; justify-content:center; align-items:center; display:none;">
     <div style="background:white; padding:30px; border-radius:15px; width:85%; max-width:320px; text-align:center; box-shadow: 0 10px 30px rgba(0,0,0,0.5); position:relative; border-top: 6px solid #6a1b9a;">
-        <button onclick="document.getElementById('settings-modal').style.display='none'" style="position:absolute; top:10px; right:15px; background:none; border:none; font-size:2em; color:#999; cursor:pointer;">×</button>
+        <button onclick="document.getElementById('settings-modal').style.display='none'; vibrar(30);" style="position:absolute; top:10px; right:15px; background:none; border:none; font-size:2em; color:#999; cursor:pointer;">×</button>
         
         <h3 style="color:#6a1b9a; margin-top:20px; margin-bottom:5px; padding-right:15px; font-size:1.3em;">⚙️ Herramientas</h3>
         <p style="color:#555; font-size:1em; margin-bottom:20px;">Ajusta tu experiencia.</p>
@@ -1073,6 +995,9 @@
             <button id="btn-config-lsm" onclick="toggleLSM()" style="background:#f4f4f9; color:#333; border:2px solid #ddd; padding:14px; border-radius:10px; cursor:pointer; font-family:inherit; display:flex; align-items:center; gap:15px; font-weight:bold; transition:0.3s; font-size:1.1rem;">
                 <span id="lsm-toggle" style="font-size:1.8em;">🤟</span> Dactilología
             </button>
+            <button id="btn-config-voice" onclick="toggleVoice()" style="background:#f4f4f9; color:#333; border:2px solid #ddd; padding:14px; border-radius:10px; cursor:pointer; font-family:inherit; display:flex; align-items:center; gap:15px; font-weight:bold; transition:0.3s; font-size:1.1rem;">
+                <span id="voice-toggle" style="font-size:1.8em;">🤫</span> Voz Robótica (Básica)
+            </button>
             <button id="btn-config-lupa" onclick="toggleLupa()" style="background:#f4f4f9; color:#333; border:2px solid #ddd; padding:14px; border-radius:10px; cursor:pointer; font-family:inherit; display:flex; align-items:center; gap:15px; font-weight:bold; transition:0.3s; font-size:1.1rem;">
                 <span style="font-size:1.8em;">🔍</span> Agrandar Letra
             </button>
@@ -1081,7 +1006,7 @@
             </button>
         </div>
         
-        <button onclick="document.getElementById('settings-modal').style.display='none'" style="width:100%; padding:14px; background-color:#d32f2f; color:white; border:none; border-radius:8px; font-weight:bold; cursor:pointer; font-size:1.15rem;">Cerrar Menú</button>
+        <button onclick="document.getElementById('settings-modal').style.display='none'; vibrar(30);" style="width:100%; padding:14px; background-color:#d32f2f; color:white; border:none; border-radius:8px; font-weight:bold; cursor:pointer; font-size:1.15rem;">Cerrar Menú</button>
     </div>
 </div>
 
