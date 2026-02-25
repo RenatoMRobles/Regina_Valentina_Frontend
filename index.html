@@ -189,7 +189,7 @@
         }
         @media print {
             * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
-            .header, .input-area, .chips-container, button, .theme-toggle, .pdf-btn, footer, .footer, #footer, #caja-aviso-legal, .support-btn { 
+            .header, .input-area, .chips-container, button, .theme-toggle, .pdf-btn, footer, .footer, #footer, #caja-aviso-legal, .support-btn, #trofeo-badge { 
                 display: none !important; 
             }
             body > p, body > div > p { display: none !important; }
@@ -211,7 +211,7 @@
 
 <div id="auth-modal" style="position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:2000; justify-content:center; align-items:center; display:none;">
     <div style="background:white; padding:40px; border-radius:15px; width:85%; max-width:320px; text-align:center; box-shadow: 0 10px 30px rgba(0,0,0,0.5); position:relative;">
-        <button onclick="document.getElementById('auth-modal').style.display='none'" style="position:absolute; top:10px; right:15px; background:none; border:none; font-size:1.8em; color:#999; cursor:pointer;">&times;</button>
+        <button onclick="document.getElementById('auth-modal').style.display='none'" style="position:absolute; top:10px; right:15px; background:none; border:none; font-size:1.8em; color:#999; cursor:pointer;">×</button>
         <img src="ReginaValentinaRostro.png?v=2" alt="Regina" style="width:80px; height:80px; border-radius:50%; margin-bottom:15px; border:3px solid #6a1b9a;">
         <h2 id="auth-title" style="color:#6a1b9a; margin-top:0;">Acceso al Rancho 🤠</h2>
         
@@ -249,7 +249,7 @@
 
 <div id="feedback-modal" style="position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:2000; justify-content:center; align-items:center; display:none;">
     <div style="background:white; padding:30px; border-radius:15px; width:85%; max-width:320px; text-align:center; box-shadow: 0 10px 30px rgba(0,0,0,0.5); position:relative; border-top: 6px solid #ffca28;">
-        <button onclick="document.getElementById('feedback-modal').style.display='none'" style="position:absolute; top:10px; right:15px; background:none; border:none; font-size:1.8em; color:#999; cursor:pointer;">&times;</button>
+        <button onclick="document.getElementById('feedback-modal').style.display='none'" style="position:absolute; top:10px; right:15px; background:none; border:none; font-size:1.8em; color:#999; cursor:pointer;">×</button>
         <h2 style="color:#6a1b9a; margin-top:0;">💡 Buzón del Rancho</h2>
         <p style="color:#555; font-size:0.9em; margin-bottom:15px;">¿Qué podemos mejorar? ¿Todo al cien? ¡Échele compa, lo leo directo en mi oficina!</p>
         <textarea id="feedback-texto" rows="4" placeholder="Escriba aquí su mensaje, sugerencia o queja..." style="width:100%; padding:10px; border:1px solid #ddd; border-radius:8px; box-sizing:border-box; resize:none; margin-bottom:15px; font-family:inherit;"></textarea>
@@ -276,8 +276,7 @@
                 <button id="btn-header-voice" class="theme-toggle" style="position:static; background:rgba(255,255,255,0.2); border-radius:50%; width:38px; height:38px; display:flex; justify-content:center; align-items:center; color:#ffeb3b; padding:0; transition: 0.3s;" onclick="togglePremiumVoice()" title="Voz Premium HD">💎🗣️</button>
                 <button id="btn-theme-toggle" class="theme-toggle" style="position:static; background:rgba(255,255,255,0.2); border-radius:50%; width:38px; height:38px; display:flex; justify-content:center; align-items:center; padding:0; transition: 0.3s;" onclick="toggleTheme()" title="Cambiar Tema">🌙</button>
                 <button class="theme-toggle" style="position:static; background:rgba(255,255,255,0.2); border-radius:50%; width:38px; height:38px; display:flex; justify-content:center; align-items:center; padding:0; transition: 0.3s;" onclick="abrirMiCuenta()" title="Mi Cuenta">👤</button>
-                <button class="theme-toggle" style="position:static; background:rgba(255,255,255,0.2); border-radius:50%; width:38px; height:38px; display:flex; justify-content:center; align-items:center; padding:0; transition: 0.3s;" onclick="document.getElementById('settings-modal').style.display='flex'" title="Ajustes de Accesibilidad">⚙️</button>
-                <button class="theme-toggle" style="position:static; background:rgba(255,255,255,0.2); border-radius:50%; width:38px; height:38px; display:flex; justify-content:center; align-items:center; padding:0; transition: 0.3s;" onclick="descargarHistorial()" title="Guardar Historial del Chat">💾</button>
+                <button class="theme-toggle" style="position:static; background:rgba(255,255,255,0.2); border-radius:50%; width:38px; height:38px; display:flex; justify-content:center; align-items:center; padding:0; transition: 0.3s;" onclick="document.getElementById('settings-modal').style.display='flex'" title="Herramientas y Ajustes">⚙️</button>
             </div>
         </div>
     </div>
@@ -430,7 +429,7 @@
     
     function mostrarNotificacion(texto, colorFondo = "#6a1b9a", tiempo = 4500) {
         const noti = document.createElement('div');
-        noti.style.cssText = `position:fixed; top:20px; left:50%; transform:translateX(-50%); background:${colorFondo}; color:white; padding:12px 24px; border-radius:30px; z-index:9999; box-shadow:0 4px 15px rgba(0,0,0,0.4); font-weight:bold; font-size:0.95em; transition: opacity 0.5s;`;
+        noti.style.cssText = `position:fixed; top:20px; left:50%; transform:translateX(-50%); background:${colorFondo}; color:white; padding:12px 24px; border-radius:30px; z-index:9999; box-shadow:0 4px 15px rgba(0,0,0,0.4); font-weight:bold; font-size:0.95em; transition: opacity 0.5s; text-align:center;`;
         noti.innerHTML = texto;
         document.body.appendChild(noti);
         
@@ -637,6 +636,18 @@
         };
     }
 
+    // 👇 LA FUNCIÓN ACTUALIZADORA DE ESTRELLAS 👇
+    function actualizarInsigniasVisuales(cantidad) {
+        const badge = document.getElementById('trofeo-badge');
+        const count = document.getElementById('trofeo-count');
+        if (cantidad !== undefined && cantidad > 0) {
+            badge.style.display = 'flex';
+            count.innerText = cantidad;
+        } else {
+            badge.style.display = 'none';
+        }
+    }
+
     async function ejecutarRegistro() {
         const terminos = document.getElementById('auth-terminos').checked;
         const errorMsg = document.getElementById('auth-error');
@@ -693,6 +704,12 @@
                 errorMsg.innerText = ""; 
                 document.getElementById('auth-modal').style.display = 'none';
                 mostrarNotificacion("✅ ¡Sesión iniciada! Qué bueno verlo de vuelta.", "#4caf50");
+
+                // Dibujar medallas al iniciar sesión
+                if (data.insignias !== undefined) {
+                    actualizarInsigniasVisuales(data.insignias);
+                }
+
             } else {
                 errorMsg.innerText = data.error;
             }
@@ -941,6 +958,12 @@
                     audioPremiumActual = new Audio("data:audio/mp3;base64," + data.audio);
                     audioPremiumActual.play();
                 }
+
+                // Dibujar medallas si el usuario completó la tarea en este mensaje
+                if (data.insignias !== undefined) {
+                    actualizarInsigniasVisuales(data.insignias);
+                }
+
             } else {
                 chatBox.innerHTML += `<div class="message bot-message" style="color:red">Error en el servidor.</div>`;
             }
@@ -1014,27 +1037,20 @@
         }
     }
 
-    // 3. Escudo de Emergencia Médica (Con enlace cliqueable verificado)
     function dispararEmergencia() {
         const chatBox = document.getElementById('chat-box');
         chatBox.innerHTML += `<div class="message user-message" style="background:#d32f2f; color:white; font-weight:bold;">🧑‍⚕️ Consulta de Urgencia</div>`;
         
-        // 👇 TEXTO SUAVIZADO Y PROFESIONAL (Sin descripciones gráficas) 👇
         const warningHTML = `¡ATENCIÓN! 🧑‍⚕️ No soy un médico veterinario, soy una IA experta en comportamiento.<br><br>Si tu mascota sufrió un accidente grave o presenta una condición crítica, <strong>ESTO REQUIERE ATENCIÓN PROFESIONAL INMEDIATA</strong>.<br><br>Por favor, no pierdas tiempo en el chat. Llévala a una clínica veterinaria ahora mismo.<br><br>📍 <a href="https://www.google.com/maps/search/veterinaria+24+horas" target="_blank" style="color:#d32f2f; font-weight:900; text-decoration:underline; cursor:pointer;">Haz clic aquí para buscar veterinarias 24 horas en Google Maps</a>.`;
         
         const newMsg = document.createElement("div");
         newMsg.className = "message bot-message";
-        
-        // Bordes rojos pero fondo translúcido (elegante en light y dark mode)
         newMsg.style.border = "2px solid #d32f2f";
         newMsg.style.background = "rgba(211, 47, 47, 0.1)"; 
         newMsg.style.color = "var(--text-main)";
-        
-        // Lo inyectamos instantáneamente
         newMsg.innerHTML = warningHTML;
         chatBox.appendChild(newMsg);
         
-        // Regina habla de forma calmada pero firme
         if (typeof hablar === "function") {
             hablar("Atención. Esto es una urgencia médica. Por favor, lleva a tu mascota a una clínica veterinaria inmediatamente.");
         }
@@ -1071,6 +1087,7 @@
         window.URL.revokeObjectURL(url);
         
         mostrarNotificacion("💾 ¡Historial descargado en tu dispositivo!", "#4caf50");
+        document.getElementById('settings-modal').style.display='none';
     }
 
     function calificarMensaje(msgId, tipo) {
@@ -1091,6 +1108,27 @@
         
         btnUp.disabled = true;
         btnDown.disabled = true;
+    }
+
+    // --- SISTEMA DE INSTALACIÓN PWA (APP) ---
+    let deferredPrompt;
+    window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+        document.getElementById('btn-install-app').style.display = 'block';
+    });
+
+    function instalarApp() {
+        if (deferredPrompt) {
+            deferredPrompt.prompt();
+            deferredPrompt.userChoice.then((choiceResult) => {
+                if (choiceResult.outcome === 'accepted') {
+                    console.log('App instalada con éxito por el pariente.');
+                    document.getElementById('btn-install-app').style.display = 'none';
+                }
+                deferredPrompt = null;
+            });
+        }
     }
 </script>
 
@@ -1117,11 +1155,17 @@
 
 <div id="settings-modal" style="position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:2000; justify-content:center; align-items:center; display:none;">
     <div style="background:white; padding:30px; border-radius:15px; width:85%; max-width:320px; text-align:center; box-shadow: 0 10px 30px rgba(0,0,0,0.5); position:relative; border-top: 6px solid #6a1b9a;">
-        <button onclick="document.getElementById('settings-modal').style.display='none'" style="position:absolute; top:10px; right:15px; background:none; border:none; font-size:1.8em; color:#999; cursor:pointer;">&times;</button>
+        <button onclick="document.getElementById('settings-modal').style.display='none'" style="position:absolute; top:10px; right:15px; background:none; border:none; font-size:1.8em; color:#999; cursor:pointer;">×</button>
         
-        <h2 style="color:#6a1b9a; margin-top:0;">⚙️ Accesibilidad</h2>
-        <p style="color:#555; font-size:0.9em; margin-bottom:20px;">Adapta el rancho a tus necesidades.</p>
+        <h2 style="color:#6a1b9a; margin-top:0;">⚙️ Herramientas del Rancho</h2>
+        <p style="color:#555; font-size:0.9em; margin-bottom:20px;">Ajusta tu experiencia o guarda tus datos.</p>
         
+        <button id="btn-install-app" onclick="instalarApp()" class="btn" style="width:100%; margin-bottom:12px; background: linear-gradient(145deg, #ff9800, #f57c00); color:white; font-weight:bold; display:none; font-size:1.1em; padding:12px; border-radius:8px; border:none;">📱 Instalar App en el Celular</button>
+
+        <button onclick="descargarHistorial()" class="btn" style="width:100%; margin-bottom:15px; background:#4caf50; color:white; font-weight:bold; font-size:1.1em; padding:12px; border-radius:8px; border:none; box-shadow: 0 4px 6px rgba(0,0,0,0.2); cursor:pointer;">💾 Guardar Conversación (TXT)</button>
+        
+        <hr style="border: 1px solid #eee; margin: 15px 0;">
+
         <div style="display:flex; flex-direction:column; gap: 12px; margin-bottom: 25px;">
             <button id="btn-config-dyslexia" onclick="toggleDyslexia()" style="background:#f4f4f9; color:#333; border:2px solid #ddd; padding:12px; border-radius:10px; cursor:pointer; font-family:inherit; display:flex; align-items:center; gap:15px; font-weight:bold; transition:0.3s;">
                 <span id="dyslexia-toggle" style="font-size:1.6em;">👓</span> Letra para Dislexia
@@ -1140,8 +1184,12 @@
             </button>
         </div>
         
-        <button onclick="document.getElementById('settings-modal').style.display='none'" style="width:100%; padding:12px; background-color:#6a1b9a; color:white; border:none; border-radius:25px; font-weight:bold; cursor:pointer; font-size:1.1em;">Guardar</button>
+        <button onclick="document.getElementById('settings-modal').style.display='none'" style="width:100%; padding:12px; background-color:#d32f2f; color:white; border:none; border-radius:8px; font-weight:bold; cursor:pointer; font-size:1.1em;">Cerrar Menú</button>
     </div>
+</div>
+
+<div id="trofeo-badge" style="position:fixed; top:15px; right:70px; z-index:9999; background:linear-gradient(145deg, #fff8e1, #ffecb3); border:2px solid #ffca28; padding:5px 12px; border-radius:25px; box-shadow:0 4px 6px rgba(0,0,0,0.1); font-size:1.2em; display:none; align-items:center; gap:5px; font-weight:bold; color:#333; pointer-events:none;">
+    🌟 <span id="trofeo-count">0</span>
 </div>
 
 </body> 
