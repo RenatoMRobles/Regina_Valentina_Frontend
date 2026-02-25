@@ -156,7 +156,7 @@
 </div>
 
 <div id="trofeo-badge" onclick="vibrar(40); abrirVitrina()" title="Ver mis medallas" style="position:fixed; top:20px; right:20px; z-index:1900; background:linear-gradient(145deg, #fff8e1, #ffecb3); border:2px solid #ffca28; padding:8px 15px; border-radius:25px; box-shadow:0 4px 10px rgba(0,0,0,0.2); font-size:1.5em; display:none; align-items:center; gap:5px; font-weight:bold; color:#333; cursor:pointer; transition:0.3s;">
-    🏆 <span id="trofeo-count">0 pts</span>
+    🌟 <span id="trofeo-count">0 pts</span>
 </div>
 
 <div class="chat-container">
@@ -338,7 +338,7 @@
                 <p style="margin:0; font-style:italic; color:#333; font-size:1.15em;">"¡Mis respetos, pariente! Has dominado todas las artes del adiestramiento. Tu mascota y tú son la dupla perfecta. Ya no ocupan correas, nomás con verse se entienden. ¡Te ganaste las llaves del rancho!"</p>
                 <p style="margin:10px 0 0 0; font-weight:bold; color:#d81b60; text-align:right;">- Regina Valentina 🤠</p>
             </div>
-            <p style="font-weight:bold; color:#4caf50; font-size:1.3em;">¡Completado al 100%!</p>
+            <p style="font-weight:bold; color:#4caf50; font-size:1.3em;">¡Completado al 100%! 🏔️</p>
         `;
         vistaDetalle.style.display = 'block';
     }
@@ -649,6 +649,7 @@
             if (response.ok) {
                 localStorage.removeItem('regina_registrado');
                 localStorage.removeItem('regina_user_id');
+                localStorage.removeItem('regina_is_admin');
                 localStorage.removeItem('regina_total_pts');
                 window.location.reload();
             }
