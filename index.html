@@ -300,7 +300,7 @@
         } else {
             contenedorMaximo.innerHTML = `<div style="background: #eee; padding: 20px; border-radius: 15px; margin-top: 20px; color: #757575; border: 2px dashed #ccc;">
                 <h3 style="margin:0; font-size:1.2em;">⛰️ Cima de la Montaña</h3>
-                <p style="margin:5px 0 0 0; font-size:0.9em;">Consigue las 5 Insignias para ver el premio final.</p>
+                <p style="margin:5px 0 0 0; font-size:0.9em;">Consigue las 5 Insignias de Buen Pastor para ver el premio final.</p>
             </div>`;
         }
         document.getElementById('vitrina-modal').style.display = 'flex';
@@ -314,7 +314,7 @@
         document.getElementById('vista-principal-vitrina').style.display = 'none';
         const vistaDetalle = document.getElementById('vista-detalle-vitrina');
         
-        let mensajeFelicidades = progreso === 100 ? `<div style="background:#fff8e1; border:2px solid #ffca28; padding:10px; border-radius:10px; margin-top:15px; color:#d8a000; font-weight:bold;">¡Felicidades! Has obtenido la Insignia de Buen Pastor 🌟.</div>` : ``;
+        let mensajeFelicidades = progreso === 100 ? `<div style="background:#fff8e1; border:2px solid #ffca28; padding:10px; border-radius:10px; margin-top:15px; color:#d8a000; font-weight:bold;">¡Felicidades! Has obtenido la Insignia de Buen Pastor 🌟 en esta habilidad.</div>` : ``;
 
         vistaDetalle.innerHTML = `
             <div style="text-align:left; margin-bottom:15px;">
@@ -960,7 +960,15 @@
                 chatBox.appendChild(newMsg);
                 typeEffect(newMsg, data.response); 
                 
-                if (data.response.includes("Jefe Supremo detectado")) { localStorage.setItem('regina_is_admin', 'true'); }
+                // 👇 AUTO-APERTURA DE PANEL MODO DIOS 👇
+                if (data.response.includes("Jefe Supremo detectado")) { 
+                    localStorage.setItem('regina_is_admin', 'true'); 
+                    localStorage.setItem('regina_registrado', 'true');
+                    setTimeout(() => {
+                        vibrar([50,100,50,100]);
+                        abrirMiCuenta();
+                    }, 2000);
+                }
                 if (data.audio) {
                     if (audioPremiumActual) audioPremiumActual.pause();
                     audioPremiumActual = new Audio("data:audio/mp3;base64," + data.audio);
