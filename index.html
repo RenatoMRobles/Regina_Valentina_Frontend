@@ -7,9 +7,7 @@
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#6a1b9a">
     <meta name="description" content="Regina Valentina: La experta en comportamiento animal que pone orden en el rancho. ¡Tus primeros 3 consejos son GRATIS! 🤠🐾">
-    <meta name="keywords" content="comportamiento animal, adiestramiento, Regina Valentina, Robles Bienestar">
-    <meta name="author" content="Robles Bienestar">
-
+    
     <meta property="og:title" content="Regina Valentina 🤠🐾 | Experta en Mascotas">
     <meta property="og:description" content="¿Tu mascota manda en casa? Platica con Regina y soluciona sus problemas hoy mismo.">
     <meta property="og:image" content="https://reginavalentina.com/ReginaValentinaRostro.png?v=2">
@@ -37,8 +35,12 @@
         [data-theme="dark"] { --bg-body: #121212; --bg-chat: #1e1e1e; --text-main: #e0e0e0; --header-bg: #4a148c; --bot-bubble: #2d2d2d; --bot-text: #e0e0e0; --input-border: #444; }
         [data-theme="sepia"] { --bg-body: #f4ecd8; --bg-chat: #fdf6e3; --text-main: #5b4636; --header-bg: #8b6b61; --bot-bubble: #ede0c8; --bot-text: #4a3b32; --input-border: #d3c4a9; }
 
-        .support-btn { position: fixed; bottom: 20px; right: 20px; background-color: #6a1b9a; border-radius: 50%; width: 55px; height: 55px; display: flex; justify-content: center; align-items: center; box-shadow: 0 4px 15px rgba(0,0,0,0.3); z-index: 9999; transition: 0.3s; }
+        /* 👇 LAS DOS BURBUJAS FLOTANTES DE LA DERECHA 👇 */
+        .support-btn { position: fixed; bottom: 20px; right: 20px; background-color: #6a1b9a; border-radius: 50%; width: 55px; height: 55px; display: flex; justify-content: center; align-items: center; box-shadow: 0 4px 15px rgba(0,0,0,0.3); z-index: 9999; transition: 0.3s; cursor:pointer; }
         .support-btn:hover { transform: scale(1.1); background-color: #ffca28; }
+
+        .share-bubble { position: fixed; bottom: 85px; right: 20px; background: linear-gradient(145deg, #ff9800, #f57c00); border-radius: 50%; width: 55px; height: 55px; display: flex; justify-content: center; align-items: center; box-shadow: 0 4px 15px rgba(0,0,0,0.3); z-index: 9999; transition: 0.3s; cursor:pointer; font-size:1.6rem; border:none; color:white; }
+        .share-bubble:hover { transform: scale(1.1); background: #e65100; }
 
         body { font-family: 'Segoe UI', sans-serif; background-color: var(--bg-body); color: var(--text-main); display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; flex-direction: column; transition: background-color 0.3s ease; font-size: 1.15rem; }
         
@@ -51,9 +53,6 @@
         .header div { text-align: left; }
         .header h1 { margin: 0; font-size: 1.6em; }
         .header p { margin: 5px 0 0 0; font-size: 1.05em; opacity: 0.9; }
-
-        .theme-toggle { position: absolute; right: 15px; top: 15px; background: none; border: none; color: white; font-size: 1.2rem; cursor: pointer; opacity: 0.8; transition: opacity 0.3s; }
-        .theme-toggle:hover { opacity: 1; }
 
         #chat-box { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; scroll-behavior: smooth; }
         
@@ -73,15 +72,22 @@
         .chips-container { display: flex; gap: 10px; padding: 12px 15px; overflow-x: auto; white-space: nowrap; scrollbar-width: none; background: var(--bg-chat); }
         .chip { background-color: var(--bg-body); border: 2px solid #6a1b9a; color: var(--text-main); padding: 10px 18px; border-radius: 20px; font-size: 1.05rem; font-weight: bold; cursor: pointer; }
         
+        /* 👇 ANIMACIÓN DE CELEBRACIÓN DE ESTRELLA 👇 */
+        @keyframes latidoEstrella {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.6); filter: drop-shadow(0 0 15px #ffca28); }
+            100% { transform: scale(1); }
+        }
+        .animar-estrella { animation: latidoEstrella 0.6s ease-in-out 3; }
+
         #membrete-pdf { display: none; }
         @media print {
             * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
-            .header, .input-area, .chips-container, button, .theme-toggle, .pdf-btn, footer, .footer, #footer, #caja-aviso-legal, .support-btn, #trofeo-badge { display: none !important; }
+            .header, .input-area, .chips-container, button, .pdf-btn, footer, .footer, #caja-aviso-legal, .support-btn, .share-bubble, #trofeo-badge { display: none !important; }
             body > p, body > div > p { display: none !important; }
             #membrete-pdf { display: block !important; text-align: center; margin-bottom: 30px; page-break-after: avoid; }
             body, html, .chat-container, #chat-box { width: 100% !important; height: auto !important; overflow: visible !important; box-shadow: none !important; border: none !important; margin: 0 !important; padding: 0 !important; }
-            .message { display: block !important; background: transparent !important; box-shadow: none !important; margin-bottom: 20px !important; page-break-inside: auto !important; font-family: 'Georgia', 'Times New Roman', serif !important; font-size: 13pt !important; line-height: 1.8 !important; text-align: justify !important; }
-            img { max-width: 90% !important; margin: 20px auto !important; page-break-inside: avoid !important; display: block !important; border-radius: 12px !important; border: 3px solid #ffca28 !important; box-shadow: 0px 10px 15px rgba(0,0,0,0.3) !important; }
+            .message { display: block !important; background: transparent !important; box-shadow: none !important; margin-bottom: 20px !important; font-family: 'Georgia', 'Times New Roman', serif !important; font-size: 13pt !important; line-height: 1.8 !important; text-align: justify !important; }
         }
     </style>
 </head>
@@ -89,7 +95,7 @@
 
 <div id="auth-modal" style="position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:2000; justify-content:center; align-items:center; display:none;">
     <div style="background:white; padding:40px; border-radius:15px; width:85%; max-width:320px; text-align:center; box-shadow: 0 10px 30px rgba(0,0,0,0.5); position:relative;">
-        <button onclick="document.getElementById('auth-modal').style.display='none'; vibrar(60);" style="position:absolute; top:10px; right:15px; background:none; border:none; font-size:2em; color:#999; cursor:pointer;">×</button>
+        <button onclick="document.getElementById('auth-modal').style.display='none'; vibrar(30);" style="position:absolute; top:10px; right:15px; background:none; border:none; font-size:2em; color:#999; cursor:pointer;">×</button>
         <img src="ReginaValentinaRostro.png?v=2" alt="Regina" style="width:90px; height:90px; border-radius:50%; margin-bottom:15px; border:3px solid #6a1b9a; object-fit: cover;">
         <h2 id="auth-title" style="color:#6a1b9a; margin-top:0;">Acceso VIP 🤠</h2>
         
@@ -97,32 +103,36 @@
             <input type="email" id="auth-email" placeholder="Correo electrónico" style="width:100%; padding:12px; margin-bottom:15px; border:1px solid #ddd; border-radius:8px; box-sizing:border-box; font-size:1.1rem;">
             <input type="password" id="auth-password" placeholder="Contraseña" style="width:100%; padding:12px; margin-bottom:15px; border:1px solid #ddd; border-radius:8px; box-sizing:border-box; font-size:1.1rem;">
             
-            <div style="text-align: left; margin-bottom: 20px; width: 100%;">
-                <label style="font-size: 0.95em; color: #555; display: flex; align-items: center; gap: 8px; cursor: pointer;">
-                    <input type="checkbox" id="auth-terminos" style="width: 20px; height: 20px; cursor: pointer;">
-                    <span>Acepto los <a href="terminos.html" target="_blank" style="color: #6a1b9a; text-decoration: underline;">Términos y Condiciones</a></span>
-                </label>
-            </div>
-            
-            <button onclick="vibrar(60); ejecutarLogin();" style="width:100%; padding:14px; background-color:#6a1b9a; color:white; border:none; border-radius:8px; font-weight:bold; cursor:pointer; margin-bottom:10px; font-size:1.1rem;">Iniciar Sesión</button>
-            <button onclick="vibrar(60); ejecutarRegistro();" style="width:100%; padding:14px; background-color:#fff; color:#6a1b9a; border:2px solid #6a1b9a; border-radius:8px; font-weight:bold; cursor:pointer; font-size:1.1rem;">Crear Cuenta Nueva</button>
+            <button onclick="vibrar(40); ejecutarLogin();" style="width:100%; padding:14px; background-color:#6a1b9a; color:white; border:none; border-radius:8px; font-weight:bold; cursor:pointer; margin-bottom:10px; font-size:1.1rem;">Iniciar Sesión</button>
+            <button onclick="vibrar(40); ejecutarRegistro();" style="width:100%; padding:14px; background-color:#fff; color:#6a1b9a; border:2px solid #6a1b9a; border-radius:8px; font-weight:bold; cursor:pointer; font-size:1.1rem;">Crear Cuenta Nueva</button>
         </div>
 
         <div id="logged-in-view" style="display:none; text-align:center;">
             <p style="color:#555; font-size:1.1em; margin-bottom:20px;">Usted ya es parte del rancho. ¡Su acceso está asegurado!</p>
-            <button id="btn-centro-mando" onclick="vibrar(60); window.open('https://RenatoRobles.pythonanywhere.com/panel-robles?admin_id=' + getUserId(), '_blank')" style="display:none; width:100%; padding:14px; background-color:#1e1e1e; color:#ffca28; border:2px solid #ffca28; border-radius:8px; font-weight:bold; cursor:pointer; margin: 0 auto 15px auto; box-shadow: 0 4px 6px rgba(0,0,0,0.3); font-size:1.1rem;">🦅 Centro de Mando</button>
-            <button onclick="vibrar(60); cerrarSesion();" style="width:100%; padding:14px; background-color:#f44336; color:white; border:none; border-radius:8px; font-weight:bold; cursor:pointer; margin: 0 auto; font-size:1.1rem;">Cerrar Sesión 🚪</button>
+            <button id="btn-centro-mando" onclick="vibrar(40); window.open('https://RenatoRobles.pythonanywhere.com/panel-robles?admin_id=' + getUserId(), '_blank')" style="display:none; width:100%; padding:14px; background-color:#1e1e1e; color:#ffca28; border:2px solid #ffca28; border-radius:8px; font-weight:bold; cursor:pointer; margin: 0 auto 15px auto; font-size:1.1rem;">🦅 Centro de Mando</button>
+            <button onclick="vibrar(40); cerrarSesion();" style="width:100%; padding:14px; background-color:#f44336; color:white; border:none; border-radius:8px; font-weight:bold; cursor:pointer; margin: 0 auto; font-size:1.1rem;">Cerrar Sesión 🚪</button>
             <button onclick="eliminarCuentaPropia()" style="display:block; margin: 20px auto 0 auto; background:none; border:none; color:#9e9e9e; text-decoration:underline; font-size:0.95em; cursor:pointer;">Eliminar mi cuenta y datos</button>
             
             <div style="background: rgba(106, 27, 154, 0.1); padding: 15px; border-radius: 8px; margin-bottom: 20px; border: 1px dashed #6a1b9a; margin-top:20px;">
                 <p style="margin-top:0; font-size:1em; color:#333; font-weight:bold;">🎟️ ¿Tienes un código promocional?</p>
                 <div style="display:flex; flex-direction:column; gap:10px;">
                     <input type="text" id="input-cupon" placeholder="Ej. ROBLESVIP" style="width:100%; padding:12px; border:1px solid #ccc; border-radius:5px; text-transform:uppercase; font-size:1rem; box-sizing:border-box;">
-                    <button onclick="vibrar(60); canjearCupon();" style="width:100%; background:#6a1b9a; color:white; border:none; padding:12px; border-radius:5px; font-weight:bold; cursor:pointer; font-size:1rem;">Canjear Cupón</button>
+                    <button onclick="vibrar(40); canjearCupon();" style="width:100%; background:#6a1b9a; color:white; border:none; padding:12px; border-radius:5px; font-weight:bold; cursor:pointer; font-size:1rem;">Canjear Cupón</button>
                 </div>
             </div>
         </div>
         <p id="auth-error" style="color:red; font-size:1rem; margin-top:15px; min-height:20px;"></p>
+    </div>
+</div>
+
+<div id="vitrina-modal" style="position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:2000; justify-content:center; align-items:center; display:none;">
+    <div style="background:white; padding:30px; border-radius:15px; width:85%; max-width:350px; text-align:center; box-shadow: 0 10px 30px rgba(0,0,0,0.5); position:relative; border-top: 6px solid #ffca28;">
+        <button onclick="document.getElementById('vitrina-modal').style.display='none'; vibrar(30);" style="position:absolute; top:10px; right:15px; background:none; border:none; font-size:2em; color:#999; cursor:pointer;">×</button>
+        <h2 style="color:#6a1b9a; margin-top:0;">🏆 Tu Vitrina de Logros</h2>
+        <p style="color:#555; font-size:0.95em; margin-bottom:20px;">Cumple las tareas de Regina para desbloquear habilidades.</p>
+        
+        <div id="lista-trofeos" style="max-height: 400px; overflow-y: auto; padding-right:5px;">
+            </div>
     </div>
 </div>
 
@@ -132,7 +142,7 @@
         <h2 style="color:#6a1b9a; margin-top:0;">💡 Buzón del Rancho</h2>
         <p style="color:#555; font-size:1.05em; margin-bottom:15px;">¿Qué podemos mejorar? ¡Échele compa!</p>
         <textarea id="feedback-texto" rows="4" placeholder="Escriba aquí su mensaje..." style="width:100%; padding:12px; border:1px solid #ddd; border-radius:8px; box-sizing:border-box; resize:none; margin-bottom:15px; font-family:inherit; font-size:1.05rem;"></textarea>
-        <button id="btn-enviar-sug" onclick="vibrar(60); enviarSugerencia();" style="width:100%; padding:14px; background-color:#ffca28; color:#333; border:none; border-radius:8px; font-weight:bold; cursor:pointer; font-size:1.1rem;">Enviar Mensaje 🚀</button>
+        <button id="btn-enviar-sug" onclick="vibrar(40); enviarSugerencia();" style="width:100%; padding:14px; background-color:#ffca28; color:#333; border:none; border-radius:8px; font-weight:bold; cursor:pointer; font-size:1.1rem;">Enviar Mensaje 🚀</button>
     </div>
 </div>
         
@@ -143,7 +153,7 @@
     <hr style="border: 1px solid #ffca28; margin-bottom: 20px;">
 </div>
 
-<div id="trofeo-badge" style="position:fixed; top:20px; right:20px; z-index:9999; background:linear-gradient(145deg, #fff8e1, #ffecb3); border:2px solid #ffca28; padding:8px 15px; border-radius:25px; box-shadow:0 4px 10px rgba(0,0,0,0.2); font-size:1.5em; display:none; align-items:center; gap:5px; font-weight:bold; color:#333; pointer-events:none;">
+<div id="trofeo-badge" onclick="vibrar(40); abrirVitrina()" title="Ver mis medallas" style="position:fixed; top:20px; right:20px; z-index:1900; background:linear-gradient(145deg, #fff8e1, #ffecb3); border:2px solid #ffca28; padding:8px 15px; border-radius:25px; box-shadow:0 4px 10px rgba(0,0,0,0.2); font-size:1.5em; display:none; align-items:center; gap:5px; font-weight:bold; color:#333; cursor:pointer; transition:0.3s;">
     🌟 <span id="trofeo-count">0</span>
 </div>
 
@@ -156,15 +166,15 @@
             <p>Experta en Comportamiento</p>
             
             <div style="display: flex; gap: 12px; margin-top:10px;">
-                <button id="btn-header-voice" style="background:rgba(255,255,255,0.2); border-radius:50%; width:46px; height:46px; display:flex; justify-content:center; align-items:center; color:#ffeb3b; padding:0; transition: 0.3s; border:none; cursor:pointer;" onclick="vibrar(60); togglePremiumVoice()" title="Voz Premium HD">
+                <button id="btn-header-voice" style="background:rgba(255,255,255,0.2); border-radius:50%; width:46px; height:46px; display:flex; justify-content:center; align-items:center; color:#ffeb3b; padding:0; transition: 0.3s; border:none; cursor:pointer;" onclick="vibrar(30); togglePremiumVoice()" title="Voz Premium HD">
                     <div style="display:flex; flex-direction:column; align-items:center; line-height:1.1;">
                         <span style="font-size:1.2rem;">🗣️</span>
                         <span style="font-size:0.65rem;">💎</span>
                     </div>
                 </button>
-                <button id="btn-theme-toggle" style="background:rgba(255,255,255,0.2); border-radius:50%; width:46px; height:46px; display:flex; justify-content:center; align-items:center; padding:0; transition: 0.3s; border:none; cursor:pointer; color:white; font-size:1.4rem;" onclick="vibrar(60); toggleTheme()" title="Cambiar Tema">🌙</button>
-                <button style="background:rgba(255,255,255,0.2); border-radius:50%; width:46px; height:46px; display:flex; justify-content:center; align-items:center; padding:0; transition: 0.3s; border:none; cursor:pointer; color:white; font-size:1.4rem;" onclick="vibrar(60); abrirMiCuenta()" title="Mi Cuenta">👤</button>
-                <button style="background:rgba(255,255,255,0.2); border-radius:50%; width:46px; height:46px; display:flex; justify-content:center; align-items:center; padding:0; transition: 0.3s; border:none; cursor:pointer; color:white; font-size:1.4rem;" onclick="vibrar(60); document.getElementById('settings-modal').style.display='flex'" title="Herramientas y Ajustes">⚙️</button>
+                <button style="background:rgba(255,255,255,0.2); border-radius:50%; width:46px; height:46px; display:flex; justify-content:center; align-items:center; padding:0; transition: 0.3s; border:none; cursor:pointer; color:white; font-size:1.4rem;" onclick="vibrar(30); toggleTheme()" title="Cambiar Tema">🌙</button>
+                <button style="background:rgba(255,255,255,0.2); border-radius:50%; width:46px; height:46px; display:flex; justify-content:center; align-items:center; padding:0; transition: 0.3s; border:none; cursor:pointer; color:white; font-size:1.4rem;" onclick="vibrar(30); abrirMiCuenta()" title="Mi Cuenta">👤</button>
+                <button style="background:rgba(255,255,255,0.2); border-radius:50%; width:46px; height:46px; display:flex; justify-content:center; align-items:center; padding:0; transition: 0.3s; border:none; cursor:pointer; color:white; font-size:1.4rem;" onclick="vibrar(30); document.getElementById('settings-modal').style.display='flex'" title="Herramientas y Ajustes">⚙️</button>
             </div>
         </div>
     </div>
@@ -177,24 +187,21 @@
     <div class="loading" id="loading">Regina está escribiendo...</div>
 
     <div class="chips-container">
-        <button class="chip" onclick="vibrar(60); sendChip('🤠 ¿Cómo educar a un perro latoso?')">🤠 Educar perro latoso</button>
-        <button class="chip" onclick="vibrar(60); sendChip('🧐 ¡Analízame Regina!')">🧐 Analízame</button>
-        <button class="chip" onclick="vibrar(60); sendChip('🏠 ¿Cómo evitar que se orine adentro?')">🏠 Pipí en casa</button>
-        <button class="chip" onclick="vibrar(80); dispararEmergencia()" style="border-color:#d32f2f; color:#d32f2f; font-weight:bold; opacity:0.8;">🧑‍⚕️ Urgencia</button>
+        <button class="chip" onclick="vibrar(40); sendChip('🤠 ¿Cómo educar a un perro latoso?')">🤠 Educar perro latoso</button>
+        <button class="chip" onclick="vibrar(40); sendChip('🧐 ¡Analízame Regina!')">🧐 Analízame</button>
+        <button class="chip" onclick="vibrar(40); sendChip('🏠 ¿Cómo evitar que se orine adentro?')">🏠 Pipí en casa</button>
+        <button class="chip" onclick="vibrar(60); dispararEmergencia()" style="border-color:#d32f2f; color:#d32f2f; font-weight:bold; opacity:0.8;">🧑‍⚕️ Urgencia</button>
     </div>
 
     <div class="input-area">
         <input type="text" id="user-input" placeholder="Escribe tu consulta aquí...">
         <div class="input-controls">
             <div class="input-icons">
-                <button id="mic-toggle" onclick="vibrar(60); toggleMic()" style="background:none; border:none; font-size:1.8em; cursor:pointer; padding: 0; transition: 0.3s;" title="Dictar por voz">🎤</button>
+                <button id="mic-toggle" onclick="vibrar(30); toggleMic()" style="background:none; border:none; font-size:1.8em; cursor:pointer; padding: 0; transition: 0.3s;" title="Dictar por voz">🎤</button>
                 <input type="file" id="input-foto-chat" accept="image/*" style="display:none;" onchange="previsualizarFotoChat()">
-                <button id="btn-camara" onclick="vibrar(60); document.getElementById('input-foto-chat').click()" style="background:none; border:none; font-size:1.8em; cursor:pointer; padding: 0; transition: 0.3s;" title="Subir Foto">📷</button>
+                <button id="btn-camara" onclick="vibrar(30); document.getElementById('input-foto-chat').click()" style="background:none; border:none; font-size:1.8em; cursor:pointer; padding: 0; transition: 0.3s;" title="Subir Foto">📷</button>
             </div>
-            <div style="display:flex; align-items:center; gap:10px;">
-                <button id="btn-share" onclick="vibrar(60); compartirApp()" style="background:none; border:none; font-size:1.8em; cursor:pointer; padding:0; transition:0.3s;" title="Compartir App">📤</button>
-                <button class="btn-enviar" onclick="vibrar(80); sendMessage()">Enviar</button>
-            </div>
+            <button class="btn-enviar" onclick="vibrar(50); sendMessage()">Enviar</button>
         </div>
     </div>
 </div> 
@@ -209,14 +216,13 @@
     let dyslexiaEnabled = false;
     let lsmEnabled = false;
 
-    // 👇 MAGIA HÁPTICA (TURBO 🚀) 👇
+    // 👇 MAGIA HÁPTICA REFORZADA (Solo Android lo permite en Web) 👇
     function vibrar(patron) {
         if ("vibrate" in navigator) {
             try { navigator.vibrate(patron); } catch(e) {}
         }
     }
 
-    // 👇 FUNCIÓN PARA COMPARTIR APP 👇
     function compartirApp() {
         if (navigator.share) {
             navigator.share({
@@ -230,7 +236,6 @@
         }
     }
 
-    // CORTADOR DE AVISO LEGAL Y ASTERISCOS (MANTIENE EMOJIS)
     function silenciarAviso(texto) {
         let txt = texto;
         if(txt.includes("Aviso:")) { txt = txt.split("Aviso:")[0]; }
@@ -285,7 +290,6 @@
 
         const elemento = document.getElementById(msgId);
         let textoPuro = elemento.getAttribute('data-puretext') || elemento.innerText;
-        
         let textoLimpio = silenciarAviso(textoPuro);
         
         const utterance = new SpeechSynthesisUtterance(textoLimpio);
@@ -366,7 +370,7 @@
             const transcript = event.results[0][0].transcript;
             const inputField = document.getElementById('user-input');
             inputField.value = inputField.value ? inputField.value + ' ' + transcript : transcript;
-            mostrarNotificacion("✅ Voz capturada, presiona Enviar pa' que lo oiga", "#4caf50");
+            mostrarNotificacion("✅ Voz capturada", "#4caf50");
         };
 
         recognition.onerror = function(event) {
@@ -381,18 +385,69 @@
     }
 
     function toggleMic() {
-        if (!recognition) { alert("Tu navegador no soporta el dictado por voz. Usa Chrome o Safari actualizados."); return; }
+        if (!recognition) { alert("Tu navegador no soporta el dictado por voz. Usa Chrome o Safari."); return; }
         if (micEnabled) recognition.stop();
         else recognition.start();
+    }
+
+    // 👇 LA LÓGICA DE LA VITRINA DE TROFEOS 👇
+    const trofeosConfig = [
+        { id: 1, color: "🟢", nombre: "Líder Alfa", desc: "Has establecido reglas y liderazgo en la manada." },
+        { id: 2, color: "🔵", nombre: "Maestro Zen", desc: "Lograste serenidad y calma en casa." },
+        { id: 3, color: "🔴", nombre: "Autocontrol", desc: "Dominaste los impulsos de tu mascota." },
+        { id: 4, color: "🟠", nombre: "Atleta Perruno", desc: "Nivel de actividad física ideal alcanzado." },
+        { id: 5, color: "🌟", nombre: "Socio Supremo", desc: "Conexión perfecta con tu mascota." }
+    ];
+
+    function abrirVitrina() {
+        const modal = document.getElementById('vitrina-modal');
+        const lista = document.getElementById('lista-trofeos');
+        let medallasActuales = parseInt(localStorage.getItem('regina_estrellas') || 0);
+        
+        let html = "";
+        trofeosConfig.forEach(t => {
+            let bloqueado = medallasActuales < t.id ? "filter: grayscale(100%); opacity: 0.4;" : "filter: drop-shadow(0 0 8px #ffca28); background: #fff8e1; border: 2px solid #ffca28;";
+            let candado = medallasActuales < t.id ? "🔒" : "✅";
+            
+            html += `<div style="display:flex; align-items:center; gap:15px; margin-bottom:15px; padding:15px; background:#f9f9f9; border-radius:12px; border: 1px solid #eee; transition: 0.3s; ${bloqueado}">
+                <span style="font-size:2.5em;">${t.color}</span>
+                <div style="text-align:left; flex:1;">
+                    <h4 style="margin:0; color:#6a1b9a; font-size:1.1em;">${t.nombre}</h4>
+                    <p style="margin:5px 0 0 0; font-size:0.85em; color:#555;">${t.desc}</p>
+                </div>
+                <div style="font-size:1.2em;">${candado}</div>
+            </div>`;
+        });
+        
+        lista.innerHTML = html;
+        modal.style.display = 'flex';
+    }
+
+    function celebrarInsigniaNueva(cantidad) {
+        // Vibración de victoria súper intensa (Funciona en Android)
+        vibrar([100, 50, 100, 50, 300, 100, 500]);
+        mostrarNotificacion("🎉 ¡NUEVA HABILIDAD DESBLOQUEADA! 🎉<br>Revisa tu Vitrina de Logros.", "#ff9800", 6000);
+        
+        const badge = document.getElementById('trofeo-badge');
+        badge.classList.remove('animar-estrella');
+        void badge.offsetWidth; // Reinicia la animación
+        badge.classList.add('animar-estrella');
     }
 
     function actualizarInsigniasVisuales(cantidad) {
         const badge = document.getElementById('trofeo-badge');
         const count = document.getElementById('trofeo-count');
+        
+        let guardadas = parseInt(localStorage.getItem('regina_estrellas') || 0);
+
         if (cantidad !== undefined && cantidad > 0) {
             badge.style.display = 'flex';
             count.innerText = cantidad;
             localStorage.setItem('regina_estrellas', cantidad); 
+            
+            if (cantidad > guardadas) {
+                celebrarInsigniaNueva(cantidad);
+            }
         } else {
             badge.style.display = 'none';
         }
@@ -410,7 +465,10 @@
         }
 
         const medallasGuardadas = localStorage.getItem('regina_estrellas');
-        if (medallasGuardadas && medallasGuardadas > 0) actualizarInsigniasVisuales(medallasGuardadas);
+        if (medallasGuardadas && medallasGuardadas > 0) {
+            document.getElementById('trofeo-badge').style.display = 'flex';
+            document.getElementById('trofeo-count').innerText = medallasGuardadas;
+        }
 
         const storedUserId = localStorage.getItem('regina_user_id');
         if (storedUserId) {
@@ -607,7 +665,6 @@
         }
     }
 
-    // 👇 LA LÓGICA DEL BOTÓN APILADO DE VOZ VIP 👇
     function togglePremiumVoice() {
         const btnPremium = document.getElementById('btn-header-voice'); 
         if (!premiumVoiceEnabled) {
@@ -634,7 +691,6 @@
     function hablar(texto) {
         if (!voiceEnabled) return;
         window.speechSynthesis.cancel(); 
-        
         let textoLimpio = silenciarAviso(texto); 
         const utterance = new SpeechSynthesisUtterance(textoLimpio);
         if (reginaVoice) utterance.voice = reginaVoice;
@@ -668,7 +724,7 @@
                 const chatBox = document.getElementById('chat-box');
                 chatBox.scrollTop = chatBox.scrollHeight;
             } else {
-                // 👇 HÁPTICA: Doble vibración al terminar de escribir la IA 👇
+                // 👇 HÁPTICA AL TERMINAR 👇
                 vibrar([50, 100, 50]);
 
                 let copyBtn = `<button onclick="copiarConsejo('${msgId}')" style="background:none; border:1px solid #d81b60; color:#d81b60; border-radius:15px; padding:6px 14px; cursor:pointer; font-size:1rem; font-weight:bold;">📋 Copiar</button>`;
@@ -706,14 +762,12 @@
         try {
             const textoGuia = mensajeElement.innerText;
             const response = await fetch(`${API_URL}/ilustrar`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ texto: textoGuia })
+                method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ texto: textoGuia })
             });
             const data = await response.json();
 
             if (data.imagen_b64) {
-                vibrar([50, 50, 50]); // Vibra cuando llega la foto
+                vibrar([50, 50, 50]); 
                 const imgHTML = `<br><img src="data:image/jpeg;base64,${data.imagen_b64}" alt="Ilustración Premium" style="width:100%; max-width:90%; border-radius:12px; border:3px solid #ffca28; margin:15px auto; box-shadow:0 4px 8px rgba(0,0,0,0.2); display:block;">`;
                 btn.parentElement.insertAdjacentHTML('beforebegin', imgHTML);
                 const currentOriginal = mensajeElement.getAttribute('data-original');
@@ -743,9 +797,7 @@
         
         try {
             const response = await fetch(`${API_URL}/feedback`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ user_id: getUserId(), mensaje: texto })
+                method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ user_id: getUserId(), mensaje: texto })
             });
             if (response.ok) {
                 vibrar([50, 100, 50]);
@@ -794,7 +846,7 @@
             loading.style.display = 'none';
 
             if (data.status === 'quota_exceeded') {
-                vibrar([50, 100, 50, 100, 50]); // Patrón de error
+                vibrar([50, 100, 50, 100, 50]); 
                 if (!localStorage.getItem('regina_registrado')) {
                     document.getElementById('auth-modal').style.display = 'flex';
                     document.getElementById('auth-modal').querySelector('h2').innerText = "¡Epa! Crea tu cuenta para ver tus pases 🤠";
@@ -826,6 +878,7 @@
                     audioPremiumActual.play();
                 }
 
+                // SI REGRESA MÁS INSIGNIAS, ACTUALIZA LA VITRINA
                 if (data.insignias !== undefined) { actualizarInsigniasVisuales(data.insignias); }
 
             } else {
@@ -989,6 +1042,8 @@
         <p>⚠️ <strong>AVISO LEGAL:</strong> Regina Valentina es una IA con fines estrictamente educativos. <strong>PROHIBICIÓN DE USO HUMANO:</strong> Este sistema es solo para mascotas; Robles Bienestar no se responsabiliza por el uso de estos consejos en seres humanos. <strong>SIN ASESORÍA MÉDICA:</strong> No se proporciona información sobre medicación, dosis ni esquemas de vacunación; tales temas deben tratarse exclusivamente con un Médico Veterinario Zootecnista. El usuario asume la total responsabilidad legal por decisiones tomadas o aplicadas tras usar esta plataforma. Ante emergencias de salud, acuda a una clínica inmediatamente.</p>
     </div>
 </div> 
+
+<button onclick="vibrar(60); compartirApp()" class="share-bubble" title="Compartir App">📤</button>
 
 <a href="mailto:soporte@reginavalentina.com?subject=Ayuda%20con%20Regina%20Valentina" onclick="vibrar(60)" class="support-btn" title="Contactar Soporte">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="32" height="32" fill="white">
