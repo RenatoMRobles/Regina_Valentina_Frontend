@@ -46,15 +46,12 @@
         .chat-container { width: 95%; max-width: 750px; background: var(--bg-chat); border-radius: 12px; box-shadow: 0 5px 25px rgba(0,0,0,0.15); overflow: hidden; display: flex; flex-direction: column; height: 85vh; margin-bottom: 20px; margin-top: 15px; transition: background-color 0.3s ease; }
         
         .header { background-color: var(--header-bg); color: white; padding: 20px; text-align: center; display: flex; align-items: center; justify-content: center; gap: 15px; position: relative; }
-
         .regina-avatar { width: 105px !important; height: 105px !important; min-width: 105px !important; min-height: 105px !important; border-radius: 50%; border: 3px solid white; object-fit: cover;}
-        
         .header div { text-align: left; }
         .header h1 { margin: 0; font-size: 1.6em; }
         .header p { margin: 5px 0 0 0; font-size: 1.05em; opacity: 0.9; }
 
         #chat-box { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; scroll-behavior: smooth; }
-        
         .message { max-width: 85%; padding: 14px 20px; border-radius: 20px; font-size: 1.20rem; line-height: 1.5; position: relative; word-wrap: break-word; white-space: pre-wrap; }
         .user-message { align-self: flex-end; background-color: #6a1b9a; color: white; border-bottom-right-radius: 2px; }
         .bot-message { align-self: flex-start; background-color: var(--bot-bubble); color: var(--bot-text); border-bottom-left-radius: 2px; }
@@ -72,22 +69,30 @@
         .chips-container { display: flex; gap: 10px; padding: 12px 15px; overflow-x: auto; white-space: nowrap; scrollbar-width: none; background: var(--bg-chat); }
         .chip { background-color: var(--bg-body); border: 2px solid #6a1b9a; color: var(--text-main); padding: 10px 18px; border-radius: 20px; font-size: 1.05rem; font-weight: bold; cursor: pointer; white-space: nowrap; }
         
-        /* Animaciones */
-        @keyframes latidoVictoria {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.8); filter: drop-shadow(0 0 25px #ffca28); }
-            100% { transform: scale(1); }
-        }
+        @keyframes latidoVictoria { 0% { transform: scale(1); } 50% { transform: scale(1.8); filter: drop-shadow(0 0 25px #ffca28); } 100% { transform: scale(1); } }
         .animar-victoria { animation: latidoVictoria 0.8s ease-in-out 3; }
 
-        #membrete-pdf { display: none; }
+        #membrete-pdf, #reporte-cientifico-pdf { display: none; }
+        
+        /* ESTILOS PARA IMPRESIÓN DEL REPORTE */
         @media print {
             * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
-            .header, .input-area, .chips-container, button, .pdf-btn, footer, .footer, #caja-aviso-legal, .support-btn, .share-bubble, #trofeo-badge { display: none !important; }
+            .header, .input-area, .chips-container, button, .pdf-btn, footer, .footer, #caja-aviso-legal, .support-btn, .share-bubble, #trofeo-badge, #vitrina-modal { display: none !important; }
             body > p, body > div > p { display: none !important; }
+            
+            body, html { background: white !important; width: 100% !important; height: auto !important; margin: 0 !important; padding: 0 !important; }
+            
+            .printable-guide { display: block !important; background: transparent !important; box-shadow: none !important; margin-bottom: 20px !important; font-family: 'Georgia', 'Times New Roman', serif !important; font-size: 13pt !important; line-height: 1.8 !important; text-align: justify !important; }
             #membrete-pdf { display: block !important; text-align: center; margin-bottom: 30px; page-break-after: avoid; }
-            body, html, .chat-container, #chat-box { width: 100% !important; height: auto !important; overflow: visible !important; box-shadow: none !important; border: none !important; margin: 0 !important; padding: 0 !important; }
-            .message { display: block !important; background: transparent !important; box-shadow: none !important; margin-bottom: 20px !important; font-family: 'Georgia', 'Times New Roman', serif !important; font-size: 13pt !important; line-height: 1.8 !important; text-align: justify !important; }
+            
+            #reporte-cientifico-pdf { display: block !important; text-align: center; font-family: 'Segoe UI', sans-serif !important; padding: 40px !important; border: 10px solid #6a1b9a !important; border-radius: 20px !important; background: #fffaf0 !important; }
+            #reporte-cientifico-pdf h1 { color: #6a1b9a !important; font-size: 35px !important; margin-bottom: 5px !important; text-transform: uppercase !important; }
+            #reporte-cientifico-pdf h2 { color: #ff9800 !important; font-size: 24px !important; border-bottom: 2px solid #ff9800 !important; padding-bottom: 10px !important; }
+            #reporte-cientifico-pdf .insignia-print { display: inline-block; padding: 15px; margin: 10px; border: 2px solid #6a1b9a; border-radius: 15px; background: white; width: 40%; vertical-align: top; }
+            #reporte-cientifico-pdf .insignia-print h3 { margin: 5px 0; color: #333; }
+            #reporte-cientifico-pdf .insignia-print p { font-size: 12px; color: #555; text-align: justify; }
+            
+            #chat-box { display: none !important; } /* Oculta el chat al imprimir el reporte */
         }
     </style>
 </head>
@@ -98,14 +103,12 @@
         <button onclick="document.getElementById('auth-modal').style.display='none'; vibrar(30);" style="position:absolute; top:10px; right:15px; background:none; border:none; font-size:2em; color:#999; cursor:pointer;">×</button>
         <img src="ReginaValentinaRostro.png?v=2" alt="Regina" style="width:90px; height:90px; border-radius:50%; margin-bottom:15px; border:3px solid #6a1b9a; object-fit: cover;">
         <h2 id="auth-title" style="color:#6a1b9a; margin-top:0;">Acceso VIP 🤠</h2>
-        
         <div id="auth-inputs">
             <input type="email" id="auth-email" placeholder="Correo electrónico" style="width:100%; padding:12px; margin-bottom:15px; border:1px solid #ddd; border-radius:8px; box-sizing:border-box; font-size:1.1rem;">
             <input type="password" id="auth-password" placeholder="Contraseña" style="width:100%; padding:12px; margin-bottom:15px; border:1px solid #ddd; border-radius:8px; box-sizing:border-box; font-size:1.1rem;">
             <button onclick="vibrar(40); ejecutarLogin();" style="width:100%; padding:14px; background-color:#6a1b9a; color:white; border:none; border-radius:8px; font-weight:bold; cursor:pointer; margin-bottom:10px; font-size:1.1rem;">Iniciar Sesión</button>
             <button onclick="vibrar(40); ejecutarRegistro();" style="width:100%; padding:14px; background-color:#fff; color:#6a1b9a; border:2px solid #6a1b9a; border-radius:8px; font-weight:bold; cursor:pointer; font-size:1.1rem;">Crear Cuenta Nueva</button>
         </div>
-
         <div id="logged-in-view" style="display:none; text-align:center;">
             <p style="color:#555; font-size:1.1em; margin-bottom:20px;">Usted ya es parte del rancho. ¡Su acceso está asegurado!</p>
             <button id="btn-centro-mando" onclick="vibrar(40); window.open('https://RenatoRobles.pythonanywhere.com/panel-robles?admin_id=' + getUserId(), '_blank')" style="display:none; width:100%; padding:14px; background-color:#1e1e1e; color:#ffca28; border:2px solid #ffca28; border-radius:8px; font-weight:bold; cursor:pointer; margin: 0 auto 15px auto; font-size:1.1rem;">🦅 Centro de Mando</button>
@@ -121,21 +124,13 @@
         <div id="vista-principal-vitrina">
             <button onclick="document.getElementById('vitrina-modal').style.display='none'; vibrar(30);" style="position:absolute; top:10px; right:15px; background:none; border:none; font-size:2em; color:#999; cursor:pointer;">×</button>
             <h2 style="color:#6a1b9a; margin-top:0;">🏆 Tu Vitrina de Logros</h2>
-            
             <button onclick="vibrar(30); abrirGuiaEstrellas()" style="background:#e8eaf6; color:#3f51b5; border:1px solid #3f51b5; padding:10px 18px; border-radius:20px; font-weight:bold; cursor:pointer; margin-bottom:15px; font-size:1rem;">📖 Guía Explicativa</button>
-            
-            <div id="lista-trofeos" style="text-align:left;">
-                </div>
-            
+            <div id="lista-trofeos" style="text-align:left;"></div>
             <div id="contenedor-maximo" style="margin-top: 15px;"></div>
         </div>
 
-        <div id="vista-detalle-vitrina" style="display:none;">
-            </div>
-
-        <div id="vista-guia-vitrina" style="display:none;">
-            </div>
-
+        <div id="vista-detalle-vitrina" style="display:none;"></div>
+        <div id="vista-guia-vitrina" style="display:none;"></div>
     </div>
 </div>
 
@@ -147,16 +142,18 @@
         <button id="btn-enviar-sug" onclick="vibrar(40); enviarSugerencia();" style="width:100%; padding:14px; background-color:#ffca28; color:#333; border:none; border-radius:8px; font-weight:bold; cursor:pointer; font-size:1.1rem;">Enviar Mensaje 🚀</button>
     </div>
 </div>
-        
+
 <div id="membrete-pdf">
     <h1 style="font-size: 24px; margin-bottom: 5px;">🐾 Robles Bienestar</h1>
     <h3 style="margin-top: 0; color: #ffca28; letter-spacing: 2px;">REPORTE OFICIAL DE COMPORTAMIENTO</h3>
-    <p>Consultora: Regina Valentina (IA Especializada)</p>
     <hr style="border: 1px solid #ffca28; margin-bottom: 20px;">
 </div>
 
-<div id="trofeo-badge" onclick="vibrar(40); abrirVitrina()" title="Ver mis medallas" style="position:fixed; top:20px; right:20px; z-index:1900; background:linear-gradient(145deg, #fff8e1, #ffecb3); border:2px solid #ffca28; padding:8px 15px; border-radius:25px; box-shadow:0 4px 10px rgba(0,0,0,0.2); font-size:1.5em; display:none; align-items:center; gap:5px; font-weight:bold; color:#333; cursor:pointer; transition:0.3s;">
-    🌟 <span id="trofeo-count">0 pts</span>
+<div id="reporte-cientifico-pdf">
+    </div>
+
+<div id="trofeo-badge" onclick="vibrar(40); abrirVitrina()" title="Ver mis medallas" style="position:fixed; top:20px; right:20px; z-index:1900; background:linear-gradient(145deg, #fff8e1, #ffecb3); border:2px solid #ffca28; padding:8px 15px; border-radius:25px; box-shadow:0 4px 10px rgba(0,0,0,0.2); font-size:1.3em; display:none; align-items:center; gap:8px; font-weight:bold; color:#333; cursor:pointer; transition:0.3s;">
+    🌟 <span id="trofeo-count">0/5</span>
 </div>
 
 <div class="chat-container">
@@ -219,30 +216,35 @@
 
     function compartirApp() {
         if (navigator.share) {
-            navigator.share({
-                title: 'Regina Valentina 🤠🐾',
-                text: '¡Conoce a Regina Valentina, la experta en mascotas con IA! Te da consejos buenísimos.',
-                url: 'https://reginavalentina.com'
-            }).catch(console.error);
+            navigator.share({ title: 'Regina Valentina 🤠🐾', text: '¡Conoce a Regina Valentina, la experta en mascotas con IA!', url: 'https://reginavalentina.com' }).catch(console.error);
         } else {
             navigator.clipboard.writeText("https://reginavalentina.com");
             mostrarNotificacion("🔗 ¡Enlace copiado al portapapeles!", "#4caf50");
         }
     }
 
-    // --- EL ÁRBOL DE HABILIDADES Y LA VITRINA MAESTRA (1-100 PUNTOS) ---
+    // --- EL ÁRBOL DE HABILIDADES Y LA VITRINA MAESTRA ---
     const trofeosConfig = [
-        { id: 'lider', color: "🟢", icono:"🐺", hex: "#4caf50", nombre: "Líder Alfa", max: 100, desc: "¡Felicidades, pariente! Aquí demuestras quién lleva las riendas del rancho, pero con puro respeto, sin gritos ni manotazos. Tu mascota ya te ve como el jefe de la manada." },
-        { id: 'zen', color: "🔵", icono:"🧘", hex: "#2196f3", nombre: "Maestro Zen", max: 100, desc: "¡Qué chulada! Se acabó el desmadre en casa. Tu perrito le bajó dos rayitas a su estrés y ahora respira pura paz. ¡Parece monje tibetano!" },
-        { id: 'autocontrol', color: "🔴", icono:"🛑", hex: "#f44336", nombre: "Autocontrol", max: 100, desc: "¡Epa! Tu mascota domina sus impulsos. Sabe esperar su turno para comer o salir sin volverse loco. ¡Un verdadero caballero o damita!" },
-        { id: 'atleta', color: "🟠", icono:"🏃", hex: "#ff9800", nombre: "Atleta Perruno", max: 100, desc: "¡Fierro! Tienen la energía bien canalizada. Actividad física al cien, mente sana y cuerpo cansado pa' dormir a gusto toda la noche." },
-        { id: 'socio', color: "🌟", icono:"🤝", hex: "#ffeb3b", nombre: "Socio Supremo", max: 100, desc: "¡Mis respetos! La conexión entre ustedes es de otro nivel. Ya ni ocupan palabras, nomás con una mirada se entienden. Son la dupla envidia del condado." }
+        { id: 'lider', color: "🟢", icono:"🐺", hex: "#4caf50", nombre: "Líder Alfa", max: 100, desc: "Dominas el liderazgo con puro respeto y calma. Tu mascota te ve como el guía de la manada." },
+        { id: 'zen', color: "🔵", icono:"🧘", hex: "#2196f3", nombre: "Maestro Zen", max: 100, desc: "Lograste un ambiente de paz. El estrés desapareció y tu mascota respira tranquilidad pura." },
+        { id: 'autocontrol', color: "🔴", icono:"🛑", hex: "#f44336", nombre: "Autocontrol", max: 100, desc: "Tu mascota domina sus impulsos. Sabe esperar su turno sin volverse loco." },
+        { id: 'atleta', color: "🟠", icono:"🏃", hex: "#ff9800", nombre: "Atleta Perruno", max: 100, desc: "Energía bien canalizada. Actividad física al cien, cuerpo sano y mente equilibrada." },
+        { id: 'socio', color: "🌟", icono:"🤝", hex: "#ffeb3b", nombre: "Socio Supremo", max: 100, desc: "La conexión máxima. Ya ni ocupan palabras, con una mirada se entienden perfectamente." }
     ];
 
     function calcularProgreso(puntos, max) {
         if (puntos <= 0) return 0;
         if (puntos >= max) return 100;
         return Math.floor((puntos / max) * 100);
+    }
+
+    function contarInsignias() {
+        let count = 0;
+        trofeosConfig.forEach(t => {
+            let pts = parseInt(localStorage.getItem('regina_pts_' + t.id) || 0);
+            if (calcularProgreso(pts, t.max) === 100) count++;
+        });
+        return count;
     }
 
     function abrirVitrina() {
@@ -252,22 +254,23 @@
         
         const lista = document.getElementById('lista-trofeos');
         let html = "";
-        let todasAlCien = true;
+        let totalInsignias = contarInsignias();
 
         trofeosConfig.forEach((t, index) => {
             let ptsActuales = parseInt(localStorage.getItem('regina_pts_' + t.id) || 0);
             let progreso = calcularProgreso(ptsActuales, t.max);
             
-            if (progreso < 100) todasAlCien = false;
-
             let bloqueado = progreso === 0 ? "filter: grayscale(100%); opacity: 0.6;" : "box-shadow: 0 4px 6px rgba(0,0,0,0.1);";
             let colorPorcentaje = progreso === 100 ? t.hex : "#777";
             
+            // 👇 LÓGICA DE INSIGNIA DE BUEN PASTOR 👇
+            let badgeInsignia = progreso === 100 ? `<div style="background:#ffca28; color:#333; padding:2px 8px; border-radius:10px; font-size:0.7em; font-weight:bold; display:inline-block; margin-top:5px; border:1px solid #d8a000;">🌟 Insignia Obtenida</div>` : `<p style="margin:3px 0 0 0; font-size:0.85em; color:#888;">Nivel de Progreso:</p>`;
+
             html += `<div onclick="vibrar(30); verDetalleTrofeo(${index})" style="display:flex; align-items:center; gap:15px; margin-bottom:12px; padding:15px; background:#f9f9f9; border-radius:12px; border: 1px solid #eee; cursor:pointer; transition: 0.3s; ${bloqueado}">
                 <span style="font-size:2.2em;">${t.icono}</span>
                 <div style="text-align:left; flex:1;">
                     <h4 style="margin:0; color:#333; font-size:1.1em;">${t.nombre}</h4>
-                    <p style="margin:3px 0 0 0; font-size:0.85em; color:#888;">Nivel de Progreso:</p>
+                    ${badgeInsignia}
                 </div>
                 <div style="font-size:1.2em; color:${colorPorcentaje}; font-weight:bold;">${progreso}%</div>
             </div>`;
@@ -275,15 +278,15 @@
         lista.innerHTML = html;
 
         const contenedorMaximo = document.getElementById('contenedor-maximo');
-        if(todasAlCien) {
+        if(totalInsignias === 5) {
             contenedorMaximo.innerHTML = `<div onclick="vibrar(80); verLeyenda()" style="background: linear-gradient(145deg, #ffd54f, #ff8f00); padding: 20px; border-radius: 15px; margin-top: 20px; color: white; cursor: pointer; box-shadow: 0 5px 15px rgba(255, 143, 0, 0.4); transition:0.3s;">
                 <h3 style="margin:0; text-shadow: 1px 1px 2px rgba(0,0,0,0.3); font-size:1.3em;">👑 LA CIMA DE LA MONTAÑA</h3>
-                <p style="margin:5px 0 0 0; font-weight:bold; font-size:0.95em;">¡Desbloqueado! Toca para abrir.</p>
+                <p style="margin:5px 0 0 0; font-weight:bold; font-size:0.95em;">¡Desbloqueado! Toca para abrir tu recompensa.</p>
             </div>`;
         } else {
             contenedorMaximo.innerHTML = `<div style="background: #eee; padding: 20px; border-radius: 15px; margin-top: 20px; color: #757575; border: 2px dashed #ccc;">
                 <h3 style="margin:0; font-size:1.2em;">⛰️ Cima de la Montaña</h3>
-                <p style="margin:5px 0 0 0; font-size:0.9em;">Llega al 100% en todo para ver el premio final.</p>
+                <p style="margin:5px 0 0 0; font-size:0.9em;">Consigue las 5 Insignias de Buen Pastor para ver el premio final.</p>
             </div>`;
         }
         document.getElementById('vitrina-modal').style.display = 'flex';
@@ -297,6 +300,8 @@
         document.getElementById('vista-principal-vitrina').style.display = 'none';
         const vistaDetalle = document.getElementById('vista-detalle-vitrina');
         
+        let mensajeFelicidades = progreso === 100 ? `<div style="background:#fff8e1; border:2px solid #ffca28; padding:10px; border-radius:10px; margin-top:15px; color:#d8a000; font-weight:bold;">¡Felicidades! Has obtenido la Insignia de Buen Pastor 🌟 en esta habilidad.</div>` : ``;
+
         vistaDetalle.innerHTML = `
             <div style="text-align:left; margin-bottom:15px;">
                 <button onclick="vibrar(30); abrirVitrina()" style="background:none; border:none; color:#d81b60; font-weight:bold; font-size:1.1em; cursor:pointer;">⬅ Volver</button>
@@ -318,6 +323,7 @@
                     <div style="background: linear-gradient(90deg, ${t.hex}, #333); width: ${progreso}%; height: 26px; border-radius: 20px; transition: width 1s cubic-bezier(0.25, 1, 0.5, 1);"></div>
                 </div>
                 <p style="color:#777; font-size:0.9em; margin-top:10px;">Tienes ${ptsActuales} pts. Gana <b>${t.max} pts</b> en total para dominar esta habilidad.</p>
+                ${mensajeFelicidades}
             </div>
         `;
         vistaDetalle.style.display = 'block';
@@ -334,12 +340,54 @@
             <h2 style="color:#ff8f00; margin:10px 0; font-size:1.8em;">Leyenda del Rancho</h2>
             
             <div style="background:#fff8e1; padding:20px; border-radius:12px; margin:20px 0; border: 2px solid #ffca28; text-align:left;">
-                <p style="margin:0; font-style:italic; color:#333; font-size:1.15em;">"¡Mis respetos, pariente! Has dominado todas las artes del adiestramiento. Tu mascota y tú son la dupla perfecta. Ya no ocupan correas, nomás con verse se entienden. ¡Te ganaste las llaves del rancho!"</p>
+                <p style="margin:0; font-style:italic; color:#333; font-size:1.15em;">"¡Mis respetos, pariente! Has obtenido las 5 Insignias de Buen Pastor. Tú y tu mascota son la dupla perfecta."</p>
                 <p style="margin:10px 0 0 0; font-weight:bold; color:#d81b60; text-align:right;">- Regina Valentina 🤠</p>
             </div>
-            <p style="font-weight:bold; color:#4caf50; font-size:1.3em;">¡Completado al 100%! 🏔️</p>
+            <p style="font-weight:bold; color:#4caf50; font-size:1.1em; margin-bottom: 20px;">¡Completado al 100%! 🏔️</p>
+
+            <button onclick="vibrar(60); generarReporteCientifico()" style="width:100%; background:#6a1b9a; color:white; border:none; padding:15px; border-radius:30px; font-weight:bold; font-size:1.1em; cursor:pointer; box-shadow: 0 4px 6px rgba(0,0,0,0.2);">📄 Descargar Reporte Científico</button>
+            <p style="color:#888; font-size:0.8em; margin-top:10px;">* El reporte avanzado completo con gráficas estará disponible en la Fase GCP. Por ahora, disfruta de este Diploma de Acreditación.</p>
         `;
         vistaDetalle.style.display = 'block';
+    }
+
+    // 👇 LA FUNCIÓN GENERADORA DEL DIPLOMA PDF (FASE 1) 👇
+    function generarReporteCientifico() {
+        let nombreMascota = prompt("¡Felicidades! Ingresa el nombre de tu mascota para el reporte:", "Mi Mascota");
+        if (!nombreMascota) return;
+
+        let fecha = new Date().toLocaleDateString('es-MX');
+        let divReporte = document.getElementById('reporte-cientifico-pdf');
+        
+        let insigniasHTML = "";
+        trofeosConfig.forEach(t => {
+            insigniasHTML += `
+            <div class="insignia-print">
+                <span style="font-size: 40px;">${t.icono} 🌟</span>
+                <h3>${t.nombre}</h3>
+                <p>Nivel 100% Alcanzado. ${t.desc}</p>
+            </div>`;
+        });
+
+        divReporte.innerHTML = `
+            <p style="color:#777; margin-bottom:20px; font-weight:bold;">FECHA DE EMISIÓN: ${fecha}</p>
+            <h1>ACREDITACIÓN DE CONDUCTA ANIMAL</h1>
+            <p style="font-size: 18px; color: #333;">Se certifica que el binomio formado por el usuario y su mascota:</p>
+            <h2 style="font-size: 30px; color: #d81b60; margin: 10px 0;">🐾 ${nombreMascota.toUpperCase()} 🐾</h2>
+            <p style="font-size: 18px; color: #333; margin-bottom: 30px;">Han completado satisfactoriamente el programa cognitivo-conductual, obteniendo las 5 Insignias de Buen Pastor.</p>
+            
+            <div style="text-align: center; margin-bottom: 40px;">
+                ${insigniasHTML}
+            </div>
+
+            <p style="font-style: italic; color: #555; margin-top: 50px;">"El verdadero liderazgo no requiere fuerza, sino entendimiento y lealtad incondicional."</p>
+            <br><br>
+            <p>_____________________________________</p>
+            <p style="font-weight: bold; margin-top:5px;">Firma de la Especialista<br>Regina Valentina</p>
+        `;
+        
+        // Ejecutamos la impresión
+        setTimeout(() => { window.print(); }, 500);
     }
 
     function abrirGuiaEstrellas() {
@@ -352,10 +400,10 @@
             <h2 style="color:#6a1b9a;">📖 Guía Explicativa</h2>
             <div style="text-align:left; color:#444; font-size:1.1em; line-height:1.6; background:#f9f9f9; padding:20px; border-radius:12px; border:1px solid #eee;">
                 <p><strong>1. Pide un consejo:</strong> Platica con Regina sobre cualquier problema.</p>
-                <p><strong>2. Gánate los Puntos:</strong> Regina te dejará una 'Tarea' y te dirá cuántos puntos de habilidad vale esa misión.</p>
-                <p><strong>3. Cobra tu premio:</strong> Cuando la termines, presiona el botón verde <b>"✅ Ya hice la tarea"</b>.</p>
-                <p><strong>4. Sube de Nivel:</strong> Regina evaluará tu esfuerzo y te entregará tus puntos para subir tu gráfica al 100%.</p>
-                <p><strong>5. La Cima:</strong> ¡Llega al 100% en todas las habilidades para ser la Leyenda del Rancho!</p>
+                <p><strong>2. Gánate los Puntos:</strong> Regina te dejará una 'Tarea' y te dirá cuántos puntos vale esa misión.</p>
+                <p><strong>3. Cobra tu premio:</strong> Cuando la termines, presiona <b>"✅ Ya hice la tarea"</b>.</p>
+                <p><strong>4. Las Insignias 🌟:</strong> Al llegar al 100% de puntos en una habilidad, te ganas una "Insignia de Buen Pastor".</p>
+                <p><strong>5. La Cima:</strong> ¡Junta las 5 Insignias para ser la Leyenda del Rancho y descargar tu Reporte Científico!</p>
             </div>
             <button onclick="vibrar(30); abrirVitrina()" style="width:100%; margin-top:20px; padding:14px; background:#6a1b9a; color:white; border:none; border-radius:8px; font-weight:bold; font-size:1.15em; cursor:pointer;">¡Entendido, a darle!</button>
         `;
@@ -364,7 +412,7 @@
 
     function celebrarInsigniaNueva() {
         vibrar([100, 50, 100, 50, 300, 100, 500]);
-        mostrarNotificacion("🎉 ¡PUNTOS AÑADIDOS A TU VITRINA! 🎉", "#ff9800", 6000);
+        mostrarNotificacion("🎉 ¡NUEVA INSIGNIA DE BUEN PASTOR DESBLOQUEADA! 🎉<br>Revisa tu Vitrina.", "#ffca28", 6000);
         
         const badge = document.getElementById('trofeo-badge');
         badge.classList.remove('animar-victoria');
@@ -372,32 +420,31 @@
         badge.classList.add('animar-victoria');
     }
 
-    // 👇 LA FUNCIÓN QUE RECIBE LOS PUNTOS DESDE EL MOTOR PYTHON 👇
     function actualizarInsigniasVisuales(puntos) {
         if (!puntos) return;
         
-        let oldTotal = parseInt(localStorage.getItem('regina_total_pts') || 0);
-        let newTotal = puntos.lider + puntos.zen + puntos.autocontrol + puntos.atleta + puntos.socio;
-
+        // Guardamos los puntos actualizados en el navegador
         localStorage.setItem('regina_pts_lider', puntos.lider);
         localStorage.setItem('regina_pts_zen', puntos.zen);
         localStorage.setItem('regina_pts_autocontrol', puntos.autocontrol);
         localStorage.setItem('regina_pts_atleta', puntos.atleta);
         localStorage.setItem('regina_pts_socio', puntos.socio);
-        localStorage.setItem('regina_total_pts', newTotal);
+
+        // Contamos cuántas habilidades llegaron a 100 (Insignias Obtenidas)
+        let insigniasNuevas = contarInsignias();
+        let insigniasViejas = parseInt(localStorage.getItem('regina_total_insignias') || 0);
+
+        localStorage.setItem('regina_total_insignias', insigniasNuevas);
 
         const badge = document.getElementById('trofeo-badge');
         const count = document.getElementById('trofeo-count');
         
-        if (newTotal > 0) {
-            badge.style.display = 'flex';
-            count.innerText = newTotal + " pts";
-            
-            if (newTotal > oldTotal) {
-                celebrarInsigniaNueva();
-            }
-        } else {
-            badge.style.display = 'none';
+        badge.style.display = 'flex';
+        count.innerText = insigniasNuevas + "/5";
+        
+        // Si el usuario desbloqueó una nueva insignia al 100%, celebramos!
+        if (insigniasNuevas > insigniasViejas) {
+            celebrarInsigniaNueva();
         }
     }
 
@@ -548,11 +595,11 @@
         if (savedTheme === 'dark') { document.documentElement.setAttribute('data-theme', 'dark'); } 
         else if (savedTheme === 'sepia') { document.documentElement.setAttribute('data-theme', 'sepia'); }
 
-        // CARGAMOS PUNTOS VIRTUALES DEL LOCAL STORAGE PARA MOSTRAR AL INICIO
-        let tPts = parseInt(localStorage.getItem('regina_total_pts') || 0);
-        if (tPts > 0) {
+        // CARGAMOS LA CUENTA DE INSIGNIAS DESDE EL INICIO
+        let insigniasG = parseInt(localStorage.getItem('regina_total_insignias') || 0);
+        if (insigniasG >= 0) { // Siempre lo mostramos
             document.getElementById('trofeo-badge').style.display = 'flex';
-            document.getElementById('trofeo-count').innerText = tPts + " pts";
+            document.getElementById('trofeo-count').innerText = insigniasG + "/5";
         }
 
         const storedUserId = localStorage.getItem('regina_user_id');
@@ -617,7 +664,7 @@
     function cerrarSesion() {
         localStorage.removeItem('regina_registrado');
         localStorage.removeItem('regina_user_id');
-        localStorage.removeItem('regina_total_pts'); 
+        localStorage.removeItem('regina_total_insignias'); 
         mostrarNotificacion("🚪 Sesión cerrada. ¡Nos vemos pronto!", "#f44336");
         setTimeout(() => { window.location.reload(); }, 1200);
     }
@@ -650,7 +697,7 @@
                 localStorage.removeItem('regina_registrado');
                 localStorage.removeItem('regina_user_id');
                 localStorage.removeItem('regina_is_admin');
-                localStorage.removeItem('regina_total_pts');
+                localStorage.removeItem('regina_total_insignias');
                 window.location.reload();
             }
         } catch (e) {}
@@ -924,7 +971,6 @@
                     audioPremiumActual.play();
                 }
                 
-                // 👇 CHAT ENVÍA LOS NUEVOS PUNTOS AL FRENTE 👇
                 if (data.puntos !== undefined) { actualizarInsigniasVisuales(data.puntos); }
             }
         } catch (error) { loading.style.display = 'none'; }
