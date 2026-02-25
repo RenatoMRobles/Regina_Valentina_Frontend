@@ -116,7 +116,7 @@
 </div>
 
 <div id="vitrina-modal" style="position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:2000; justify-content:center; align-items:center; display:none;">
-    <div style="background:white; padding:30px; border-radius:15px; width:90%; max-width:420px; text-align:center; box-shadow: 0 10px 30px rgba(0,0,0,0.5); position:relative; border-top: 6px solid #ffca28; max-height:85vh; overflow-y:auto;">
+    <div class="modal-content" style="background:white; padding:30px; border-radius:15px; width:90%; max-width:420px; text-align:center; box-shadow: 0 10px 30px rgba(0,0,0,0.5); position:relative; border-top: 6px solid #ffca28; max-height:85vh; overflow-y:auto;">
         
         <div id="vista-principal-vitrina">
             <button onclick="document.getElementById('vitrina-modal').style.display='none'; vibrar(30);" style="position:absolute; top:10px; right:15px; background:none; border:none; font-size:2em; color:#999; cursor:pointer;">×</button>
@@ -156,7 +156,7 @@
 </div>
 
 <div id="trofeo-badge" onclick="vibrar(40); abrirVitrina()" title="Ver mis medallas" style="position:fixed; top:20px; right:20px; z-index:1900; background:linear-gradient(145deg, #fff8e1, #ffecb3); border:2px solid #ffca28; padding:8px 15px; border-radius:25px; box-shadow:0 4px 10px rgba(0,0,0,0.2); font-size:1.5em; display:none; align-items:center; gap:5px; font-weight:bold; color:#333; cursor:pointer; transition:0.3s;">
-    🌟 <span id="trofeo-count">0</span>
+    🏆 <span id="trofeo-count">0 pts</span>
 </div>
 
 <div class="chat-container">
@@ -215,9 +215,7 @@
     let lsmEnabled = false;
 
     function vibrar(patron) {
-        if ("vibrate" in navigator) {
-            try { navigator.vibrate(patron); } catch(e) {}
-        }
+        if ("vibrate" in navigator) { try { navigator.vibrate(patron); } catch(e) {} }
     }
 
     function compartirApp() {
@@ -233,19 +231,19 @@
         }
     }
 
-    // --- EL ÁRBOL DE HABILIDADES Y LA VITRINA MAESTRA ---
+    // --- EL ÁRBOL DE HABILIDADES Y LA VITRINA MAESTRA (1-100 PUNTOS) ---
     const trofeosConfig = [
-        { id: 1, color: "🟢", icono:"🐺", hex: "#4caf50", nombre: "Líder Alfa", min: 1, max: 3, desc: "¡Felicidades, pariente! Aquí demostraste quién lleva las riendas del rancho, pero con puro respeto, sin gritos ni manotazos. Tu mascota ya te ve como el jefe de la manada." },
-        { id: 2, color: "🔵", icono:"🧘", hex: "#2196f3", nombre: "Maestro Zen", min: 4, max: 6, desc: "¡Qué chulada! Se acabó el desmadre en casa. Tu perrito ya le bajó dos rayitas a su estrés y ahora respira pura paz. ¡Parece monje tibetano!" },
-        { id: 3, color: "🔴", icono:"🛑", hex: "#f44336", nombre: "Autocontrol", min: 7, max: 9, desc: "¡Epa! Tu mascota ya domina sus impulsos. Ya sabe esperar su turno para comer o salir sin volverse loco. ¡Un verdadero caballero o damita!" },
-        { id: 4, color: "🟠", icono:"🏃", hex: "#ff9800", nombre: "Atleta Perruno", min: 10, max: 12, desc: "¡Fierro! Tienen la energía bien canalizada. Actividad física al cien, mente sana y cuerpo cansado pa' dormir a gusto toda la noche." },
-        { id: 5, color: "🌟", icono:"🤝", hex: "#ffeb3b", nombre: "Socio Supremo", min: 13, max: 15, desc: "¡Mis respetos! La conexión entre ustedes es de otro nivel. Ya ni ocupan palabras, nomás con una mirada se entienden. Son la dupla envidia del condado." }
+        { id: 'lider', color: "🟢", icono:"🐺", hex: "#4caf50", nombre: "Líder Alfa", max: 100, desc: "¡Felicidades, pariente! Aquí demuestras quién lleva las riendas del rancho, pero con puro respeto, sin gritos ni manotazos. Tu mascota ya te ve como el jefe de la manada." },
+        { id: 'zen', color: "🔵", icono:"🧘", hex: "#2196f3", nombre: "Maestro Zen", max: 100, desc: "¡Qué chulada! Se acabó el desmadre en casa. Tu perrito le bajó dos rayitas a su estrés y ahora respira pura paz. ¡Parece monje tibetano!" },
+        { id: 'autocontrol', color: "🔴", icono:"🛑", hex: "#f44336", nombre: "Autocontrol", max: 100, desc: "¡Epa! Tu mascota domina sus impulsos. Sabe esperar su turno para comer o salir sin volverse loco. ¡Un verdadero caballero o damita!" },
+        { id: 'atleta', color: "🟠", icono:"🏃", hex: "#ff9800", nombre: "Atleta Perruno", max: 100, desc: "¡Fierro! Tienen la energía bien canalizada. Actividad física al cien, mente sana y cuerpo cansado pa' dormir a gusto toda la noche." },
+        { id: 'socio', color: "🌟", icono:"🤝", hex: "#ffeb3b", nombre: "Socio Supremo", max: 100, desc: "¡Mis respetos! La conexión entre ustedes es de otro nivel. Ya ni ocupan palabras, nomás con una mirada se entienden. Son la dupla envidia del condado." }
     ];
 
-    function calcularProgreso(estrellas, min, max) {
-        if (estrellas < min) return 0;
-        if (estrellas >= max) return 100;
-        return Math.floor(((estrellas - min + 1) / (max - min + 1)) * 100);
+    function calcularProgreso(puntos, max) {
+        if (puntos <= 0) return 0;
+        if (puntos >= max) return 100;
+        return Math.floor((puntos / max) * 100);
     }
 
     function abrirVitrina() {
@@ -254,11 +252,15 @@
         document.getElementById('vista-guia-vitrina').style.display = 'none';
         
         const lista = document.getElementById('lista-trofeos');
-        let estrellas = parseInt(localStorage.getItem('regina_estrellas') || 0);
-        
         let html = "";
+        let todasAlCien = true;
+
         trofeosConfig.forEach((t, index) => {
-            let progreso = calcularProgreso(estrellas, t.min, t.max);
+            let ptsActuales = parseInt(localStorage.getItem('regina_pts_' + t.id) || 0);
+            let progreso = calcularProgreso(ptsActuales, t.max);
+            
+            if (progreso < 100) todasAlCien = false;
+
             let bloqueado = progreso === 0 ? "filter: grayscale(100%); opacity: 0.6;" : "box-shadow: 0 4px 6px rgba(0,0,0,0.1);";
             let colorPorcentaje = progreso === 100 ? t.hex : "#777";
             
@@ -274,7 +276,7 @@
         lista.innerHTML = html;
 
         const contenedorMaximo = document.getElementById('contenedor-maximo');
-        if(estrellas >= 15) {
+        if(todasAlCien) {
             contenedorMaximo.innerHTML = `<div onclick="vibrar(80); verLeyenda()" style="background: linear-gradient(145deg, #ffd54f, #ff8f00); padding: 20px; border-radius: 15px; margin-top: 20px; color: white; cursor: pointer; box-shadow: 0 5px 15px rgba(255, 143, 0, 0.4); transition:0.3s;">
                 <h3 style="margin:0; text-shadow: 1px 1px 2px rgba(0,0,0,0.3); font-size:1.3em;">👑 LA CIMA DE LA MONTAÑA</h3>
                 <p style="margin:5px 0 0 0; font-weight:bold; font-size:0.95em;">¡Desbloqueado! Toca para abrir.</p>
@@ -282,7 +284,7 @@
         } else {
             contenedorMaximo.innerHTML = `<div style="background: #eee; padding: 20px; border-radius: 15px; margin-top: 20px; color: #757575; border: 2px dashed #ccc;">
                 <h3 style="margin:0; font-size:1.2em;">⛰️ Cima de la Montaña</h3>
-                <p style="margin:5px 0 0 0; font-size:0.9em;">Junta 15 estrellas para ver el premio final.</p>
+                <p style="margin:5px 0 0 0; font-size:0.9em;">Llega al 100% en todo para ver el premio final.</p>
             </div>`;
         }
         document.getElementById('vitrina-modal').style.display = 'flex';
@@ -290,8 +292,8 @@
 
     function verDetalleTrofeo(index) {
         let t = trofeosConfig[index];
-        let estrellas = parseInt(localStorage.getItem('regina_estrellas') || 0);
-        let progreso = calcularProgreso(estrellas, t.min, t.max);
+        let ptsActuales = parseInt(localStorage.getItem('regina_pts_' + t.id) || 0);
+        let progreso = calcularProgreso(ptsActuales, t.max);
 
         document.getElementById('vista-principal-vitrina').style.display = 'none';
         const vistaDetalle = document.getElementById('vista-detalle-vitrina');
@@ -316,7 +318,7 @@
                 <div style="background:#e0e0e0; border-radius:25px; padding:4px; box-shadow: inset 0 2px 5px rgba(0,0,0,0.2);">
                     <div style="background: linear-gradient(90deg, ${t.hex}, #333); width: ${progreso}%; height: 26px; border-radius: 20px; transition: width 1s cubic-bezier(0.25, 1, 0.5, 1);"></div>
                 </div>
-                <p style="color:#777; font-size:0.9em; margin-top:10px;">Gana <b>${t.max} estrellas</b> en total para dominar esta habilidad.</p>
+                <p style="color:#777; font-size:0.9em; margin-top:10px;">Tienes ${ptsActuales} pts. Gana <b>${t.max} pts</b> en total para dominar esta habilidad.</p>
             </div>
         `;
         vistaDetalle.style.display = 'block';
@@ -336,7 +338,7 @@
                 <p style="margin:0; font-style:italic; color:#333; font-size:1.15em;">"¡Mis respetos, pariente! Has dominado todas las artes del adiestramiento. Tu mascota y tú son la dupla perfecta. Ya no ocupan correas, nomás con verse se entienden. ¡Te ganaste las llaves del rancho!"</p>
                 <p style="margin:10px 0 0 0; font-weight:bold; color:#d81b60; text-align:right;">- Regina Valentina 🤠</p>
             </div>
-            <p style="font-weight:bold; color:#4caf50; font-size:1.3em;">¡Has llegado a la Cima! 🏔️</p>
+            <p style="font-weight:bold; color:#4caf50; font-size:1.3em;">¡Completado al 100%!</p>
         `;
         vistaDetalle.style.display = 'block';
     }
@@ -351,10 +353,10 @@
             <h2 style="color:#6a1b9a;">📖 Guía Explicativa</h2>
             <div style="text-align:left; color:#444; font-size:1.1em; line-height:1.6; background:#f9f9f9; padding:20px; border-radius:12px; border:1px solid #eee;">
                 <p><strong>1. Pide un consejo:</strong> Platica con Regina sobre cualquier problema.</p>
-                <p><strong>2. Aplícalo:</strong> Regina te dejará una 'Tarea' práctica.</p>
+                <p><strong>2. Gánate los Puntos:</strong> Regina te dejará una 'Tarea' y te dirá cuántos puntos de habilidad vale esa misión.</p>
                 <p><strong>3. Cobra tu premio:</strong> Cuando la termines, presiona el botón verde <b>"✅ Ya hice la tarea"</b>.</p>
-                <p><strong>4. Sube de Nivel:</strong> Regina te dará una Estrella 🌟. Con cada estrella, la gráfica de tus habilidades se irá llenando del 1 al 100.</p>
-                <p><strong>5. La Cima:</strong> Junta 15 estrellas para desbloquear el trofeo máximo.</p>
+                <p><strong>4. Sube de Nivel:</strong> Regina evaluará tu esfuerzo y te entregará tus puntos para subir tu gráfica al 100%.</p>
+                <p><strong>5. La Cima:</strong> ¡Llega al 100% en todas las habilidades para ser la Leyenda del Rancho!</p>
             </div>
             <button onclick="vibrar(30); abrirVitrina()" style="width:100%; margin-top:20px; padding:14px; background:#6a1b9a; color:white; border:none; border-radius:8px; font-weight:bold; font-size:1.15em; cursor:pointer;">¡Entendido, a darle!</button>
         `;
@@ -363,12 +365,41 @@
 
     function celebrarInsigniaNueva() {
         vibrar([100, 50, 100, 50, 300, 100, 500]);
-        mostrarNotificacion("🎉 ¡NUEVA ESTRELLA OBTENIDA! 🎉<br>Revisa tu Vitrina de Logros.", "#ff9800", 6000);
+        mostrarNotificacion("🎉 ¡PUNTOS AÑADIDOS A TU VITRINA! 🎉", "#ff9800", 6000);
         
         const badge = document.getElementById('trofeo-badge');
         badge.classList.remove('animar-victoria');
         void badge.offsetWidth; 
         badge.classList.add('animar-victoria');
+    }
+
+    // 👇 LA FUNCIÓN QUE RECIBE LOS PUNTOS DESDE EL MOTOR PYTHON 👇
+    function actualizarInsigniasVisuales(puntos) {
+        if (!puntos) return;
+        
+        let oldTotal = parseInt(localStorage.getItem('regina_total_pts') || 0);
+        let newTotal = puntos.lider + puntos.zen + puntos.autocontrol + puntos.atleta + puntos.socio;
+
+        localStorage.setItem('regina_pts_lider', puntos.lider);
+        localStorage.setItem('regina_pts_zen', puntos.zen);
+        localStorage.setItem('regina_pts_autocontrol', puntos.autocontrol);
+        localStorage.setItem('regina_pts_atleta', puntos.atleta);
+        localStorage.setItem('regina_pts_socio', puntos.socio);
+        localStorage.setItem('regina_total_pts', newTotal);
+
+        const badge = document.getElementById('trofeo-badge');
+        const count = document.getElementById('trofeo-count');
+        
+        if (newTotal > 0) {
+            badge.style.display = 'flex';
+            count.innerText = newTotal + " pts";
+            
+            if (newTotal > oldTotal) {
+                celebrarInsigniaNueva();
+            }
+        } else {
+            badge.style.display = 'none';
+        }
     }
 
     function silenciarAviso(texto) {
@@ -380,12 +411,16 @@
     function toggleDyslexia() {
         dyslexiaEnabled = !dyslexiaEnabled;
         const body = document.body;
+        const btnModal = document.getElementById('btn-config-dyslexia');
+
         if (dyslexiaEnabled) {
             if (lsmEnabled) toggleLSM();
             body.classList.add('dyslexia-mode');
+            if(btnModal) { btnModal.style.background = '#e8f5e9'; btnModal.style.borderColor = '#4caf50'; } 
             mostrarNotificacion("👓 Lectura cómoda habilitada", "#4caf50"); 
         } else {
             body.classList.remove('dyslexia-mode');
+            if(btnModal) { btnModal.style.background = '#f4f4f9'; btnModal.style.borderColor = '#ddd'; } 
             mostrarNotificacion("Lectura estándar restaurada", "#6a1b9a");
         }
     }
@@ -509,29 +544,17 @@
         else recognition.start();
     }
 
-    function actualizarInsigniasVisuales(cantidad) {
-        const badge = document.getElementById('trofeo-badge');
-        const count = document.getElementById('trofeo-count');
-        let guardadas = parseInt(localStorage.getItem('regina_estrellas') || 0);
-
-        if (cantidad !== undefined && cantidad > 0) {
-            badge.style.display = 'flex';
-            count.innerText = cantidad;
-            localStorage.setItem('regina_estrellas', cantidad); 
-            
-            if (cantidad > guardadas) { celebrarInsigniaNueva(); }
-        } else {
-            badge.style.display = 'none';
-        }
-    }
-
     window.addEventListener('DOMContentLoaded', async () => {
         const savedTheme = localStorage.getItem('regina_theme');
         if (savedTheme === 'dark') { document.documentElement.setAttribute('data-theme', 'dark'); } 
         else if (savedTheme === 'sepia') { document.documentElement.setAttribute('data-theme', 'sepia'); }
 
-        const medallasGuardadas = localStorage.getItem('regina_estrellas');
-        if (medallasGuardadas && medallasGuardadas > 0) actualizarInsigniasVisuales(medallasGuardadas);
+        // CARGAMOS PUNTOS VIRTUALES DEL LOCAL STORAGE PARA MOSTRAR AL INICIO
+        let tPts = parseInt(localStorage.getItem('regina_total_pts') || 0);
+        if (tPts > 0) {
+            document.getElementById('trofeo-badge').style.display = 'flex';
+            document.getElementById('trofeo-count').innerText = tPts + " pts";
+        }
 
         const storedUserId = localStorage.getItem('regina_user_id');
         if (!storedUserId) { localStorage.setItem('regina_user_id', 'user_' + Math.floor(Math.random() * 10000000)); }
@@ -594,7 +617,7 @@
     function cerrarSesion() {
         localStorage.removeItem('regina_registrado');
         localStorage.removeItem('regina_user_id');
-        localStorage.removeItem('regina_estrellas'); 
+        localStorage.removeItem('regina_total_pts'); 
         mostrarNotificacion("🚪 Sesión cerrada. ¡Nos vemos pronto!", "#f44336");
         setTimeout(() => { window.location.reload(); }, 1200);
     }
@@ -602,7 +625,6 @@
     async function canjearCupon() {
         const codigo = document.getElementById('input-cupon').value;
         if(!codigo) { vibrar([50, 50, 50]); return; }
-        
         try {
             const response = await fetch(`${API_URL}/canjear_codigo`, {
                 method: 'POST', headers: { 'Content-Type': 'application/json' },
@@ -627,8 +649,7 @@
             if (response.ok) {
                 localStorage.removeItem('regina_registrado');
                 localStorage.removeItem('regina_user_id');
-                localStorage.removeItem('regina_is_admin');
-                localStorage.removeItem('regina_estrellas');
+                localStorage.removeItem('regina_total_pts');
                 window.location.reload();
             }
         } catch (e) {}
@@ -681,7 +702,9 @@
                 localStorage.setItem('regina_is_admin', data.is_admin ? 'true' : 'false');
                 document.getElementById('auth-modal').style.display = 'none';
                 mostrarNotificacion("✅ ¡Sesión iniciada!", "#4caf50");
-                if (data.insignias !== undefined) actualizarInsigniasVisuales(data.insignias);
+                
+                // 👇 LOGIN ENVÍA PUNTOS AL FRONTEND 👇
+                if (data.puntos !== undefined) actualizarInsigniasVisuales(data.puntos);
             } else { vibrar([50,50,50]); errorMsg.innerText = data.error; }
         } catch (e) {}
     }
@@ -897,7 +920,9 @@
                     audioPremiumActual = new Audio("data:audio/mp3;base64," + data.audio);
                     audioPremiumActual.play();
                 }
-                if (data.insignias !== undefined) { actualizarInsigniasVisuales(data.insignias); }
+                
+                // 👇 CHAT ENVÍA LOS NUEVOS PUNTOS AL FRENTE 👇
+                if (data.puntos !== undefined) { actualizarInsigniasVisuales(data.puntos); }
             }
         } catch (error) { loading.style.display = 'none'; }
     }
@@ -912,7 +937,6 @@
     }
     
     let imagenChatBase64 = null;
-    
     function previsualizarFotoChat() {
         const file = document.getElementById('input-foto-chat').files[0];
         if(file) {
