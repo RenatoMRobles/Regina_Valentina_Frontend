@@ -69,6 +69,12 @@
         .chips-container { display: flex; gap: 10px; padding: 12px 15px; overflow-x: auto; white-space: nowrap; scrollbar-width: none; background: var(--bg-chat); }
         .chip { background-color: var(--bg-body); border: 2px solid #6a1b9a; color: var(--text-main); padding: 10px 18px; border-radius: 20px; font-size: 1.05rem; font-weight: bold; cursor: pointer; white-space: nowrap; }
         
+        /* ESTILOS DINÁMICOS PARA LA VITRINA */
+        .vitrina-card { background: var(--bg-chat); color: var(--text-main); }
+        .vitrina-item { background: var(--bg-body); border: 1px solid var(--input-border); color: var(--text-main); }
+        .vitrina-text { color: var(--text-main); }
+        .vitrina-subtext { color: var(--text-main); opacity: 0.8; }
+
         @keyframes latidoVictoria { 0% { transform: scale(1); } 50% { transform: scale(1.8); filter: drop-shadow(0 0 25px #ffca28); } 100% { transform: scale(1); } }
         .animar-victoria { animation: latidoVictoria 0.8s ease-in-out 3; }
 
@@ -136,7 +142,7 @@
 </div>
 
 <div id="vitrina-modal" style="position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:2000; justify-content:center; align-items:center; display:none;">
-    <div class="modal-content" style="background:white; padding:30px; border-radius:15px; width:90%; max-width:420px; text-align:center; box-shadow: 0 10px 30px rgba(0,0,0,0.5); position:relative; border-top: 6px solid #ffca28; max-height:85vh; overflow-y:auto;">
+    <div class="vitrina-card" style="padding:30px; border-radius:15px; width:90%; max-width:420px; text-align:center; box-shadow: 0 10px 30px rgba(0,0,0,0.5); position:relative; border-top: 6px solid #ffca28; max-height:85vh; overflow-y:auto;">
         
         <div id="vista-principal-vitrina">
             <button onclick="document.getElementById('vitrina-modal').style.display='none'; vibrar(30);" style="position:absolute; top:10px; right:15px; background:none; border:none; font-size:2em; color:#999; cursor:pointer;">×</button>
@@ -241,13 +247,13 @@
         }
     }
 
-    // 👇 TEXTOS DE LA VITRINA PURIFICADOS 👇
+    // 👇 TEXTOS PURIFICADOS (Líder de la Manada y Relajo) 👇
     const trofeosConfig = [
-        { id: 'lider', color: "🟢", icono:"🐺", hex: "#4caf50", nombre: "Líder de la Manada", max: 100, desc: "¡Felicidades, pariente! Aquí demuestras quién lleva las riendas del rancho, pero con puro respeto, sin gritos ni manotazos. Tu mascota ya te ve como el jefe de la manada." },
-        { id: 'zen', color: "🔵", icono:"🧘", hex: "#2196f3", nombre: "Maestro Zen", max: 100, desc: "¡Qué chulada! Se acabó el relajo en casa. Tu perrito le bajó dos rayitas a su estrés y ahora respira pura paz. ¡Parece monje tibetano!" },
-        { id: 'autocontrol', color: "🔴", icono:"🛑", hex: "#f44336", nombre: "Autocontrol", max: 100, desc: "¡Epa! Tu mascota domina sus impulsos. Sabe esperar su turno para comer o salir sin volverse loco. ¡Un verdadero caballero o damita!" },
-        { id: 'atleta', color: "🟠", icono:"🏃", hex: "#ff9800", nombre: "Atleta Perruno", max: 100, desc: "¡Fierro! Tienen la energía bien canalizada. Actividad física al cien, mente sana y cuerpo cansado pa' dormir a gusto toda la noche." },
-        { id: 'socio', color: "🌟", icono:"🤝", hex: "#ffeb3b", nombre: "Socio Supremo", max: 100, desc: "¡Mis respetos! La conexión entre ustedes es de otro nivel. Ya ni ocupan palabras, nomás con una mirada se entienden. Son la dupla envidia del condado." }
+        { id: 'lider', color: "🟢", icono:"🐺", hex: "#4caf50", nombre: "Líder de la Manada", max: 100, desc: "Dominas el liderazgo con puro respeto y calma. Tu mascota te ve como el guía de la manada." },
+        { id: 'zen', color: "🔵", icono:"🧘", hex: "#2196f3", nombre: "Maestro Zen", max: 100, desc: "Lograste un ambiente de paz. Se acabó el relajo y tu mascota respira tranquilidad pura." },
+        { id: 'autocontrol', color: "🔴", icono:"🛑", hex: "#f44336", nombre: "Autocontrol", max: 100, desc: "Tu mascota domina sus impulsos. Sabe esperar su turno sin volverse loco." },
+        { id: 'atleta', color: "🟠", icono:"🏃", hex: "#ff9800", nombre: "Atleta Perruno", max: 100, desc: "Energía bien canalizada. Actividad física al cien, cuerpo sano y mente equilibrada." },
+        { id: 'socio', color: "🌟", icono:"🤝", hex: "#ffeb3b", nombre: "Socio Supremo", max: 100, desc: "La conexión máxima. Ya ni ocupan palabras, con una mirada se entienden perfectamente." }
     ];
 
     function calcularProgreso(puntos, max) {
@@ -265,6 +271,7 @@
         return count;
     }
 
+    // 👇 VITRINA ADAPTADA AL TEMA (DARK MODE / SEPIA) 👇
     function abrirVitrina() {
         document.getElementById('vista-principal-vitrina').style.display = 'block';
         document.getElementById('vista-detalle-vitrina').style.display = 'none';
@@ -279,14 +286,14 @@
             let progreso = calcularProgreso(ptsActuales, t.max);
             
             let bloqueado = progreso === 0 ? "filter: grayscale(100%); opacity: 0.6;" : "box-shadow: 0 4px 6px rgba(0,0,0,0.1);";
-            let colorPorcentaje = progreso === 100 ? t.hex : "#777";
+            let colorPorcentaje = progreso === 100 ? t.hex : "var(--text-main)";
             
-            let badgeInsignia = progreso === 100 ? `<div style="background:#ffca28; color:#333; padding:2px 8px; border-radius:10px; font-size:0.7em; font-weight:bold; display:inline-block; margin-top:5px; border:1px solid #d8a000;">🌟 Insignia Obtenida</div>` : `<p style="margin:3px 0 0 0; font-size:0.85em; color:#888;">Nivel de Progreso:</p>`;
+            let badgeInsignia = progreso === 100 ? `<div style="background:#ffca28; color:#333; padding:2px 8px; border-radius:10px; font-size:0.7em; font-weight:bold; display:inline-block; margin-top:5px; border:1px solid #d8a000;">🌟 Insignia Obtenida</div>` : `<p class="vitrina-subtext" style="margin:3px 0 0 0; font-size:0.85em;">Nivel de Progreso:</p>`;
 
-            html += `<div onclick="vibrar(30); verDetalleTrofeo(${index})" style="display:flex; align-items:center; gap:15px; margin-bottom:12px; padding:15px; background:#f9f9f9; border-radius:12px; border: 1px solid #eee; cursor:pointer; transition: 0.3s; ${bloqueado}">
+            html += `<div onclick="vibrar(30); verDetalleTrofeo(${index})" class="vitrina-item" style="display:flex; align-items:center; gap:15px; margin-bottom:12px; padding:15px; border-radius:12px; cursor:pointer; transition: 0.3s; ${bloqueado}">
                 <span style="font-size:2.2em;">${t.icono}</span>
                 <div style="text-align:left; flex:1;">
-                    <h4 style="margin:0; color:#333; font-size:1.1em;">${t.nombre}</h4>
+                    <h4 class="vitrina-text" style="margin:0; font-size:1.1em;">${t.nombre}</h4>
                     ${badgeInsignia}
                 </div>
                 <div style="font-size:1.2em; color:${colorPorcentaje}; font-weight:bold;">${progreso}%</div>
@@ -301,9 +308,9 @@
                 <p style="margin:5px 0 0 0; font-weight:bold; font-size:0.95em;">¡Desbloqueado! Toca para abrir tu recompensa.</p>
             </div>`;
         } else {
-            contenedorMaximo.innerHTML = `<div style="background: #eee; padding: 20px; border-radius: 15px; margin-top: 20px; color: #757575; border: 2px dashed #ccc;">
-                <h3 style="margin:0; font-size:1.2em;">⛰️ Cima de la Montaña</h3>
-                <p style="margin:5px 0 0 0; font-size:0.9em;">Consigue las 5 Insignias para ver el premio final.</p>
+            contenedorMaximo.innerHTML = `<div class="vitrina-item" style="padding: 20px; border-radius: 15px; margin-top: 20px; border-style: dashed;">
+                <h3 class="vitrina-text" style="margin:0; font-size:1.2em;">⛰️ Cima de la Montaña</h3>
+                <p class="vitrina-subtext" style="margin:5px 0 0 0; font-size:0.9em;">Consigue las 5 Insignias para ver el premio final.</p>
             </div>`;
         }
         document.getElementById('vitrina-modal').style.display = 'flex';
@@ -326,20 +333,20 @@
             <span style="font-size:4.5em; filter:drop-shadow(0 4px 6px rgba(0,0,0,0.2));">${t.icono}</span>
             <h2 style="color:${t.hex}; margin:10px 0;">${t.nombre}</h2>
             
-            <div style="background:#f4f4f9; padding:20px; border-radius:12px; margin:20px 0; border-left: 5px solid ${t.hex}; text-align:left;">
-                <p style="margin:0; font-style:italic; color:#555; font-size:1.1em;">"${t.desc}"</p>
-                <p style="margin:10px 0 0 0; font-weight:bold; color:#333; text-align:right;">- Regina Valentina 🤠</p>
+            <div class="vitrina-item" style="padding:20px; border-radius:12px; margin:20px 0; border-left: 5px solid ${t.hex}; text-align:left;">
+                <p class="vitrina-subtext" style="margin:0; font-style:italic; font-size:1.1em;">"${t.desc}"</p>
+                <p class="vitrina-text" style="margin:10px 0 0 0; font-weight:bold; text-align:right;">- Regina Valentina 🤠</p>
             </div>
 
             <div style="margin-top:25px;">
-                <div style="display:flex; justify-content:space-between; margin-bottom:8px; font-weight:bold; color:#333;">
+                <div style="display:flex; justify-content:space-between; margin-bottom:8px; font-weight:bold;" class="vitrina-text">
                     <span>Tu Nivel:</span>
                     <span style="color:${t.hex}; font-size:1.3em;">${progreso}%</span>
                 </div>
                 <div style="background:#e0e0e0; border-radius:25px; padding:4px; box-shadow: inset 0 2px 5px rgba(0,0,0,0.2);">
                     <div style="background: linear-gradient(90deg, ${t.hex}, #333); width: ${progreso}%; height: 26px; border-radius: 20px; transition: width 1s cubic-bezier(0.25, 1, 0.5, 1);"></div>
                 </div>
-                <p style="color:#777; font-size:0.9em; margin-top:10px;">Tienes ${ptsActuales} pts. Gana <b>${t.max} pts</b> en total para dominar esta habilidad.</p>
+                <p class="vitrina-subtext" style="font-size:0.9em; margin-top:10px;">Tienes ${ptsActuales} pts. Gana <b>${t.max} pts</b> en total para dominar esta habilidad.</p>
                 ${mensajeFelicidades}
             </div>
         `;
@@ -356,14 +363,14 @@
             <span style="font-size:5.5em; filter:drop-shadow(0 0 25px #ffca28);">👑</span>
             <h2 style="color:#ff8f00; margin:10px 0; font-size:1.8em;">Leyenda del Rancho</h2>
             
-            <div style="background:#fff8e1; padding:20px; border-radius:12px; margin:20px 0; border: 2px solid #ffca28; text-align:left;">
-                <p style="margin:0; font-style:italic; color:#333; font-size:1.15em;">"¡Mis respetos, pariente! Has obtenido las 5 Insignias de Buen Pastor. Tú y tu mascota son la dupla perfecta."</p>
+            <div class="vitrina-item" style="padding:20px; border-radius:12px; margin:20px 0; border: 2px solid #ffca28; text-align:left;">
+                <p class="vitrina-text" style="margin:0; font-style:italic; font-size:1.15em;">"¡Mis respetos, pariente! Has obtenido las 5 Insignias de Buen Pastor. Tú y tu mascota son la dupla perfecta."</p>
                 <p style="margin:10px 0 0 0; font-weight:bold; color:#d81b60; text-align:right;">- Regina Valentina 🤠</p>
             </div>
             <p style="font-weight:bold; color:#4caf50; font-size:1.1em; margin-bottom: 20px;">¡Completado al 100%! 🏔️</p>
 
             <button onclick="vibrar(60); generarReporteCientifico()" style="width:100%; background:#6a1b9a; color:white; border:none; padding:15px; border-radius:30px; font-weight:bold; font-size:1.1em; cursor:pointer; box-shadow: 0 4px 6px rgba(0,0,0,0.2);">📄 Descargar Reporte</button>
-            <p style="color:#888; font-size:0.8em; margin-top:10px;">* El reporte avanzado estará en la Fase GCP. Por ahora, disfruta de tu Acreditación.</p>
+            <p class="vitrina-subtext" style="font-size:0.8em; margin-top:10px;">* El reporte avanzado estará en la Fase GCP. Por ahora, disfruta de tu Acreditación.</p>
         `;
         vistaDetalle.style.display = 'block';
     }
@@ -408,7 +415,7 @@
                 <button onclick="vibrar(30); abrirVitrina()" style="background:none; border:none; color:#d81b60; font-weight:bold; font-size:1.1em; cursor:pointer;">⬅ Volver</button>
             </div>
             <h2 style="color:#6a1b9a;">📖 Guía Explicativa</h2>
-            <div style="text-align:left; color:#444; font-size:1.1em; line-height:1.6; background:#f9f9f9; padding:20px; border-radius:12px; border:1px solid #eee;">
+            <div class="vitrina-item" style="text-align:left; font-size:1.1em; line-height:1.6; padding:20px; border-radius:12px;">
                 <p><strong>1. Pide un consejo:</strong> Platica con Regina sobre cualquier problema.</p>
                 <p><strong>2. Gánate los Puntos:</strong> Regina te dejará una 'Tarea' y te dirá cuántos puntos vale.</p>
                 <p><strong>3. Cobra tu premio:</strong> Cuando la termines, presiona <b>"✅ Ya hice la tarea"</b>.</p>
@@ -482,6 +489,24 @@
         botones.forEach(b => b.remove()); 
         navigator.clipboard.writeText(clon.innerText.trim());
         mostrarNotificacion("📋 ¡Consejo copiado al portapapeles!", "#d81b60");
+    }
+
+    // 👇 LA FUNCIÓN DE LOS BOTONES DE LIKE/DISLIKE 👇
+    function calificarMensaje(msgId, tipo) {
+        vibrar(30);
+        let btnUp = document.getElementById(`btn-up-${msgId}`);
+        let btnDown = document.getElementById(`btn-down-${msgId}`);
+        if(tipo === 'up') {
+            btnUp.style.filter = 'drop-shadow(0 0 5px #4caf50)';
+            btnUp.style.transform = 'scale(1.2)';
+            if(btnDown) { btnDown.style.filter = 'grayscale(100%)'; btnDown.style.transform = 'scale(1)'; }
+            mostrarNotificacion("¡Qué bueno que te sirvió! 👍", "#4caf50", 2000);
+        } else {
+            btnDown.style.filter = 'drop-shadow(0 0 5px #f44336)';
+            btnDown.style.transform = 'scale(1.2)';
+            if(btnUp) { btnUp.style.filter = 'grayscale(100%)'; btnUp.style.transform = 'scale(1)'; }
+            mostrarNotificacion("Tomaremos nota para mejorar 👎", "#f44336", 2000);
+        }
     }
     
     let ultimoMensajeLeido = null;
@@ -759,33 +784,46 @@
 
     function getUserId() { return localStorage.getItem('regina_user_id'); }
 
+    // 👇 LA SOLUCIÓN AL MUTE GLOBAL DE LA VOZ 👇
+    let isMuted = false;
+    function togglePremiumVoice() {
+        const btnPremium = document.getElementById('btn-header-voice'); 
+        vibrar(60);
+        if (isMuted) {
+            isMuted = false;
+            premiumVoiceEnabled = true;
+            voiceEnabled = false; 
+            if(btnPremium) btnPremium.innerHTML = '<div style="display:flex; flex-direction:column; align-items:center; line-height:1.1;"><span style="font-size:1.2rem;">🗣️</span><span style="font-size:0.65rem;">💎</span></div>'; 
+            mostrarNotificacion("✨ Voz Premium HD Activada", "#ffca28");
+        } else {
+            isMuted = true;
+            premiumVoiceEnabled = false;
+            voiceEnabled = false; // SILENCIA TODO
+            window.speechSynthesis.cancel();
+            if (audioPremiumActual) {
+                audioPremiumActual.pause();
+                audioPremiumActual.currentTime = 0;
+            }
+            if(btnPremium) btnPremium.innerHTML = '<div style="display:flex; flex-direction:column; align-items:center; line-height:1.1;"><span style="font-size:1.2rem;">🤫</span><span style="font-size:0.65rem; filter:grayscale(100%);">💎</span></div>'; 
+            mostrarNotificacion("🤫 Silencio total activado", "#9e9e9e");
+        }
+    }
+
     function toggleVoice() {
         vibrar(60);
         if (!voiceEnabled) {
             voiceEnabled = true;
-            if (premiumVoiceEnabled) { togglePremiumVoice(); } 
+            isMuted = false;
+            premiumVoiceEnabled = false; // Solo voz robótica
             cargarVoces();
+            const btnPremium = document.getElementById('btn-header-voice'); 
+            if(btnPremium) btnPremium.innerHTML = '<div style="display:flex; flex-direction:column; align-items:center; line-height:1.1;"><span style="font-size:1.2rem;">🗣️</span><span style="font-size:0.65rem; filter:grayscale(100%);">💎</span></div>'; 
             mostrarNotificacion("🤖 Voz robótica activada", "#2196f3");
             hablar("Voz robótica activada.");
         } else {
             voiceEnabled = false;
             window.speechSynthesis.cancel();
             mostrarNotificacion("🤫 Silencio activado", "#9e9e9e");
-        }
-    }
-
-    function togglePremiumVoice() {
-        const btnPremium = document.getElementById('btn-header-voice'); 
-        if (!premiumVoiceEnabled) {
-            premiumVoiceEnabled = true;
-            if(btnPremium) btnPremium.innerHTML = '<div style="display:flex; flex-direction:column; align-items:center; line-height:1.1;"><span style="font-size:1.2rem;">🗣️</span><span style="font-size:0.65rem;">💎</span></div>'; 
-            if (voiceEnabled) { toggleVoice(); } 
-            mostrarNotificacion("✨ Voz Premium HD Activada", "#ffca28");
-        } else {
-            premiumVoiceEnabled = false;
-            if(btnPremium) btnPremium.innerHTML = '<div style="display:flex; flex-direction:column; align-items:center; line-height:1.1;"><span style="font-size:1.2rem;">🤫</span><span style="font-size:0.65rem; filter:grayscale(100%);">💎</span></div>'; 
-            if (audioPremiumActual) audioPremiumActual.pause();
-            mostrarNotificacion("🤫 Voz Premium Desactivada", "#9e9e9e");
         }
     }
 
