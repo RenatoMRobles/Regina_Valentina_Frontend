@@ -69,7 +69,6 @@
         .chips-container { display: flex; gap: 10px; padding: 12px 15px; overflow-x: auto; white-space: nowrap; scrollbar-width: none; background: var(--bg-chat); }
         .chip { background-color: var(--bg-body); border: 2px solid #6a1b9a; color: var(--text-main); padding: 10px 18px; border-radius: 20px; font-size: 1.05rem; font-weight: bold; cursor: pointer; white-space: nowrap; }
         
-        /* 👇 ESTILOS DINÁMICOS PARA MODALES Y VITRINA 👇 */
         .modal-card { background: var(--bg-chat); color: var(--text-main); border: 1px solid var(--input-border); }
         .modal-title { color: var(--header-bg); margin-top: 0; }
         [data-theme="dark"] .modal-title { color: #ce93d8; }
@@ -207,10 +206,10 @@
     <div class="loading" id="loading">Regina está escribiendo...</div>
 
     <div class="chips-container">
-        <button class="chip" onclick="vibrar(40); sendChip('Quiero jugar con la Miss Regina')">🎮 Juguemos</button>
-        <button class="chip" onclick="vibrar(40); sendChip('Miss Regina, ya hice la tarea')" style="background:#e8f5e9; border-color:#4caf50; color:#2e7d32;">✅ Ya hice la tarea</button>
-        <button class="chip" onclick="vibrar(40); sendChip('🧐 ¡Analízame Regina!')">🧐 Analízame</button>
-        <button class="chip" onclick="vibrar(40); sendChip('🤠 ¿Cómo educar a un perro latoso?')">🤠 Educar perro latoso</button>
+        <button class="chip" onclick="sendChip('Quiero jugar con la Miss Regina')">🎮 Juguemos</button>
+        <button class="chip" onclick="sendChip('Miss Regina, ya hice la tarea')" style="background:#e8f5e9; border-color:#4caf50; color:#2e7d32;">✅ Ya hice la tarea</button>
+        <button class="chip" onclick="sendChip('🧐 ¡Analízame Regina!')">🧐 Analízame</button>
+        <button class="chip" onclick="sendChip('🤠 ¿Cómo educar a un perro latoso?')">🤠 Educar perro latoso</button>
     </div>
 
     <div class="input-area">
@@ -236,8 +235,9 @@
     let dyslexiaEnabled = false;
     let lsmEnabled = false;
 
+    // 👇 VIBRACIÓN SEGURA 👇
     function vibrar(patron) {
-        if ("vibrate" in navigator) { try { navigator.vibrate(patron); } catch(e) {} }
+        try { if (navigator && navigator.vibrate) navigator.vibrate(patron); } catch(e) {}
     }
 
     function compartirApp() {
@@ -309,7 +309,7 @@
             </div>`;
         } else {
             contenedorMaximo.innerHTML = `<div class="vitrina-item" style="padding: 20px; border-radius: 15px; margin-top: 20px; border-style: dashed;">
-                <h3 style="margin:0; font-size:1.2em;">⛰️ Cima de la Montaña</h3>
+                <h3 class="vitrina-text" style="margin:0; font-size:1.2em;">⛰️ Cima de la Montaña</h3>
                 <p class="vitrina-subtext" style="margin:5px 0 0 0; font-size:0.9em;">Consigue las 5 Insignias para ver el premio final.</p>
             </div>`;
         }
@@ -335,7 +335,7 @@
             
             <div class="vitrina-item" style="padding:20px; border-radius:12px; margin:20px 0; border-left: 5px solid ${t.hex}; text-align:left;">
                 <p class="vitrina-subtext" style="margin:0; font-style:italic; font-size:1.1em;">"${t.desc}"</p>
-                <p style="margin:10px 0 0 0; font-weight:bold; text-align:right;">- Regina Valentina 🤠</p>
+                <p class="vitrina-text" style="margin:10px 0 0 0; font-weight:bold; text-align:right;">- Regina Valentina 🤠</p>
             </div>
 
             <div style="margin-top:25px;">
@@ -364,7 +364,7 @@
             <h2 style="color:#ff8f00; margin:10px 0; font-size:1.8em;">Leyenda del Rancho</h2>
             
             <div class="vitrina-item" style="padding:20px; border-radius:12px; margin:20px 0; border: 2px solid #ffca28; text-align:left;">
-                <p style="margin:0; font-style:italic; font-size:1.15em;">"¡Mis respetos, pariente! Has obtenido las 5 Insignias de Buen Pastor. Tú y tu mascota son la dupla perfecta."</p>
+                <p class="vitrina-text" style="margin:0; font-style:italic; font-size:1.15em;">"¡Mis respetos, pariente! Has obtenido las 5 Insignias de Buen Pastor. Tú y tu mascota son la dupla perfecta."</p>
                 <p style="margin:10px 0 0 0; font-weight:bold; color:#d81b60; text-align:right;">- Regina Valentina 🤠</p>
             </div>
             <p style="font-weight:bold; color:#4caf50; font-size:1.1em; margin-bottom: 20px;">¡Completado al 100%! 🏔️</p>
@@ -474,7 +474,6 @@
         mostrarNotificacion("📋 ¡Consejo copiado al portapapeles!", "var(--header-bg)");
     }
 
-    // 👇 LOS BOTONES DE LIKE / DISLIKE REPARADOS 👇
     function calificarMensaje(msgId, tipo) {
         vibrar(40);
         let btnUp = document.getElementById(`btn-up-${msgId}`);
@@ -618,7 +617,10 @@
                     chatBox.appendChild(newMsg);
                     typeEffect(newMsg, data.response);
                 }
-            } catch (e) { loading.style.display = 'none'; }
+            } catch (e) { 
+                loading.style.display = 'none'; 
+                chatBox.innerHTML += `<div class="message bot-message" style="background:#f44336; color:white;">⚠️ <b>ALERTA DE SISTEMA:</b> Error de conexión inicial. Verifica PythonAnywhere.</div>`;
+            }
         }
     });
 
@@ -735,7 +737,6 @@
 
     function getUserId() { return localStorage.getItem('regina_user_id'); }
 
-    // 👇 LA SOLUCIÓN DEFINITIVA AL BOTÓN DE MUTE 👇
     let isMuted = false;
     function togglePremiumVoice() {
         const btnPremium = document.getElementById('btn-header-voice'); 
@@ -749,7 +750,7 @@
         } else {
             isMuted = true;
             premiumVoiceEnabled = false;
-            voiceEnabled = false; // SILENCIA TODO
+            voiceEnabled = false; 
             window.speechSynthesis.cancel();
             if (audioPremiumActual) {
                 audioPremiumActual.pause();
@@ -841,6 +842,15 @@
         typing();
     }
     
+    // 👇 LA FUNCIÓN DE LOS CHIPS REPARADA 👇
+    function sendChip(texto) {
+        vibrar(40);
+        const input = document.getElementById('user-input');
+        input.value = texto;
+        sendMessage();
+    }
+    
+    // 👇 EL ESCUDO CONTRA EL SILENCIO INCOMODO 👇
     async function sendMessage() {
         const input = document.getElementById('user-input');
         const message = input.value;
@@ -897,10 +907,9 @@
                     setTimeout(() => { vibrar([50,100,50,100]); abrirMiCuenta(); }, 2000);
                 }
                 
-                // 👇 COMPROBACIÓN INFALIBLE ANTES DE REPRODUCIR AUDIO 👇
                 if (data.audio) {
                     if (audioPremiumActual) audioPremiumActual.pause();
-                    if (!isMuted && premiumVoiceEnabled) { // Verifica el estado *actual* del botón
+                    if (!isMuted && premiumVoiceEnabled) { 
                         audioPremiumActual = new Audio("data:audio/mp3;base64," + data.audio);
                         audioPremiumActual.play();
                     }
@@ -908,7 +917,84 @@
                 
                 if (data.puntos !== undefined) { actualizarInsigniasVisuales(data.puntos); }
             }
-        } catch (error) { loading.style.display = 'none'; }
+        } catch (error) { 
+            // 🚨 SI EL SERVIDOR CHOCA (ERROR 500), LA ALARMA SE ACTIVA 🚨
+            vibrar([100, 100, 100]);
+            loading.style.display = 'none'; 
+            chatBox.innerHTML += `<div class="message bot-message" style="background:#f44336; color:white; font-weight:bold;">⚠️ ALERTA ROJA: El servidor Python se detuvo de golpe. Pariente, avísale al Jefe Supremo que revise su consola. (Error: ${error.message})</div>`;
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+    }
+
+    document.getElementById("user-input").addEventListener("keypress", function(event) {
+        if (event.key === "Enter") { vibrar(80); sendMessage(); }
+    });
+    
+    let imagenChatBase64 = null;
+    function previsualizarFotoChat() {
+        const file = document.getElementById('input-foto-chat').files[0];
+        if(file) {
+            const reader = new FileReader();
+            reader.onloadend = function() {
+                imagenChatBase64 = reader.result;
+                vibrar([50, 100, 50]);
+                mostrarNotificacion("📸 ¡Foto adjuntada exitosamente!<br>Agrega una descripción y dale a Enviar.", "#4caf50", 4500);
+            }
+            reader.readAsDataURL(file);
+        }
+    }
+
+    function toggleLupa() {
+        vibrar(60);
+        document.body.classList.toggle('large-text-mode');
+        mostrarNotificacion(document.body.classList.contains('large-text-mode') ? "🔍 Texto súper grande activado" : "Tamaño restaurado", "#4caf50");
+    }
+
+    function toggleContraste() {
+        vibrar(60);
+        document.body.classList.toggle('high-contrast-mode');
+        mostrarNotificacion(document.body.classList.contains('high-contrast-mode') ? "🌗 Alto contraste activado" : "Colores restaurados", "#4caf50");
+    }
+
+    function dispararEmergencia() {
+        const chatBox = document.getElementById('chat-box');
+        chatBox.innerHTML += `<div class="message user-message" style="background:#d32f2f; color:white; font-weight:bold;">🧑‍⚕️ Consulta de Urgencia</div>`;
+        const warningHTML = `¡ATENCIÓN! 🧑‍⚕️ No soy un médico veterinario, soy una IA experta en comportamiento.<br><br>Si tu mascota sufrió un accidente grave o presenta una condición crítica, <strong>ESTO REQUIERE ATENCIÓN PROFESIONAL INMEDIATA</strong>.<br><br>📍 <a href="https://www.google.com/maps/search/veterinaria+24+horas" target="_blank" style="color:#d32f2f; font-weight:900; text-decoration:underline;">Haz clic aquí para buscar veterinarias en Maps</a>.`;
+        
+        const newMsg = document.createElement("div");
+        newMsg.className = "message bot-message";
+        newMsg.style.border = "2px solid #d32f2f";
+        newMsg.style.background = "rgba(211, 47, 47, 0.1)"; 
+        newMsg.innerHTML = warningHTML;
+        chatBox.appendChild(newMsg);
+        
+        if (typeof hablar === "function") { hablar("Atención. Lleva a tu mascota a una clínica veterinaria inmediatamente."); }
+        chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    function descargarHistorial() {
+        vibrar(60);
+        const mensajes = document.querySelectorAll('.message');
+        if(mensajes.length <= 1) { return; }
+        
+        let textoHistorial = "🐾 HISTORIAL DE CONSULTA - REGINA VALENTINA 🐾\nFecha: " + new Date().toLocaleString() + "\n---------------------------------------------------\n\n";
+        
+        mensajes.forEach(msg => {
+            let emisor = msg.classList.contains('user-message') ? "TÚ:" : "REGINA:";
+            let contenido = msg.getAttribute('data-puretext') || msg.innerText.split('📋')[0].trim();
+            textoHistorial += `${emisor}\n${contenido}\n\n`;
+        });
+        
+        const blob = new Blob([textoHistorial], { type: 'text/plain;charset=utf-8' });
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `Consulta_Regina.txt`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        window.URL.revokeObjectURL(url);
+        document.getElementById('settings-modal').style.display='none';
     }
 
     let deferredPrompt;
