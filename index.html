@@ -116,10 +116,10 @@
             <input type="email" id="auth-email" class="modal-input" placeholder="Correo electrónico">
             <input type="password" id="auth-password" class="modal-input" placeholder="Contraseña">
             
-            <div style="text-align: left; margin-bottom: 20px; width: 100%;">
-                <label style="font-size: 0.95em; color: var(--text-main); opacity: 0.8; display: flex; align-items: center; gap: 8px; cursor: pointer;">
-                    <input type="checkbox" id="auth-terminos" style="width: 20px; height: 20px; cursor: pointer;">
-                    <span>Acepto los <a href="terminos.html" target="_blank" style="color: var(--header-bg); text-decoration: underline; font-weight:bold;">Términos</a></span>
+            <div style="text-align: left; margin-bottom: 20px; width: 100%; padding-right: 10px; box-sizing: border-box;">
+                <label style="font-size: 0.95em; color: var(--text-main); display: flex; align-items: flex-start; gap: 8px; cursor: pointer; line-height: 1.4;">
+                    <input type="checkbox" id="auth-terminos" style="width: 20px; height: 20px; margin-top: 2px; cursor: pointer; flex-shrink: 0;">
+                    <span style="flex: 1;">Acepto los <a href="terminos.html" target="_blank" style="color: #ff9800; text-decoration: underline; font-weight:bold;">Términos y Condiciones</a></span>
                 </label>
             </div>
 
@@ -235,7 +235,6 @@
     let dyslexiaEnabled = false;
     let lsmEnabled = false;
 
-    // 👇 VIBRACIÓN SEGURA 👇
     function vibrar(patron) {
         try { if (navigator && navigator.vibrate) navigator.vibrate(patron); } catch(e) {}
     }
@@ -842,7 +841,6 @@
         typing();
     }
     
-    // 👇 LA FUNCIÓN DE LOS CHIPS REPARADA 👇
     function sendChip(texto) {
         vibrar(40);
         const input = document.getElementById('user-input');
@@ -850,7 +848,6 @@
         sendMessage();
     }
     
-    // 👇 EL ESCUDO CONTRA EL SILENCIO INCOMODO 👇
     async function sendMessage() {
         const input = document.getElementById('user-input');
         const message = input.value;
@@ -918,7 +915,6 @@
                 if (data.puntos !== undefined) { actualizarInsigniasVisuales(data.puntos); }
             }
         } catch (error) { 
-            // 🚨 SI EL SERVIDOR CHOCA (ERROR 500), LA ALARMA SE ACTIVA 🚨
             vibrar([100, 100, 100]);
             loading.style.display = 'none'; 
             chatBox.innerHTML += `<div class="message bot-message" style="background:#f44336; color:white; font-weight:bold;">⚠️ ALERTA ROJA: El servidor Python se detuvo de golpe. Pariente, avísale al Jefe Supremo que revise su consola. (Error: ${error.message})</div>`;
