@@ -199,8 +199,10 @@
     <div class="chips-container">
         <button class="chip" onclick="vibrar(40); sendChip('Quiero jugar con la Miss Regina')">🎮 Juguemos</button>
         <button class="chip" onclick="vibrar(40); sendChip('Miss Regina, ya hice la tarea')" style="background:#e8f5e9; border-color:#4caf50; color:#2e7d32;">✅ Ya hice la tarea</button>
-        <button class="chip" onclick="vibrar(40); sendChip('🤠 ¿Cómo educar a un perro latoso?')">🤠 Educar perro latoso</button>
         <button class="chip" onclick="vibrar(40); sendChip('🧐 ¡Analízame Regina!')">🧐 Analízame</button>
+        <button class="chip" onclick="vibrar(40); sendChip('🤠 ¿Cómo educar a un perro latoso?')">🤠 Educar perro latoso</button>
+        <button class="chip" onclick="vibrar(40); sendChip('🏠 ¿Cómo evitar que se orine adentro?')">🏠 Pipí en casa</button>
+        <button class="chip" onclick="vibrar(60); dispararEmergencia()" style="border-color:#d32f2f; color:#d32f2f;">🧑‍⚕️ Urgencia</button>
     </div>
 
     <div class="input-area">
@@ -239,12 +241,13 @@
         }
     }
 
+    // 👇 TEXTOS DE LA VITRINA PURIFICADOS 👇
     const trofeosConfig = [
-        { id: 'lider', color: "🟢", icono:"🐺", hex: "#4caf50", nombre: "Líder Alfa", max: 100, desc: "Dominas el liderazgo con puro respeto y calma. Tu mascota te ve como el guía de la manada." },
-        { id: 'zen', color: "🔵", icono:"🧘", hex: "#2196f3", nombre: "Maestro Zen", max: 100, desc: "Lograste un ambiente de paz. El estrés desapareció y tu mascota respira tranquilidad pura." },
-        { id: 'autocontrol', color: "🔴", icono:"🛑", hex: "#f44336", nombre: "Autocontrol", max: 100, desc: "Tu mascota domina sus impulsos. Sabe esperar su turno sin volverse loco." },
-        { id: 'atleta', color: "🟠", icono:"🏃", hex: "#ff9800", nombre: "Atleta Perruno", max: 100, desc: "Energía bien canalizada. Actividad física al cien, cuerpo sano y mente equilibrada." },
-        { id: 'socio', color: "🌟", icono:"🤝", hex: "#ffeb3b", nombre: "Socio Supremo", max: 100, desc: "La conexión máxima. Ya ni ocupan palabras, con una mirada se entienden perfectamente." }
+        { id: 'lider', color: "🟢", icono:"🐺", hex: "#4caf50", nombre: "Líder de la Manada", max: 100, desc: "¡Felicidades, pariente! Aquí demuestras quién lleva las riendas del rancho, pero con puro respeto, sin gritos ni manotazos. Tu mascota ya te ve como el jefe de la manada." },
+        { id: 'zen', color: "🔵", icono:"🧘", hex: "#2196f3", nombre: "Maestro Zen", max: 100, desc: "¡Qué chulada! Se acabó el relajo en casa. Tu perrito le bajó dos rayitas a su estrés y ahora respira pura paz. ¡Parece monje tibetano!" },
+        { id: 'autocontrol', color: "🔴", icono:"🛑", hex: "#f44336", nombre: "Autocontrol", max: 100, desc: "¡Epa! Tu mascota domina sus impulsos. Sabe esperar su turno para comer o salir sin volverse loco. ¡Un verdadero caballero o damita!" },
+        { id: 'atleta', color: "🟠", icono:"🏃", hex: "#ff9800", nombre: "Atleta Perruno", max: 100, desc: "¡Fierro! Tienen la energía bien canalizada. Actividad física al cien, mente sana y cuerpo cansado pa' dormir a gusto toda la noche." },
+        { id: 'socio', color: "🌟", icono:"🤝", hex: "#ffeb3b", nombre: "Socio Supremo", max: 100, desc: "¡Mis respetos! La conexión entre ustedes es de otro nivel. Ya ni ocupan palabras, nomás con una mirada se entienden. Son la dupla envidia del condado." }
     ];
 
     function calcularProgreso(puntos, max) {
@@ -300,7 +303,7 @@
         } else {
             contenedorMaximo.innerHTML = `<div style="background: #eee; padding: 20px; border-radius: 15px; margin-top: 20px; color: #757575; border: 2px dashed #ccc;">
                 <h3 style="margin:0; font-size:1.2em;">⛰️ Cima de la Montaña</h3>
-                <p style="margin:5px 0 0 0; font-size:0.9em;">Consigue las 5 Insignias de Buen Pastor para ver el premio final.</p>
+                <p style="margin:5px 0 0 0; font-size:0.9em;">Consigue las 5 Insignias para ver el premio final.</p>
             </div>`;
         }
         document.getElementById('vitrina-modal').style.display = 'flex';
@@ -314,7 +317,7 @@
         document.getElementById('vista-principal-vitrina').style.display = 'none';
         const vistaDetalle = document.getElementById('vista-detalle-vitrina');
         
-        let mensajeFelicidades = progreso === 100 ? `<div style="background:#fff8e1; border:2px solid #ffca28; padding:10px; border-radius:10px; margin-top:15px; color:#d8a000; font-weight:bold;">¡Felicidades! Has obtenido la Insignia de Buen Pastor 🌟 en esta habilidad.</div>` : ``;
+        let mensajeFelicidades = progreso === 100 ? `<div style="background:#fff8e1; border:2px solid #ffca28; padding:10px; border-radius:10px; margin-top:15px; color:#d8a000; font-weight:bold;">¡Felicidades! Has obtenido la Insignia de Buen Pastor 🌟.</div>` : ``;
 
         vistaDetalle.innerHTML = `
             <div style="text-align:left; margin-bottom:15px;">
@@ -725,7 +728,6 @@
                 localStorage.setItem('regina_registrado', 'true');
                 localStorage.setItem('regina_user_id', data.user_id);
                 localStorage.setItem('regina_is_admin', 'false'); 
-                errorMsg.innerText = ""; 
                 document.getElementById('auth-modal').style.display = 'none';
                 mostrarNotificacion("✅ ¡Cuenta lista!", "#4caf50");
             } else { vibrar([50,50,50]); errorMsg.innerText = data.error; }
@@ -960,7 +962,6 @@
                 chatBox.appendChild(newMsg);
                 typeEffect(newMsg, data.response); 
                 
-                // 👇 AUTO-APERTURA DE PANEL MODO DIOS 👇
                 if (data.response.includes("Jefe Supremo detectado")) { 
                     localStorage.setItem('regina_is_admin', 'true'); 
                     localStorage.setItem('regina_registrado', 'true');
