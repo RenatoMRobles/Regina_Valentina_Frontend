@@ -69,10 +69,18 @@
         .chips-container { display: flex; gap: 10px; padding: 12px 15px; overflow-x: auto; white-space: nowrap; scrollbar-width: none; background: var(--bg-chat); }
         .chip { background-color: var(--bg-body); border: 2px solid #6a1b9a; color: var(--text-main); padding: 10px 18px; border-radius: 20px; font-size: 1.05rem; font-weight: bold; cursor: pointer; white-space: nowrap; }
         
-        /* ESTILOS DINÁMICOS PARA LA VITRINA */
-        .vitrina-card { background: var(--bg-chat); color: var(--text-main); }
+        /* 👇 ESTILOS DINÁMICOS PARA MODALES Y VITRINA 👇 */
+        .modal-card { background: var(--bg-chat); color: var(--text-main); border: 1px solid var(--input-border); }
+        .modal-title { color: var(--header-bg); margin-top: 0; }
+        [data-theme="dark"] .modal-title { color: #ce93d8; }
+        [data-theme="sepia"] .modal-title { color: #8b6b61; }
+        body.high-contrast-mode .modal-title { color: #ffff00 !important; }
+        
+        .modal-input { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid var(--input-border); border-radius: 8px; box-sizing: border-box; font-size: 1.1rem; background: var(--bg-body); color: var(--text-main); }
+        .config-btn { background: var(--bg-body); color: var(--text-main); border: 2px solid var(--input-border); padding: 14px; border-radius: 10px; cursor: pointer; font-family: inherit; display: flex; align-items: center; gap: 15px; font-weight: bold; transition: 0.3s; font-size: 1.1rem; width: 100%; text-align: left; }
+        .config-btn:hover { background: var(--bot-bubble); }
+        
         .vitrina-item { background: var(--bg-body); border: 1px solid var(--input-border); color: var(--text-main); }
-        .vitrina-text { color: var(--text-main); }
         .vitrina-subtext { color: var(--text-main); opacity: 0.8; }
 
         @keyframes latidoVictoria { 0% { transform: scale(1); } 50% { transform: scale(1.8); filter: drop-shadow(0 0 25px #ffca28); } 100% { transform: scale(1); } }
@@ -84,19 +92,15 @@
             * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
             .header, .input-area, .chips-container, button, .pdf-btn, footer, .footer, #caja-aviso-legal, .support-btn, .share-bubble, #trofeo-badge, #vitrina-modal { display: none !important; }
             body > p, body > div > p { display: none !important; }
-            
             body, html { background: white !important; width: 100% !important; height: auto !important; margin: 0 !important; padding: 0 !important; }
-            
             .printable-guide { display: block !important; background: transparent !important; box-shadow: none !important; margin-bottom: 20px !important; font-family: 'Georgia', 'Times New Roman', serif !important; font-size: 13pt !important; line-height: 1.8 !important; text-align: justify !important; }
             #membrete-pdf { display: block !important; text-align: center; margin-bottom: 30px; page-break-after: avoid; }
-            
             #reporte-cientifico-pdf { display: block !important; text-align: center; font-family: 'Segoe UI', sans-serif !important; padding: 40px !important; border: 10px solid #6a1b9a !important; border-radius: 20px !important; background: #fffaf0 !important; }
             #reporte-cientifico-pdf h1 { color: #6a1b9a !important; font-size: 35px !important; margin-bottom: 5px !important; text-transform: uppercase !important; }
             #reporte-cientifico-pdf h2 { color: #ff9800 !important; font-size: 24px !important; border-bottom: 2px solid #ff9800 !important; padding-bottom: 10px !important; }
             #reporte-cientifico-pdf .insignia-print { display: inline-block; padding: 15px; margin: 10px; border: 2px solid #6a1b9a; border-radius: 15px; background: white; width: 40%; vertical-align: top; }
             #reporte-cientifico-pdf .insignia-print h3 { margin: 5px 0; color: #333; }
             #reporte-cientifico-pdf .insignia-print p { font-size: 12px; color: #555; text-align: justify; }
-            
             #chat-box { display: none !important; } 
         }
     </style>
@@ -104,50 +108,50 @@
 <body>
 
 <div id="auth-modal" style="position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:3000; justify-content:center; align-items:center; display:none;">
-    <div style="background:white; padding:40px; border-radius:15px; width:85%; max-width:320px; text-align:center; box-shadow: 0 10px 30px rgba(0,0,0,0.5); position:relative;">
-        <button onclick="document.getElementById('auth-modal').style.display='none'; vibrar(30);" style="position:absolute; top:10px; right:15px; background:none; border:none; font-size:2em; color:#999; cursor:pointer;">×</button>
-        <img src="ReginaValentinaRostro.png?v=2" alt="Regina" style="width:90px; height:90px; border-radius:50%; margin-bottom:15px; border:3px solid #6a1b9a; object-fit: cover;">
-        <h2 id="auth-title" style="color:#6a1b9a; margin-top:0;">Acceso VIP 🤠</h2>
+    <div class="modal-card" style="padding:40px; border-radius:15px; width:85%; max-width:320px; text-align:center; box-shadow: 0 10px 30px rgba(0,0,0,0.5); position:relative;">
+        <button onclick="document.getElementById('auth-modal').style.display='none'; vibrar(30);" style="position:absolute; top:10px; right:15px; background:none; border:none; font-size:2em; color:var(--text-main); opacity:0.6; cursor:pointer;">×</button>
+        <img src="ReginaValentinaRostro.png?v=2" alt="Regina" style="width:90px; height:90px; border-radius:50%; margin-bottom:15px; border:3px solid var(--header-bg); object-fit: cover;">
+        <h2 id="auth-title" class="modal-title">Acceso VIP 🤠</h2>
         
         <div id="auth-inputs">
-            <input type="email" id="auth-email" placeholder="Correo electrónico" style="width:100%; padding:12px; margin-bottom:15px; border:1px solid #ddd; border-radius:8px; box-sizing:border-box; font-size:1.1rem;">
-            <input type="password" id="auth-password" placeholder="Contraseña" style="width:100%; padding:12px; margin-bottom:15px; border:1px solid #ddd; border-radius:8px; box-sizing:border-box; font-size:1.1rem;">
+            <input type="email" id="auth-email" class="modal-input" placeholder="Correo electrónico">
+            <input type="password" id="auth-password" class="modal-input" placeholder="Contraseña">
             
             <div style="text-align: left; margin-bottom: 20px; width: 100%;">
-                <label style="font-size: 0.95em; color: #555; display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                <label style="font-size: 0.95em; color: var(--text-main); opacity: 0.8; display: flex; align-items: center; gap: 8px; cursor: pointer;">
                     <input type="checkbox" id="auth-terminos" style="width: 20px; height: 20px; cursor: pointer;">
-                    <span>Acepto los <a href="terminos.html" target="_blank" style="color: #6a1b9a; text-decoration: underline;">Términos y Condiciones</a></span>
+                    <span>Acepto los <a href="terminos.html" target="_blank" style="color: var(--header-bg); text-decoration: underline; font-weight:bold;">Términos</a></span>
                 </label>
             </div>
 
             <button onclick="vibrar(40); ejecutarLogin();" style="width:100%; padding:14px; background-color:#6a1b9a; color:white; border:none; border-radius:8px; font-weight:bold; cursor:pointer; margin-bottom:10px; font-size:1.1rem;">Iniciar Sesión</button>
-            <button onclick="vibrar(40); ejecutarRegistro();" style="width:100%; padding:14px; background-color:#fff; color:#6a1b9a; border:2px solid #6a1b9a; border-radius:8px; font-weight:bold; cursor:pointer; font-size:1.1rem;">Crear Cuenta Nueva</button>
+            <button onclick="vibrar(40); ejecutarRegistro();" style="width:100%; padding:14px; background-color:var(--bg-body); color:var(--text-main); border:2px solid var(--header-bg); border-radius:8px; font-weight:bold; cursor:pointer; font-size:1.1rem;">Crear Cuenta Nueva</button>
         </div>
 
         <div id="logged-in-view" style="display:none; text-align:center;">
-            <p style="color:#555; font-size:1.1em; margin-bottom:20px;">Usted ya es parte del rancho. ¡Su acceso está asegurado!</p>
+            <p style="color:var(--text-main); opacity:0.8; font-size:1.1em; margin-bottom:20px;">Usted ya es parte del rancho. ¡Su acceso está asegurado!</p>
             <button id="btn-centro-mando" onclick="vibrar(40); window.open('https://RenatoRobles.pythonanywhere.com/panel-robles?admin_id=' + getUserId(), '_blank')" style="display:none; width:100%; padding:14px; background-color:#1e1e1e; color:#ffca28; border:2px solid #ffca28; border-radius:8px; font-weight:bold; cursor:pointer; margin: 0 auto 15px auto; font-size:1.1rem;">🦅 Centro de Mando</button>
             <button onclick="vibrar(40); cerrarSesion();" style="width:100%; padding:14px; background-color:#f44336; color:white; border:none; border-radius:8px; font-weight:bold; cursor:pointer; margin: 0 auto; font-size:1.1rem;">Cerrar Sesión 🚪</button>
             
-            <div style="background: rgba(106, 27, 154, 0.1); padding: 15px; border-radius: 8px; margin-bottom: 20px; border: 1px dashed #6a1b9a; margin-top:20px;">
-                <p style="margin-top:0; font-size:1em; color:#333; font-weight:bold;">🎟️ ¿Tienes un código promocional?</p>
+            <div style="background: rgba(106, 27, 154, 0.1); padding: 15px; border-radius: 8px; margin-bottom: 20px; border: 1px dashed var(--header-bg); margin-top:20px;">
+                <p style="margin-top:0; font-size:1em; color:var(--text-main); font-weight:bold;">🎟️ ¿Tienes un código promocional?</p>
                 <div style="display:flex; flex-direction:column; gap:10px;">
-                    <input type="text" id="input-cupon" placeholder="Ej. ROBLESVIP" style="width:100%; padding:12px; border:1px solid #ccc; border-radius:5px; text-transform:uppercase; font-size:1rem; box-sizing:border-box;">
-                    <button onclick="vibrar(40); canjearCupon();" style="width:100%; background:#6a1b9a; color:white; border:none; padding:12px; border-radius:5px; font-weight:bold; cursor:pointer; font-size:1rem;">Canjear Cupón</button>
+                    <input type="text" id="input-cupon" class="modal-input" placeholder="Ej. ROBLESVIP" style="text-transform:uppercase; margin-bottom:0;">
+                    <button onclick="vibrar(40); canjearCupon();" style="width:100%; background:var(--header-bg); color:white; border:none; padding:12px; border-radius:5px; font-weight:bold; cursor:pointer; font-size:1rem;">Canjear Cupón</button>
                 </div>
             </div>
         </div>
-        <p id="auth-error" style="color:red; font-size:1rem; margin-top:15px; min-height:20px;"></p>
+        <p id="auth-error" style="color:#f44336; font-size:1rem; margin-top:15px; min-height:20px;"></p>
     </div>
 </div>
 
 <div id="vitrina-modal" style="position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:2000; justify-content:center; align-items:center; display:none;">
-    <div class="vitrina-card" style="padding:30px; border-radius:15px; width:90%; max-width:420px; text-align:center; box-shadow: 0 10px 30px rgba(0,0,0,0.5); position:relative; border-top: 6px solid #ffca28; max-height:85vh; overflow-y:auto;">
+    <div class="modal-card" style="padding:30px; border-radius:15px; width:90%; max-width:420px; text-align:center; box-shadow: 0 10px 30px rgba(0,0,0,0.5); position:relative; border-top: 6px solid #ffca28; max-height:85vh; overflow-y:auto;">
         
         <div id="vista-principal-vitrina">
-            <button onclick="document.getElementById('vitrina-modal').style.display='none'; vibrar(30);" style="position:absolute; top:10px; right:15px; background:none; border:none; font-size:2em; color:#999; cursor:pointer;">×</button>
-            <h2 style="color:#6a1b9a; margin-top:0;">🏆 Tu Vitrina de Logros</h2>
-            <button onclick="vibrar(30); abrirGuiaEstrellas()" style="background:#e8eaf6; color:#3f51b5; border:1px solid #3f51b5; padding:10px 18px; border-radius:20px; font-weight:bold; cursor:pointer; margin-bottom:15px; font-size:1rem;">📖 Guía Explicativa</button>
+            <button onclick="document.getElementById('vitrina-modal').style.display='none'; vibrar(30);" style="position:absolute; top:10px; right:15px; background:none; border:none; font-size:2em; color:var(--text-main); opacity:0.6; cursor:pointer;">×</button>
+            <h2 class="modal-title" style="margin-top:0;">🏆 Tu Vitrina de Logros</h2>
+            <button onclick="vibrar(30); abrirGuiaEstrellas()" style="background:var(--bg-body); color:var(--text-main); border:2px solid var(--header-bg); padding:10px 18px; border-radius:20px; font-weight:bold; cursor:pointer; margin-bottom:15px; font-size:1rem;">📖 Guía Explicativa</button>
             <div id="lista-trofeos" style="text-align:left;"></div>
             <div id="contenedor-maximo" style="margin-top: 15px;"></div>
         </div>
@@ -158,10 +162,10 @@
 </div>
 
 <div id="feedback-modal" style="position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:2000; justify-content:center; align-items:center; display:none;">
-    <div style="background:white; padding:30px; border-radius:15px; width:85%; max-width:320px; text-align:center; box-shadow: 0 10px 30px rgba(0,0,0,0.5); position:relative; border-top: 6px solid #ffca28;">
-        <button onclick="document.getElementById('feedback-modal').style.display='none'; vibrar(60);" style="position:absolute; top:10px; right:15px; background:none; border:none; font-size:2em; color:#999; cursor:pointer;">×</button>
-        <h2 style="color:#6a1b9a; margin-top:0;">💡 Buzón del Rancho</h2>
-        <textarea id="feedback-texto" rows="4" placeholder="Escriba aquí su mensaje..." style="width:100%; padding:12px; border:1px solid #ddd; border-radius:8px; box-sizing:border-box; resize:none; margin-bottom:15px; font-family:inherit; font-size:1.05rem;"></textarea>
+    <div class="modal-card" style="padding:30px; border-radius:15px; width:85%; max-width:320px; text-align:center; box-shadow: 0 10px 30px rgba(0,0,0,0.5); position:relative; border-top: 6px solid #ffca28;">
+        <button onclick="document.getElementById('feedback-modal').style.display='none'; vibrar(60);" style="position:absolute; top:10px; right:15px; background:none; border:none; font-size:2em; color:var(--text-main); opacity:0.6; cursor:pointer;">×</button>
+        <h2 class="modal-title" style="margin-top:0;">💡 Buzón del Rancho</h2>
+        <textarea id="feedback-texto" class="modal-input" rows="4" placeholder="Escriba aquí su mensaje..." style="resize:none; font-family:inherit;"></textarea>
         <button id="btn-enviar-sug" onclick="vibrar(40); enviarSugerencia();" style="width:100%; padding:14px; background-color:#ffca28; color:#333; border:none; border-radius:8px; font-weight:bold; cursor:pointer; font-size:1.1rem;">Enviar Mensaje 🚀</button>
     </div>
 </div>
@@ -185,7 +189,7 @@
             <h1>Regina Valentina 🤠🐾</h1>
             <p>Experta en Comportamiento</p>
             <div style="display: flex; gap: 12px; margin-top:10px;">
-                <button id="btn-header-voice" style="background:rgba(255,255,255,0.2); border-radius:50%; width:46px; height:46px; display:flex; justify-content:center; align-items:center; color:#ffeb3b; padding:0; transition: 0.3s; border:none; cursor:pointer;" onclick="vibrar(30); togglePremiumVoice()">
+                <button id="btn-header-voice" style="background:rgba(255,255,255,0.2); border-radius:50%; width:46px; height:46px; display:flex; justify-content:center; align-items:center; color:#ffeb3b; padding:0; transition: 0.3s; border:none; cursor:pointer;" onclick="togglePremiumVoice()">
                     <div style="display:flex; flex-direction:column; align-items:center; line-height:1.1;"><span style="font-size:1.2rem;">🗣️</span><span style="font-size:0.65rem;">💎</span></div>
                 </button>
                 <button style="background:rgba(255,255,255,0.2); border-radius:50%; width:46px; height:46px; display:flex; justify-content:center; align-items:center; padding:0; transition: 0.3s; border:none; cursor:pointer; color:white; font-size:1.4rem;" onclick="vibrar(30); toggleTheme()">🌙</button>
@@ -207,8 +211,6 @@
         <button class="chip" onclick="vibrar(40); sendChip('Miss Regina, ya hice la tarea')" style="background:#e8f5e9; border-color:#4caf50; color:#2e7d32;">✅ Ya hice la tarea</button>
         <button class="chip" onclick="vibrar(40); sendChip('🧐 ¡Analízame Regina!')">🧐 Analízame</button>
         <button class="chip" onclick="vibrar(40); sendChip('🤠 ¿Cómo educar a un perro latoso?')">🤠 Educar perro latoso</button>
-        <button class="chip" onclick="vibrar(40); sendChip('🏠 ¿Cómo evitar que se orine adentro?')">🏠 Pipí en casa</button>
-        <button class="chip" onclick="vibrar(60); dispararEmergencia()" style="border-color:#d32f2f; color:#d32f2f;">🧑‍⚕️ Urgencia</button>
     </div>
 
     <div class="input-area">
@@ -247,9 +249,8 @@
         }
     }
 
-    // 👇 TEXTOS PURIFICADOS (Líder de la Manada y Relajo) 👇
     const trofeosConfig = [
-        { id: 'lider', color: "🟢", icono:"🐺", hex: "#4caf50", nombre: "Líder de la Manada", max: 100, desc: "Dominas el liderazgo con puro respeto y calma. Tu mascota te ve como el guía de la manada." },
+        { id: 'lider', color: "🟢", icono:"🐺", hex: "#4caf50", nombre: "Líder de la Manada", max: 100, desc: "Dominas el liderazgo con puro respeto y calma. Tu mascota te ve como el guía." },
         { id: 'zen', color: "🔵", icono:"🧘", hex: "#2196f3", nombre: "Maestro Zen", max: 100, desc: "Lograste un ambiente de paz. Se acabó el relajo y tu mascota respira tranquilidad pura." },
         { id: 'autocontrol', color: "🔴", icono:"🛑", hex: "#f44336", nombre: "Autocontrol", max: 100, desc: "Tu mascota domina sus impulsos. Sabe esperar su turno sin volverse loco." },
         { id: 'atleta', color: "🟠", icono:"🏃", hex: "#ff9800", nombre: "Atleta Perruno", max: 100, desc: "Energía bien canalizada. Actividad física al cien, cuerpo sano y mente equilibrada." },
@@ -271,7 +272,6 @@
         return count;
     }
 
-    // 👇 VITRINA ADAPTADA AL TEMA (DARK MODE / SEPIA) 👇
     function abrirVitrina() {
         document.getElementById('vista-principal-vitrina').style.display = 'block';
         document.getElementById('vista-detalle-vitrina').style.display = 'none';
@@ -293,7 +293,7 @@
             html += `<div onclick="vibrar(30); verDetalleTrofeo(${index})" class="vitrina-item" style="display:flex; align-items:center; gap:15px; margin-bottom:12px; padding:15px; border-radius:12px; cursor:pointer; transition: 0.3s; ${bloqueado}">
                 <span style="font-size:2.2em;">${t.icono}</span>
                 <div style="text-align:left; flex:1;">
-                    <h4 class="vitrina-text" style="margin:0; font-size:1.1em;">${t.nombre}</h4>
+                    <h4 style="margin:0; font-size:1.1em;">${t.nombre}</h4>
                     ${badgeInsignia}
                 </div>
                 <div style="font-size:1.2em; color:${colorPorcentaje}; font-weight:bold;">${progreso}%</div>
@@ -309,7 +309,7 @@
             </div>`;
         } else {
             contenedorMaximo.innerHTML = `<div class="vitrina-item" style="padding: 20px; border-radius: 15px; margin-top: 20px; border-style: dashed;">
-                <h3 class="vitrina-text" style="margin:0; font-size:1.2em;">⛰️ Cima de la Montaña</h3>
+                <h3 style="margin:0; font-size:1.2em;">⛰️ Cima de la Montaña</h3>
                 <p class="vitrina-subtext" style="margin:5px 0 0 0; font-size:0.9em;">Consigue las 5 Insignias para ver el premio final.</p>
             </div>`;
         }
@@ -328,18 +328,18 @@
 
         vistaDetalle.innerHTML = `
             <div style="text-align:left; margin-bottom:15px;">
-                <button onclick="vibrar(30); abrirVitrina()" style="background:none; border:none; color:#d81b60; font-weight:bold; font-size:1.1em; cursor:pointer;">⬅ Volver</button>
+                <button onclick="vibrar(30); abrirVitrina()" style="background:none; border:none; color:var(--text-main); opacity:0.8; font-weight:bold; font-size:1.1em; cursor:pointer;">⬅ Volver</button>
             </div>
             <span style="font-size:4.5em; filter:drop-shadow(0 4px 6px rgba(0,0,0,0.2));">${t.icono}</span>
             <h2 style="color:${t.hex}; margin:10px 0;">${t.nombre}</h2>
             
             <div class="vitrina-item" style="padding:20px; border-radius:12px; margin:20px 0; border-left: 5px solid ${t.hex}; text-align:left;">
                 <p class="vitrina-subtext" style="margin:0; font-style:italic; font-size:1.1em;">"${t.desc}"</p>
-                <p class="vitrina-text" style="margin:10px 0 0 0; font-weight:bold; text-align:right;">- Regina Valentina 🤠</p>
+                <p style="margin:10px 0 0 0; font-weight:bold; text-align:right;">- Regina Valentina 🤠</p>
             </div>
 
             <div style="margin-top:25px;">
-                <div style="display:flex; justify-content:space-between; margin-bottom:8px; font-weight:bold;" class="vitrina-text">
+                <div style="display:flex; justify-content:space-between; margin-bottom:8px; font-weight:bold;">
                     <span>Tu Nivel:</span>
                     <span style="color:${t.hex}; font-size:1.3em;">${progreso}%</span>
                 </div>
@@ -358,19 +358,19 @@
         const vistaDetalle = document.getElementById('vista-detalle-vitrina');
         vistaDetalle.innerHTML = `
             <div style="text-align:left; margin-bottom:15px;">
-                <button onclick="vibrar(30); abrirVitrina()" style="background:none; border:none; color:#d81b60; font-weight:bold; font-size:1.1em; cursor:pointer;">⬅ Volver</button>
+                <button onclick="vibrar(30); abrirVitrina()" style="background:none; border:none; color:var(--text-main); opacity:0.8; font-weight:bold; font-size:1.1em; cursor:pointer;">⬅ Volver</button>
             </div>
             <span style="font-size:5.5em; filter:drop-shadow(0 0 25px #ffca28);">👑</span>
             <h2 style="color:#ff8f00; margin:10px 0; font-size:1.8em;">Leyenda del Rancho</h2>
             
             <div class="vitrina-item" style="padding:20px; border-radius:12px; margin:20px 0; border: 2px solid #ffca28; text-align:left;">
-                <p class="vitrina-text" style="margin:0; font-style:italic; font-size:1.15em;">"¡Mis respetos, pariente! Has obtenido las 5 Insignias de Buen Pastor. Tú y tu mascota son la dupla perfecta."</p>
+                <p style="margin:0; font-style:italic; font-size:1.15em;">"¡Mis respetos, pariente! Has obtenido las 5 Insignias de Buen Pastor. Tú y tu mascota son la dupla perfecta."</p>
                 <p style="margin:10px 0 0 0; font-weight:bold; color:#d81b60; text-align:right;">- Regina Valentina 🤠</p>
             </div>
             <p style="font-weight:bold; color:#4caf50; font-size:1.1em; margin-bottom: 20px;">¡Completado al 100%! 🏔️</p>
 
             <button onclick="vibrar(60); generarReporteCientifico()" style="width:100%; background:#6a1b9a; color:white; border:none; padding:15px; border-radius:30px; font-weight:bold; font-size:1.1em; cursor:pointer; box-shadow: 0 4px 6px rgba(0,0,0,0.2);">📄 Descargar Reporte</button>
-            <p class="vitrina-subtext" style="font-size:0.8em; margin-top:10px;">* El reporte avanzado estará en la Fase GCP. Por ahora, disfruta de tu Acreditación.</p>
+            <p class="vitrina-subtext" style="font-size:0.8em; margin-top:10px;">* El reporte avanzado estará en la Fase GCP.</p>
         `;
         vistaDetalle.style.display = 'block';
     }
@@ -378,32 +378,15 @@
     function generarReporteCientifico() {
         let nombreMascota = prompt("¡Felicidades! Ingresa el nombre de tu mascota para el reporte:", "Mi Mascota");
         if (!nombreMascota) return;
-
         let fecha = new Date().toLocaleDateString('es-MX');
         let divReporte = document.getElementById('reporte-cientifico-pdf');
         
         let insigniasHTML = "";
         trofeosConfig.forEach(t => {
-            insigniasHTML += `
-            <div class="insignia-print">
-                <span style="font-size: 40px;">${t.icono} 🌟</span>
-                <h3>${t.nombre}</h3>
-                <p>Nivel 100% Alcanzado. ${t.desc}</p>
-            </div>`;
+            insigniasHTML += `<div class="insignia-print"><span style="font-size: 40px;">${t.icono} 🌟</span><h3>${t.nombre}</h3><p>Nivel 100% Alcanzado. ${t.desc}</p></div>`;
         });
 
-        divReporte.innerHTML = `
-            <p style="color:#777; margin-bottom:20px; font-weight:bold;">FECHA DE EMISIÓN: ${fecha}</p>
-            <h1>ACREDITACIÓN DE CONDUCTA ANIMAL</h1>
-            <p style="font-size: 18px; color: #333;">Se certifica que el binomio formado por el usuario y su mascota:</p>
-            <h2 style="font-size: 30px; color: #d81b60; margin: 10px 0;">🐾 ${nombreMascota.toUpperCase()} 🐾</h2>
-            <p style="font-size: 18px; color: #333; margin-bottom: 30px;">Han completado el programa, obteniendo las 5 Insignias de Buen Pastor.</p>
-            <div style="text-align: center; margin-bottom: 40px;">${insigniasHTML}</div>
-            <p style="font-style: italic; color: #555; margin-top: 50px;">"El verdadero liderazgo no requiere fuerza, sino entendimiento."</p>
-            <br><br><p>_____________________________________</p>
-            <p style="font-weight: bold; margin-top:5px;">Regina Valentina</p>
-        `;
-        
+        divReporte.innerHTML = `<p style="color:#777; margin-bottom:20px; font-weight:bold;">FECHA DE EMISIÓN: ${fecha}</p><h1>ACREDITACIÓN DE CONDUCTA ANIMAL</h1><p style="font-size: 18px; color: #333;">Se certifica que el binomio formado por el usuario y su mascota:</p><h2 style="font-size: 30px; color: #d81b60; margin: 10px 0;">🐾 ${nombreMascota.toUpperCase()} 🐾</h2><p style="font-size: 18px; color: #333; margin-bottom: 30px;">Han completado el programa, obteniendo las 5 Insignias de Buen Pastor.</p><div style="text-align: center; margin-bottom: 40px;">${insigniasHTML}</div><p style="font-style: italic; color: #555; margin-top: 50px;">"El verdadero liderazgo no requiere fuerza, sino entendimiento."</p><br><br><p>_____________________________________</p><p style="font-weight: bold; margin-top:5px;">Regina Valentina</p>`;
         setTimeout(() => { window.print(); }, 500);
     }
 
@@ -412,9 +395,9 @@
         const vistaGuia = document.getElementById('vista-guia-vitrina');
         vistaGuia.innerHTML = `
             <div style="text-align:left; margin-bottom:15px;">
-                <button onclick="vibrar(30); abrirVitrina()" style="background:none; border:none; color:#d81b60; font-weight:bold; font-size:1.1em; cursor:pointer;">⬅ Volver</button>
+                <button onclick="vibrar(30); abrirVitrina()" style="background:none; border:none; color:var(--text-main); opacity:0.8; font-weight:bold; font-size:1.1em; cursor:pointer;">⬅ Volver</button>
             </div>
-            <h2 style="color:#6a1b9a;">📖 Guía Explicativa</h2>
+            <h2 class="modal-title">📖 Guía Explicativa</h2>
             <div class="vitrina-item" style="text-align:left; font-size:1.1em; line-height:1.6; padding:20px; border-radius:12px;">
                 <p><strong>1. Pide un consejo:</strong> Platica con Regina sobre cualquier problema.</p>
                 <p><strong>2. Gánate los Puntos:</strong> Regina te dejará una 'Tarea' y te dirá cuántos puntos vale.</p>
@@ -422,7 +405,7 @@
                 <p><strong>4. Las Insignias 🌟:</strong> Al llegar al 100% en una habilidad, te ganas una "Insignia de Buen Pastor".</p>
                 <p><strong>5. La Cima:</strong> ¡Junta las 5 Insignias para ser la Leyenda del Rancho!</p>
             </div>
-            <button onclick="vibrar(30); abrirVitrina()" style="width:100%; margin-top:20px; padding:14px; background:#6a1b9a; color:white; border:none; border-radius:8px; font-weight:bold; font-size:1.15em; cursor:pointer;">¡Entendido, a darle!</button>
+            <button onclick="vibrar(30); abrirVitrina()" style="width:100%; margin-top:20px; padding:14px; background:var(--header-bg); color:white; border:none; border-radius:8px; font-weight:bold; font-size:1.15em; cursor:pointer;">¡Entendido, a darle!</button>
         `;
         vistaGuia.style.display = 'block';
     }
@@ -471,12 +454,12 @@
         if (dyslexiaEnabled) {
             if (lsmEnabled) toggleLSM();
             body.classList.add('dyslexia-mode');
-            if(btnModal) { btnModal.style.background = '#e8f5e9'; btnModal.style.borderColor = '#4caf50'; } 
+            if(btnModal) { btnModal.style.background = 'rgba(76, 175, 80, 0.2)'; btnModal.style.borderColor = '#4caf50'; } 
             mostrarNotificacion("👓 Lectura cómoda habilitada", "#4caf50"); 
         } else {
             body.classList.remove('dyslexia-mode');
-            if(btnModal) { btnModal.style.background = '#f4f4f9'; btnModal.style.borderColor = '#ddd'; } 
-            mostrarNotificacion("Lectura estándar restaurada", "#6a1b9a");
+            if(btnModal) { btnModal.style.background = 'var(--bg-body)'; btnModal.style.borderColor = 'var(--input-border)'; } 
+            mostrarNotificacion("Lectura estándar restaurada", "var(--header-bg)");
         }
     }
 
@@ -488,24 +471,24 @@
         let botones = clon.querySelectorAll('button, div');
         botones.forEach(b => b.remove()); 
         navigator.clipboard.writeText(clon.innerText.trim());
-        mostrarNotificacion("📋 ¡Consejo copiado al portapapeles!", "#d81b60");
+        mostrarNotificacion("📋 ¡Consejo copiado al portapapeles!", "var(--header-bg)");
     }
 
-    // 👇 LA FUNCIÓN DE LOS BOTONES DE LIKE/DISLIKE 👇
+    // 👇 LOS BOTONES DE LIKE / DISLIKE REPARADOS 👇
     function calificarMensaje(msgId, tipo) {
-        vibrar(30);
+        vibrar(40);
         let btnUp = document.getElementById(`btn-up-${msgId}`);
         let btnDown = document.getElementById(`btn-down-${msgId}`);
         if(tipo === 'up') {
             btnUp.style.filter = 'drop-shadow(0 0 5px #4caf50)';
             btnUp.style.transform = 'scale(1.2)';
             if(btnDown) { btnDown.style.filter = 'grayscale(100%)'; btnDown.style.transform = 'scale(1)'; }
-            mostrarNotificacion("¡Qué bueno que te sirvió! 👍", "#4caf50", 2000);
+            mostrarNotificacion("¡Qué bueno que te sirvió! 👍", "#4caf50", 2500);
         } else {
             btnDown.style.filter = 'drop-shadow(0 0 5px #f44336)';
             btnDown.style.transform = 'scale(1.2)';
             if(btnUp) { btnUp.style.filter = 'grayscale(100%)'; btnUp.style.transform = 'scale(1)'; }
-            mostrarNotificacion("Tomaremos nota para mejorar 👎", "#f44336", 2000);
+            mostrarNotificacion("Tomaremos nota para mejorar 👎", "#f44336", 2500);
         }
     }
     
@@ -518,7 +501,6 @@
             ultimoMensajeLeido = null;
             return;
         }
-
         window.speechSynthesis.cancel();
         ultimoMensajeLeido = msgId;
 
@@ -529,7 +511,6 @@
         const utterance = new SpeechSynthesisUtterance(textoLimpio);
         if (reginaVoice) utterance.voice = reginaVoice;
         utterance.lang = 'es-MX'; utterance.rate = 1.05; 
-        
         utterance.onend = function() { if (ultimoMensajeLeido === msgId) ultimoMensajeLeido = null; };
         
         window.speechSynthesis.speak(utterance);
@@ -569,10 +550,7 @@
         noti.style.cssText = `position:fixed; top:20px; left:50%; transform:translateX(-50%); background:${colorFondo}; color:white; padding:12px 24px; border-radius:30px; z-index:9999; box-shadow:0 4px 15px rgba(0,0,0,0.4); font-weight:bold; font-size:1.05em; transition: opacity 0.5s; text-align:center;`;
         noti.innerHTML = texto;
         document.body.appendChild(noti);
-        setTimeout(() => {
-            noti.style.opacity = '0';
-            setTimeout(() => noti.remove(), 500);
-        }, tiempo);
+        setTimeout(() => { noti.style.opacity = '0'; setTimeout(() => noti.remove(), 500); }, tiempo);
     }
     
     let micEnabled = false;
@@ -586,34 +564,25 @@
         recognition.lang = 'es-MX'; 
 
         recognition.onstart = function() {
-            vibrar(60);
-            micEnabled = true;
-            document.getElementById('mic-toggle').innerText = '🔴'; 
+            vibrar(60); micEnabled = true; document.getElementById('mic-toggle').innerText = '🔴'; 
             mostrarNotificacion("🎤 Te escucho...", "#f44336"); 
         };
-
         recognition.onresult = function(event) {
-            vibrar(80);
-            const transcript = event.results[0][0].transcript;
+            vibrar(80); const transcript = event.results[0][0].transcript;
             const inputField = document.getElementById('user-input');
             inputField.value = inputField.value ? inputField.value + ' ' + transcript : transcript;
         };
-
         recognition.onerror = function(event) {
-            vibrar([50, 50, 50]);
-            mostrarNotificacion("⚠️ Error al escuchar. Checa tus permisos.", "#f44336");
+            vibrar([50, 50, 50]); mostrarNotificacion("⚠️ Error al escuchar. Checa tus permisos.", "#f44336");
         };
-
         recognition.onend = function() {
-            micEnabled = false;
-            document.getElementById('mic-toggle').innerText = '🎤'; 
+            micEnabled = false; document.getElementById('mic-toggle').innerText = '🎤'; 
         };
     }
 
     function toggleMic() {
         if (!recognition) { alert("Tu navegador no soporta voz. Usa Chrome o Safari."); return; }
-        if (micEnabled) recognition.stop();
-        else recognition.start();
+        if (micEnabled) recognition.stop(); else recognition.start();
     }
 
     window.addEventListener('DOMContentLoaded', async () => {
@@ -670,7 +639,7 @@
 
     function abrirMiCuenta() {
         const modal = document.getElementById('auth-modal');
-        const titulo = modal.querySelector('h2');
+        const titulo = document.getElementById('auth-title');
         document.getElementById('auth-error').innerText = ""; 
         if (localStorage.getItem('regina_registrado') === 'true') {
             titulo.innerText = "Mi Cuenta VIP 💎";
@@ -711,23 +680,6 @@
         } catch (e) {}
     }
     
-    async function eliminarCuentaPropia() {
-        vibrar(100);
-        if(!confirm("⚠️ ¿Seguro que quieres borrar tu cuenta?")) return;
-        try {
-            const response = await fetch(`${API_URL}/eliminar_cuenta`, {
-                method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ user_id: getUserId() })
-            });
-            if (response.ok) {
-                localStorage.removeItem('regina_registrado');
-                localStorage.removeItem('regina_user_id');
-                localStorage.removeItem('regina_is_admin');
-                localStorage.removeItem('regina_total_insignias');
-                window.location.reload();
-            }
-        } catch (e) {}
-    }
-
     function obtenerDatosAuth() {
         return {
             email: document.getElementById('auth-email').value,
@@ -776,7 +728,6 @@
                 errorMsg.innerText = ""; 
                 document.getElementById('auth-modal').style.display = 'none';
                 mostrarNotificacion("✅ ¡Sesión iniciada!", "#4caf50");
-                
                 if (data.puntos !== undefined) actualizarInsigniasVisuales(data.puntos);
             } else { vibrar([50,50,50]); errorMsg.innerText = data.error; }
         } catch (e) {}
@@ -784,7 +735,7 @@
 
     function getUserId() { return localStorage.getItem('regina_user_id'); }
 
-    // 👇 LA SOLUCIÓN AL MUTE GLOBAL DE LA VOZ 👇
+    // 👇 LA SOLUCIÓN DEFINITIVA AL BOTÓN DE MUTE 👇
     let isMuted = false;
     function togglePremiumVoice() {
         const btnPremium = document.getElementById('btn-header-voice'); 
@@ -814,7 +765,7 @@
         if (!voiceEnabled) {
             voiceEnabled = true;
             isMuted = false;
-            premiumVoiceEnabled = false; // Solo voz robótica
+            premiumVoiceEnabled = false; 
             cargarVoces();
             const btnPremium = document.getElementById('btn-header-voice'); 
             if(btnPremium) btnPremium.innerHTML = '<div style="display:flex; flex-direction:column; align-items:center; line-height:1.1;"><span style="font-size:1.2rem;">🗣️</span><span style="font-size:0.65rem; filter:grayscale(100%);">💎</span></div>'; 
@@ -843,13 +794,6 @@
         window.speechSynthesis.speak(utterance);
     }
 
-    function imprimirGuia(elementId) {
-        const mensajeElement = document.getElementById(elementId);
-        mensajeElement.classList.add('printable-guide');
-        window.print();
-        mensajeElement.classList.remove('printable-guide');
-    }
-
     function typeEffect(element, text, speed = 18) {
         let i = 0;
         element.innerHTML = "";
@@ -871,8 +815,8 @@
             } else {
                 vibrar([50, 100, 50]);
 
-                let copyBtn = `<button onclick="copiarConsejo('${msgId}')" style="background:none; border:1px solid #d81b60; color:#d81b60; border-radius:15px; padding:6px 14px; cursor:pointer; font-size:1rem; font-weight:bold;">📋 Copiar</button>`;
-                let readBtn = `<button onclick="reproducirMensaje('${msgId}')" style="background:none; border:1px solid #2196f3; color:#2196f3; border-radius:15px; padding:6px 14px; margin-left:8px; cursor:pointer; font-size:1rem; font-weight:bold;">🔊 Escuchar</button>`;
+                let copyBtn = `<button onclick="copiarConsejo('${msgId}')" style="background:var(--bg-body); border:1px solid var(--header-bg); color:var(--text-main); border-radius:15px; padding:6px 14px; cursor:pointer; font-size:1rem; font-weight:bold;">📋 Copiar</button>`;
+                let readBtn = `<button onclick="reproducirMensaje('${msgId}')" style="background:var(--bg-body); border:1px solid #2196f3; color:var(--text-main); border-radius:15px; padding:6px 14px; margin-left:8px; cursor:pointer; font-size:1rem; font-weight:bold;">🔊 Escuchar</button>`;
                 
                 let califBtns = `
                     <button id="btn-up-${msgId}" onclick="calificarMensaje('${msgId}', 'up')" style="background:none; border:none; cursor:pointer; font-size:1.5em; margin-left:15px; transition:0.2s; filter:grayscale(0%);" title="¡Buen consejo!">👍</button>
@@ -895,59 +839,6 @@
             }
         }
         typing();
-    }
-    
-    async function ilustrarManual(msgId) {
-        const mensajeElement = document.getElementById(msgId);
-        const btn = document.getElementById(`btn-ilustrar-${msgId}`);
-        btn.innerText = "✨ Creando ilustración... (Espere unos 10 seg)";
-        btn.disabled = true;
-
-        try {
-            const textoGuia = mensajeElement.innerText;
-            const response = await fetch(`${API_URL}/ilustrar`, {
-                method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ texto: textoGuia })
-            });
-            const data = await response.json();
-
-            if (data.imagen_b64) {
-                vibrar([50, 50, 50]); 
-                const imgHTML = `<br><img src="data:image/jpeg;base64,${data.imagen_b64}" alt="Ilustración Premium" style="width:100%; max-width:90%; border-radius:12px; border:3px solid #ffca28; margin:15px auto; box-shadow:0 4px 8px rgba(0,0,0,0.2); display:block;">`;
-                btn.parentElement.insertAdjacentHTML('beforebegin', imgHTML);
-                const currentOriginal = mensajeElement.getAttribute('data-original');
-                if(currentOriginal) { mensajeElement.setAttribute('data-original', currentOriginal + imgHTML); }
-                btn.style.display = 'none'; 
-                hablar("¡Listo pariente! Su manual ha sido ilustrado.");
-            } else {
-                btn.innerText = "✨ Reintentar Ilustración";
-                btn.disabled = false;
-            }
-        } catch (e) {
-            btn.innerText = "✨ Reintentar Ilustración";
-            btn.disabled = false;
-        }
-    }
-    
-    async function enviarSugerencia() {
-        const texto = document.getElementById('feedback-texto').value;
-        const btn = document.getElementById('btn-enviar-sug');
-        if (!texto.trim()) { vibrar([50,50,50]); return; }
-        btn.innerText = "Enviando... ⏳";
-        btn.disabled = true;
-        
-        try {
-            const response = await fetch(`${API_URL}/feedback`, {
-                method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ user_id: getUserId(), mensaje: texto })
-            });
-            if (response.ok) {
-                vibrar([50, 100, 50]);
-                mostrarNotificacion("✅ ¡Mensaje recibido! Gracias.", "#4caf50", 5000);
-                document.getElementById('feedback-modal').style.display = 'none';
-                document.getElementById('feedback-texto').value = '';
-            }
-        } catch (e) {}
-        btn.innerText = "Enviar Mensaje 🚀";
-        btn.disabled = false;
     }
     
     async function sendMessage() {
@@ -984,12 +875,12 @@
                 } else {
                     const modalHtml = `
                     <div id="modal-premium" style="position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:9999; display:flex; justify-content:center; align-items:center;">
-                        <div style="background:white; padding:30px; border-radius:20px; max-width:90%; width:400px; text-align:center; box-shadow:0 10px 25px rgba(0,0,0,0.5); border-top: 6px solid #d81b60;">
+                        <div class="modal-card" style="padding:30px; border-radius:20px; max-width:90%; width:400px; text-align:center; box-shadow:0 10px 25px rgba(0,0,0,0.5); border-top: 6px solid #d81b60;">
                             <h2 style="color:#d81b60; margin-top:0;">¡Tiempo Fuera, Pariente! 🛑</h2>
-                            <p style="color:#333; font-size:1.1em; font-weight:bold;">Se nos acabaron los mensajes de prueba.</p>
+                            <p style="font-size:1.1em; font-weight:bold;">Se nos acabaron los mensajes de prueba.</p>
                             <a href="${data.payment_link_day}" style="display:block; background:#ffca28; color:#333; text-decoration:none; padding:15px; border-radius:12px; font-weight:bold; margin-bottom:12px; font-size:1.1em; box-shadow:0 4px 6px rgba(0,0,0,0.1);">🤠 Pase 24 Horas - $39 MXN</a>
                             <a href="${data.payment_link_month}" style="display:block; background:#d81b60; color:white; text-decoration:none; padding:15px; border-radius:12px; font-weight:bold; margin-bottom:20px; font-size:1.1em; box-shadow:0 4px 6px rgba(0,0,0,0.1);">💎 Mes VIP Ilimitado - $99 MXN</a>
-                            <button onclick="document.getElementById('modal-premium').remove()" style="background:none; border:none; color:#999; text-decoration:underline; cursor:pointer; font-size:1em;">Cerrar por ahora</button>
+                            <button onclick="document.getElementById('modal-premium').remove()" style="background:none; border:none; color:var(--text-main); opacity:0.6; text-decoration:underline; cursor:pointer; font-size:1em;">Cerrar por ahora</button>
                         </div>
                     </div>`;
                     document.body.insertAdjacentHTML('beforeend', modalHtml);
@@ -1003,96 +894,21 @@
                 if (data.response.includes("Jefe Supremo detectado")) { 
                     localStorage.setItem('regina_is_admin', 'true'); 
                     localStorage.setItem('regina_registrado', 'true');
-                    setTimeout(() => {
-                        vibrar([50,100,50,100]);
-                        abrirMiCuenta();
-                    }, 2000);
+                    setTimeout(() => { vibrar([50,100,50,100]); abrirMiCuenta(); }, 2000);
                 }
+                
+                // 👇 COMPROBACIÓN INFALIBLE ANTES DE REPRODUCIR AUDIO 👇
                 if (data.audio) {
                     if (audioPremiumActual) audioPremiumActual.pause();
-                    audioPremiumActual = new Audio("data:audio/mp3;base64," + data.audio);
-                    audioPremiumActual.play();
+                    if (!isMuted && premiumVoiceEnabled) { // Verifica el estado *actual* del botón
+                        audioPremiumActual = new Audio("data:audio/mp3;base64," + data.audio);
+                        audioPremiumActual.play();
+                    }
                 }
                 
                 if (data.puntos !== undefined) { actualizarInsigniasVisuales(data.puntos); }
             }
         } catch (error) { loading.style.display = 'none'; }
-    }
-
-    document.getElementById("user-input").addEventListener("keypress", function(event) {
-        if (event.key === "Enter") { vibrar(80); sendMessage(); }
-    });
-
-    function sendChip(texto) {
-        document.getElementById('user-input').value = texto;
-        sendMessage();
-    }
-    
-    let imagenChatBase64 = null;
-    function previsualizarFotoChat() {
-        const file = document.getElementById('input-foto-chat').files[0];
-        if(file) {
-            const reader = new FileReader();
-            reader.onloadend = function() {
-                imagenChatBase64 = reader.result;
-                vibrar([50, 100, 50]);
-                mostrarNotificacion("📸 ¡Foto adjuntada exitosamente!<br>Agrega una descripción y dale a Enviar.", "#4caf50", 4500);
-            }
-            reader.readAsDataURL(file);
-        }
-    }
-
-    function toggleLupa() {
-        vibrar(60);
-        document.body.classList.toggle('large-text-mode');
-        mostrarNotificacion(document.body.classList.contains('large-text-mode') ? "🔍 Texto súper grande activado" : "Tamaño restaurado", "#4caf50");
-    }
-
-    function toggleContraste() {
-        vibrar(60);
-        document.body.classList.toggle('high-contrast-mode');
-        mostrarNotificacion(document.body.classList.contains('high-contrast-mode') ? "🌗 Alto contraste activado" : "Colores restaurados", "#4caf50");
-    }
-
-    function dispararEmergencia() {
-        const chatBox = document.getElementById('chat-box');
-        chatBox.innerHTML += `<div class="message user-message" style="background:#d32f2f; color:white; font-weight:bold;">🧑‍⚕️ Consulta de Urgencia</div>`;
-        const warningHTML = `¡ATENCIÓN! 🧑‍⚕️ No soy un médico veterinario, soy una IA experta en comportamiento.<br><br>Si tu mascota sufrió un accidente grave o presenta una condición crítica, <strong>ESTO REQUIERE ATENCIÓN PROFESIONAL INMEDIATA</strong>.<br><br>📍 <a href="https://www.google.com/maps/search/veterinaria+24+horas" target="_blank" style="color:#d32f2f; font-weight:900; text-decoration:underline;">Haz clic aquí para buscar veterinarias en Maps</a>.`;
-        
-        const newMsg = document.createElement("div");
-        newMsg.className = "message bot-message";
-        newMsg.style.border = "2px solid #d32f2f";
-        newMsg.style.background = "rgba(211, 47, 47, 0.1)"; 
-        newMsg.innerHTML = warningHTML;
-        chatBox.appendChild(newMsg);
-        
-        if (typeof hablar === "function") { hablar("Atención. Lleva a tu mascota a una clínica veterinaria inmediatamente."); }
-        chatBox.scrollTop = chatBox.scrollHeight;
-    }
-
-    function descargarHistorial() {
-        vibrar(60);
-        const mensajes = document.querySelectorAll('.message');
-        if(mensajes.length <= 1) { return; }
-        
-        let textoHistorial = "🐾 HISTORIAL DE CONSULTA - REGINA VALENTINA 🐾\nFecha: " + new Date().toLocaleString() + "\n---------------------------------------------------\n\n";
-        
-        mensajes.forEach(msg => {
-            let emisor = msg.classList.contains('user-message') ? "TÚ:" : "REGINA:";
-            let contenido = msg.getAttribute('data-puretext') || msg.innerText.split('📋')[0].trim();
-            textoHistorial += `${emisor}\n${contenido}\n\n`;
-        });
-        
-        const blob = new Blob([textoHistorial], { type: 'text/plain;charset=utf-8' });
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = `Consulta_Regina.txt`;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        window.URL.revokeObjectURL(url);
-        document.getElementById('settings-modal').style.display='none';
     }
 
     let deferredPrompt;
@@ -1121,9 +937,9 @@
 </div>
     
 <div class="footer">
-    <button onclick="vibrar(60); document.getElementById('feedback-modal').style.display='flex'" style="background:none; border:none; color:#6a1b9a; cursor:pointer; font-size:1.1em; text-decoration:underline; font-weight:bold; margin-bottom:15px;">💡 Dejar una Sugerencia Rápida</button>
+    <button onclick="vibrar(60); document.getElementById('feedback-modal').style.display='flex'" style="background:none; border:none; color:var(--header-bg); cursor:pointer; font-size:1.1em; text-decoration:underline; font-weight:bold; margin-bottom:15px;">💡 Dejar una Sugerencia Rápida</button>
     <p>© 2026 <b>Robles Bienestar</b>. Todos los derechos reservados.</p>
-    <p><a href="terminos.html" target="_blank">Ver Términos y Condiciones Completos</a></p>
+    <p><a href="terminos.html" target="_blank" style="color:var(--text-main);">Ver Términos y Condiciones Completos</a></p>
     <div id="caja-aviso-legal">
         <p>⚠️ <strong>AVISO LEGAL:</strong> Regina Valentina es una IA con fines educativos. Robles Bienestar no se responsabiliza por el uso en seres humanos. <strong>SIN ASESORÍA MÉDICA:</strong> No recetamos medicamentos. El usuario asume la total responsabilidad legal. Ante emergencias, acuda a una clínica inmediatamente.</p>
     </div>
@@ -1138,32 +954,32 @@
 </a>
 
 <div id="settings-modal" style="position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:2000; justify-content:center; align-items:center; display:none;">
-    <div style="background:white; padding:30px; border-radius:15px; width:85%; max-width:320px; text-align:center; box-shadow: 0 10px 30px rgba(0,0,0,0.5); position:relative; border-top: 6px solid #6a1b9a;">
-        <button onclick="document.getElementById('settings-modal').style.display='none'; vibrar(60);" style="position:absolute; top:10px; right:15px; background:none; border:none; font-size:2em; color:#999; cursor:pointer;">×</button>
+    <div class="modal-card" style="padding:30px; border-radius:15px; width:85%; max-width:320px; text-align:center; box-shadow: 0 10px 30px rgba(0,0,0,0.5); position:relative; border-top: 6px solid #6a1b9a;">
+        <button onclick="document.getElementById('settings-modal').style.display='none'; vibrar(60);" style="position:absolute; top:10px; right:15px; background:none; border:none; font-size:2em; color:var(--text-main); opacity:0.6; cursor:pointer;">×</button>
         
-        <h3 style="color:#6a1b9a; margin-top:20px; margin-bottom:5px; padding-right:15px; font-size:1.3em;">⚙️ Herramientas</h3>
-        <p style="color:#555; font-size:1em; margin-bottom:20px;">Ajusta tu experiencia.</p>
+        <h3 class="modal-title" style="margin-top:20px; margin-bottom:5px; padding-right:15px; font-size:1.3em;">⚙️ Herramientas</h3>
+        <p style="color:var(--text-main); opacity:0.8; font-size:1em; margin-bottom:20px;">Ajusta tu experiencia.</p>
         
         <button id="btn-install-app" onclick="instalarApp()" class="btn" style="width:100%; margin-bottom:12px; background: linear-gradient(145deg, #ff9800, #f57c00); color:white; font-weight:bold; display:none; font-size:1.15rem; padding:12px; border-radius:8px; border:none;">📱 Instalar App</button>
 
         <button onclick="descargarHistorial()" class="btn" style="width:100%; margin-bottom:15px; background:#4caf50; color:white; font-weight:bold; font-size:1.15rem; padding:12px; border-radius:8px; border:none; box-shadow: 0 4px 6px rgba(0,0,0,0.2); cursor:pointer;">💾 Guardar Chat (TXT)</button>
         
-        <hr style="border: 1px solid #eee; margin: 15px 0;">
+        <hr style="border: 1px solid var(--input-border); margin: 15px 0;">
 
         <div style="display:flex; flex-direction:column; gap: 12px; margin-bottom: 25px;">
-            <button id="btn-config-dyslexia" onclick="vibrar(60); toggleDyslexia()" style="background:#f4f4f9; color:#333; border:2px solid #ddd; padding:14px; border-radius:10px; cursor:pointer; font-family:inherit; display:flex; align-items:center; gap:15px; font-weight:bold; transition:0.3s; font-size:1.1rem;">
+            <button id="btn-config-dyslexia" onclick="vibrar(60); toggleDyslexia()" class="config-btn">
                 <span id="dyslexia-toggle" style="font-size:1.8em;">👓</span> Letra para Dislexia
             </button>
-            <button id="btn-config-lsm" onclick="vibrar(60); toggleLSM()" style="background:#f4f4f9; color:#333; border:2px solid #ddd; padding:14px; border-radius:10px; cursor:pointer; font-family:inherit; display:flex; align-items:center; gap:15px; font-weight:bold; transition:0.3s; font-size:1.1rem;">
+            <button id="btn-config-lsm" onclick="vibrar(60); toggleLSM()" class="config-btn">
                 <span id="lsm-toggle" style="font-size:1.8em;">🤟</span> Dactilología
             </button>
-            <button id="btn-config-voice" onclick="vibrar(60); toggleVoice()" style="background:#f4f4f9; color:#333; border:2px solid #ddd; padding:14px; border-radius:10px; cursor:pointer; font-family:inherit; display:flex; align-items:center; gap:15px; font-weight:bold; transition:0.3s; font-size:1.1rem;">
+            <button id="btn-config-voice" onclick="vibrar(60); toggleVoice()" class="config-btn">
                 <span id="voice-toggle" style="font-size:1.8em;">🤫</span> Voz Robótica (Básica)
             </button>
-            <button id="btn-config-lupa" onclick="vibrar(60); toggleLupa()" style="background:#f4f4f9; color:#333; border:2px solid #ddd; padding:14px; border-radius:10px; cursor:pointer; font-family:inherit; display:flex; align-items:center; gap:15px; font-weight:bold; transition:0.3s; font-size:1.1rem;">
+            <button id="btn-config-lupa" onclick="vibrar(60); toggleLupa()" class="config-btn">
                 <span style="font-size:1.8em;">🔍</span> Agrandar Letra
             </button>
-            <button id="btn-config-contraste" onclick="vibrar(60); toggleContraste()" style="background:#f4f4f9; color:#333; border:2px solid #ddd; padding:14px; border-radius:10px; cursor:pointer; font-family:inherit; display:flex; align-items:center; gap:15px; font-weight:bold; transition:0.3s; font-size:1.1rem;">
+            <button id="btn-config-contraste" onclick="vibrar(60); toggleContraste()" class="config-btn">
                 <span style="font-size:1.8em;">🌗</span> Alto Contraste
             </button>
         </div>
